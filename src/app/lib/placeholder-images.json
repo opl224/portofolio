@@ -1,0 +1,28 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Creative desk sketch",
+      "imageUrl": "https://picsum.photos/seed/ink-hero/800/600",
+      "imageHint": "creative office"
+    },
+    {
+      "id": "project1",
+      "description": "App design sketch",
+      "imageUrl": "https://picsum.photos/seed/ink-p1/600/400",
+      "imageHint": "ui design"
+    },
+    {
+      "id": "project2",
+      "description": "Branding identity sketch",
+      "imageUrl": "https://picsum.photos/seed/ink-p2/600/400",
+      "imageHint": "branding logo"
+    },
+    {
+      "id": "project3",
+      "description": "Illustration showcase",
+      "imageUrl": "https://picsum.photos/seed/ink-p3/600/400",
+      "imageHint": "illustration art"
+    }
+  ]
+}
