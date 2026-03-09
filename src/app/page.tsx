@@ -20,13 +20,13 @@ import {
   SheetClose 
 } from '@/components/ui/sheet';
 
-// Custom Long Arrow Icon Component
+// Custom Long Arrow Icon Component - Fixed ViewBox to prevent clipping
 const LongArrowRight = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
+    width="36" 
     height="24" 
-    viewBox="0 0 24 24" 
+    viewBox="0 0 36 24" 
     fill="none" 
     stroke="currentColor" 
     strokeWidth="2.5" 
@@ -34,8 +34,8 @@ const LongArrowRight = ({ className }: { className?: string }) => (
     strokeLinejoin="round" 
     className={className}
   >
-    <path d="M2 12h17" />
-    <path d="m12 5 7 7-7 7" />
+    <path d="M2 12h30" />
+    <path d="m24 5 8 7-8 7" />
   </svg>
 );
 
@@ -326,7 +326,9 @@ export default function Home() {
             </div>
             <div className="text-center pt-4">
               <HandDrawnButton variant="accent" size="lg" className="w-full md:w-auto flex items-center justify-center gap-4">
-                {t.contact.send} <LongArrowRight className="inline" />
+                <span className="flex items-center gap-4">
+                  {t.contact.send} <LongArrowRight />
+                </span>
               </HandDrawnButton>
             </div>
           </form>
