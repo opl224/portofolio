@@ -1,7 +1,9 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Mengaktifkan export statis untuk menghasilkan folder /out */
+  output: 'export',
+  
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -9,6 +11,8 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    /* Ekspor statis memerlukan gambar tidak dioptimalkan secara default atau menggunakan loader kustom */
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
