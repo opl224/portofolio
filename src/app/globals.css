@@ -25,6 +25,26 @@
     --ring: 215 56% 40%;
     --radius: 0.5rem;
   }
+
+  .dark {
+    --background: 220 20% 10%; /* Deep Ink Dark */
+    --foreground: 40 40% 98%;  /* Warm Paper Text */
+    --card: 220 20% 12%;
+    --card-foreground: 40 40% 98%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 40 40% 98%;
+    --primary: 215 80% 70%;    /* Light Blue Pen */
+    --primary-foreground: 220 20% 10%;
+    --secondary: 220 15% 20%;
+    --secondary-foreground: 40 40% 98%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 0 100% 70%;      /* Bright Red Marker */
+    --accent-foreground: 220 20% 10%;
+    --border: 40 40% 98%;
+    --input: 40 40% 98%;
+    --ring: 215 80% 70%;
+  }
 }
 
 @layer base {
@@ -35,7 +55,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline;
@@ -62,4 +82,14 @@
 
 .animate-bounce-slow {
   animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.shadow-hand-drawn {
+  box-shadow: 4px 4px 0px 0px currentColor;
+}
+.shadow-hand-drawn-lg {
+  box-shadow: 8px 8px 0px 0px currentColor;
+}
+.shadow-hand-drawn-sm {
+  box-shadow: 2px 2px 0px 0px currentColor;
 }
