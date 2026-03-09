@@ -1,10 +1,8 @@
-
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Loader2, Sparkles } from 'lucide-react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { MessageCircle, X, Send, Loader2, Sparkles, Search } from 'lucide-react';
 import { WobblyBox } from './ui/wobbly-box';
-import { HandDrawnButton } from './ui/hand-drawn-button';
 import { chatWithPortfolio } from '@/ai/flows/portfolio-chat-flow';
 import { cn } from '@/lib/utils';
 import portfolioData from '@/lib/chatbot-data.json';
@@ -27,31 +25,47 @@ export const ChatBot = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  // Suggestion logic based on typing
+  const suggestions = useMemo(() => {
+    if (!input.trim()) return [];
+    
+    const allKnowledge = [
+      ...portfolioData.faq,
+      ...portfolioData.projects.map(p => `Ceritakan tentang ${p.title}`),
+      ...portfolioData.skills.design.map(s => `Apakah kamu ahli dalam ${s}?`),
+      ...portfolioData.skills.technical.map(s => `Bagaimana pengalamanmu dengan ${s}?`)
+    ];
 
-    const userMsg = input.trim();
+    return allKnowledge
+      .filter(item => item.toLowerCase().includes(input.toLowerCase()))
+      .slice(0, 3);
+  }, [input]);
+
+  const handleSend = async (overrideMessage?: string) => {
+    const messageToSend = overrideMessage || input.trim();
+    if (!messageToSend || isLoading) return;
+
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+    setMessages(prev => [...prev, { role: 'user', text: messageToSend }]);
     setIsLoading(true);
 
     try {
       const result = await chatWithPortfolio({ 
-        message: userMsg,
+        message: messageToSend,
         history: messages 
       });
       setMessages(prev => [...prev, { role: 'model', text: result.response }]);
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: 'Maaf, tinta saya sedikit macet. Bisa coba tanya lagi nanti?' }]);
+      setMessages(prev => [...prev, { role: 'model', text: 'Waduh, sepertinya koneksi tinta saya terputus. Coba lagi ya!' }]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleQuickQuestion = (q: string) => {
-    setInput(q);
+  const handleSuggestionClick = (s: string) => {
+    handleSend(s);
   };
 
   return (
@@ -61,9 +75,10 @@ export const ChatBot = () => {
         <WobblyBox 
           variant="default" 
           shadow="lg" 
-          className="mb-4 w-[350px] md:w-[400px] h-[500px] flex flex-col p-4 bg-white overflow-hidden"
+          className="mb-4 w-[350px] md:w-[400px] h-[550px] flex flex-col p-4 bg-white overflow-hidden"
           rotate={-1}
         >
+          {/* Header */}
           <div className="flex justify-between items-center border-b-2 border-dashed border-foreground pb-2 mb-4">
             <h3 className="font-headline text-2xl flex items-center gap-2">
               <Sparkles size={20} className="text-accent" /> Chat Asisten
@@ -76,9 +91,10 @@ export const ChatBot = () => {
             </button>
           </div>
 
+          {/* Messages Area */}
           <div 
             ref={scrollRef}
-            className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 custom-scrollbar"
+            className="flex-1 overflow-y-auto space-y-4 mb-2 pr-2 custom-scrollbar"
           >
             {messages.map((msg, i) => (
               <div 
@@ -89,10 +105,10 @@ export const ChatBot = () => {
                 )}
               >
                 <div className={cn(
-                  "p-3 font-body text-lg border-2 border-foreground",
+                  "p-3 font-body text-lg border-2 border-foreground shadow-hand-drawn-sm",
                   msg.role === 'user' 
-                    ? "bg-primary text-white rounded-t-xl rounded-bl-xl" 
-                    : "bg-secondary text-foreground rounded-t-xl rounded-br-xl"
+                    ? "bg-primary text-white" 
+                    : "bg-secondary text-foreground"
                 )}
                 style={{ 
                   borderRadius: msg.role === 'user' 
@@ -104,41 +120,64 @@ export const ChatBot = () => {
               </div>
             ))}
             {isLoading && (
-              <div className="flex items-center gap-2 font-body text-muted-foreground italic">
+              <div className="flex items-center gap-2 font-body text-muted-foreground italic p-2">
                 <Loader2 size={16} className="animate-spin" /> Sedang merangkai kata...
               </div>
             )}
           </div>
 
-          {/* Quick Suggestions */}
-          {messages.length < 3 && !isLoading && (
-            <div className="flex flex-wrap gap-2 mb-4">
-              {portfolioData.faq.slice(0, 3).map((q, i) => (
-                <button 
-                  key={i}
-                  onClick={() => handleQuickQuestion(q)}
-                  className="text-xs font-body border border-foreground/30 px-2 py-1 rounded-full hover:bg-accent/10 transition-colors"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          )}
+          {/* Suggestions List */}
+          <div className="min-h-[40px] mb-2">
+            {suggestions.length > 0 && (
+              <div className="flex flex-col gap-1">
+                <p className="text-[10px] font-headline text-muted-foreground uppercase tracking-widest ml-1 mb-1 flex items-center gap-1">
+                  <Search size={10} /> Mungkin maksud Anda:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {suggestions.map((s, i) => (
+                    <button 
+                      key={i}
+                      onClick={() => handleSuggestionClick(s)}
+                      className="text-xs font-body border-2 border-foreground/30 px-3 py-1 rounded-full hover:bg-accent hover:text-white hover:border-foreground transition-all text-left"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Default FAQ if no typing */}
+            {input.length === 0 && messages.length < 3 && !isLoading && (
+              <div className="flex flex-wrap gap-2">
+                {portfolioData.faq.slice(0, 3).map((q, i) => (
+                  <button 
+                    key={i}
+                    onClick={() => handleSuggestionClick(q)}
+                    className="text-xs font-body border-2 border-foreground/30 px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-foreground transition-all"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
-          <div className="flex gap-2 items-center">
+          {/* Input Area */}
+          <div className="flex gap-2 items-center mt-auto">
             <input 
               type="text" 
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Tanya apapun..."
-              className="flex-1 font-body text-lg border-2 border-foreground p-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Tanya tentang proyek..."
+              className="flex-1 font-body text-lg border-2 border-foreground p-2 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all"
               style={{ borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px' }}
             />
             <button 
-              onClick={handleSend}
+              onClick={() => handleSend()}
               disabled={isLoading || !input.trim()}
-              className="p-3 bg-accent text-white border-2 border-foreground hover:scale-110 active:scale-95 transition-all disabled:opacity-50"
+              className="p-3 bg-accent text-white border-2 border-foreground hover:scale-110 active:scale-95 transition-all disabled:opacity-30 disabled:grayscale"
               style={{ borderRadius: '50%' }}
             >
               <Send size={20} strokeWidth={3} />

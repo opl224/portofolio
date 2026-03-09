@@ -1,7 +1,6 @@
-
 'use server';
 /**
- * @fileOverview Flow AI untuk chatbot portofolio.
+ * @fileOverview Flow AI untuk chatbot portofolio dengan dukungan riwayat percakapan.
  */
 
 import { ai } from '@/ai/genkit';
@@ -13,7 +12,7 @@ const ChatInputSchema = z.object({
   history: z.array(z.object({
     role: z.enum(['user', 'model']),
     text: z.string()
-  })).optional().describe('Riwayat percakapan'),
+  })).optional().describe('Riwayat percakapan sebelumnya'),
 });
 
 const ChatOutputSchema = z.object({
@@ -45,8 +44,14 @@ Aturan:
 1. Jawablah pertanyaan seputar pemilik portofolio ini berdasarkan data di atas.
 2. Jika ditanya hal di luar portofolio, arahkan kembali dengan sopan ke topik desain/dev.
 3. Jangan pernah memberikan informasi yang tidak ada di data.
+4. Gunakan riwayat percakapan untuk memberikan jawaban yang berkesinambungan.
 
-Pesan Pengguna: {{{message}}}`,
+Riwayat Percakapan:
+{{#each history}}
+  {{role}}: {{{text}}}
+{{/each}}
+
+Pesan Pengguna Baru: {{{message}}}`,
 });
 
 export async function chatWithPortfolio(input: ChatInput): Promise<ChatOutput> {
@@ -60,11 +65,22 @@ const portfolioChatFlow = ai.defineFlow(
     outputSchema: ChatOutputSchema,
   },
   async (input) => {
-    const { output } = await prompt({
-      ...input,
-      // @ts-ignore - passing extra data for handlebars
-      data: portfolioData
-    });
-    return output!;
+    try {
+      const { output } = await prompt({
+        ...input,
+        history: input.history || [],
+        // @ts-ignore - passing extra data for handlebars
+        data: portfolioData
+      });
+      
+      if (!output) {
+        throw new Error("AI tidak memberikan respons.");
+      }
+      
+      return output;
+    } catch (error) {
+      console.error("Chat Flow Error:", error);
+      return { response: "Maaf, tinta saya sedikit macet. Bisa coba tanya lagi nanti?" };
+    }
   }
 );
