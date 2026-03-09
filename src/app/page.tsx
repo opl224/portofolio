@@ -168,8 +168,9 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="mt-auto text-center pb-8">
-                      <p className="font-headline text-accent text-2xl -rotate-2">{t.footer.stayCreative}</p>
+                    <div className="mt-auto text-center pb-8 flex flex-col items-center">
+                      <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-10px] z-10">opal</span>
+                      <p className="font-headline text-accent text-4xl -rotate-2">{t.footer.stayCreative}</p>
                     </div>
                   </div>
                 </SheetContent>
@@ -361,7 +362,7 @@ export default function Home() {
             <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
             <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
           </div>
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-10">
             <div className="flex justify-center gap-6">
               <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
                 <Github strokeWidth={3} />
@@ -378,9 +379,14 @@ export default function Home() {
               {t.footer.backToTop}
             </a>
           </div>
-          <div className="text-center md:text-right space-y-2">
-            <p className="font-body text-lg text-foreground">{t.footer.copyright}</p>
-            <div className="font-headline text-2xl text-accent -rotate-2">{t.footer.stayCreative}</div>
+          <div className="text-center md:text-right space-y-4">
+            <p className="font-body text-lg text-foreground hidden md:block">{t.footer.copyright}</p>
+            <div className="flex flex-col items-center md:items-end group">
+              <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-12px] md:mr-4 z-10">opal</span>
+              <div className="font-headline text-4xl md:text-5xl text-accent -rotate-2 group-hover:rotate-0 transition-transform duration-500">
+                {t.footer.stayCreative}
+              </div>
+            </div>
           </div>
         </div>
       </footer>
