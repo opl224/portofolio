@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, ArrowUp, User, Code, Palette, Menu, X } from 'lucide-react';
+import { Mail, Github, Linkedin, User, Code, Palette, Menu, X } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -20,7 +20,7 @@ import {
   SheetClose 
 } from '@/components/ui/sheet';
 
-// Custom Long Arrow Icon Component - Fixed ViewBox to prevent clipping
+// Custom Long Arrow Right Icon
 const LongArrowRight = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -36,6 +36,25 @@ const LongArrowRight = ({ className }: { className?: string }) => (
   >
     <path d="M2 12h30" />
     <path d="m24 5 8 7-8 7" />
+  </svg>
+);
+
+// Custom Move Up Arrow Icon
+const MoveUpArrow = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="3" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M8 6L12 2L16 6"/>
+    <path d="M12 2V22"/>
   </svg>
 );
 
@@ -355,7 +374,7 @@ export default function Home() {
               </a>
             </div>
             <a href="#top" className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group">
-              <ArrowUp size={20} strokeWidth={3} className="group-hover:-translate-y-1 transition-transform" />
+              <MoveUpArrow className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
               {t.footer.backToTop}
             </a>
           </div>
