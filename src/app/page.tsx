@@ -1,9 +1,11 @@
+
 import Image from 'next/image';
 import { Mail, Github, Linkedin, ExternalLink, ArrowRight, ArrowUp, User, Code, Palette, Briefcase } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { ChatBot } from '@/components/chat-bot';
 
 export default function Home() {
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
@@ -39,7 +41,7 @@ export default function Home() {
   ];
 
   return (
-    <div id="top" className="max-w-5xl mx-auto px-6 py-10">
+    <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative">
       {/* Navigation */}
       <nav className="flex justify-between items-center mb-20 px-4">
         <h1 className="text-3xl md:text-4xl font-headline tracking-tight">InkFolio.</h1>
@@ -261,6 +263,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating AI ChatBot */}
+      <ChatBot />
     </div>
   );
 }

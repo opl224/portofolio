@@ -1,1 +1,3 @@
-// Flows will be imported for their side effects in this file.
+
+// Flows akan diimpor untuk efek sampingnya di file ini.
+import './flows/portfolio-chat-flow';

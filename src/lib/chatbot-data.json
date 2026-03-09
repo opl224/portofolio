@@ -1,0 +1,42 @@
+
+{
+  "profile": {
+    "name": "InkFolio Studio",
+    "role": "Designer & Developer",
+    "bio": "Seorang kreator yang mengutamakan sentuhan manusiawi daripada presisi klinis. Ahli dalam membuat produk digital yang berjiwa, autentik, dan berkesan dengan gaya visual coretan tangan.",
+    "location": "Indonesia",
+    "philosophy": "Desain harus terasa hidup dan memiliki karakter unik."
+  },
+  "skills": {
+    "design": ["UI/UX", "Branding", "Digital Illustration", "Typography", "Visual Storytelling"],
+    "technical": ["Next.js", "React", "Tailwind CSS", "TypeScript", "Firebase", "GenAI (Genkit)"]
+  },
+  "projects": [
+    {
+      "title": "Eco-App Redesign",
+      "description": "Redesain antarmuka aplikasi ramah lingkungan dengan estetika organik.",
+      "category": "UI/UX"
+    },
+    {
+      "title": "Hand-Crafted Branding",
+      "description": "Identitas visual lengkap untuk studio keramik lokal dengan nuansa earthy.",
+      "category": "Branding"
+    },
+    {
+      "title": "Storybook World",
+      "description": "Seri ilustrasi digital untuk buku anak-anak berdasarkan dongeng Nusantara.",
+      "category": "Illustration"
+    },
+    {
+      "title": "Inkfolio Website",
+      "description": "Website portofolio interaktif dengan animasi coretan tangan dinamis.",
+      "category": "Web Dev"
+    }
+  ],
+  "faq": [
+    "Apa bahasa pemrograman favoritmu?",
+    "Proyek apa yang paling menantang?",
+    "Bagaimana cara menghubungimu?",
+    "Apakah kamu menerima proyek freelance?"
+  ]
+}
