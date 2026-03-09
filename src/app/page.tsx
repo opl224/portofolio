@@ -1,12 +1,43 @@
+
 import Image from 'next/image';
 import { Mail, Github, Linkedin, ExternalLink, ArrowRight, User, Code, Palette, Briefcase } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
+import { ProjectCard } from '@/components/ui/project-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
-  const projectImages = PlaceHolderImages.filter(img => img.id.startsWith('project'));
+  const projects = [
+    {
+      id: 'project1',
+      title: "Eco-App Redesign",
+      description: "Desain antarmuka aplikasi ramah lingkungan dengan pendekatan visual yang organik dan tekstur alami.",
+      tags: ["UI/UX", "Mobile", "Sustainability"],
+      image: PlaceHolderImages.find(img => img.id === 'project1')
+    },
+    {
+      id: 'project2',
+      title: "Hand-Crafted Branding",
+      description: "Identitas visual untuk studio keramik lokal, mencakup logo, kartu nama, dan kemasan dengan nuansa earthy.",
+      tags: ["Branding", "Print", "Illustration"],
+      image: PlaceHolderImages.find(img => img.id === 'project2')
+    },
+    {
+      id: 'project3',
+      title: "Storybook World",
+      description: "Seri ilustrasi digital untuk buku anak-anak yang terinspirasi dari dongeng klasik Nusantara.",
+      tags: ["Illustration", "Digital Art"],
+      image: PlaceHolderImages.find(img => img.id === 'project3')
+    },
+    {
+      id: 'project4',
+      title: "Inkfolio Website",
+      description: "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan yang dinamis.",
+      tags: ["Web Dev", "React", "Tailwind"],
+      image: PlaceHolderImages.find(img => img.id === 'project4')
+    }
+  ];
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
@@ -91,41 +122,17 @@ export default function Home() {
             </svg>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 gap-12">
-          {projectImages.map((project, i) => (
-            <div key={project.id} className={`group ${i % 2 !== 0 ? 'md:mt-12' : ''}`}>
-              <WobblyBox 
-                decoration={i === 0 ? "tape" : "none"} 
-                className={`overflow-hidden p-0 mb-6 transition-transform group-hover:scale-[1.02] ${i % 2 === 0 ? 'rotate-[-1deg]' : 'rotate-[1deg]'}`}
-              >
-                <div className="relative aspect-video">
-                  <Image 
-                    src={project.imageUrl} 
-                    alt={project.description} 
-                    fill 
-                    className="object-cover"
-                    data-ai-hint={project.imageHint}
-                  />
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <HandDrawnButton variant="accent" size="sm">
-                      View Details
-                    </HandDrawnButton>
-                  </div>
-                </div>
-              </WobblyBox>
-              <div className="flex justify-between items-start px-2">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-headline mb-2">Project {i + 1} Name</h3>
-                  <div className="flex gap-2">
-                    <span className="font-body text-sm bg-secondary px-2 border border-foreground rounded-full">Branding</span>
-                    <span className="font-body text-sm bg-secondary px-2 border border-foreground rounded-full">Web Design</span>
-                  </div>
-                </div>
-                <div className="p-2 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-colors">
-                  <ExternalLink size={20} strokeWidth={3} />
-                </div>
-              </div>
-            </div>
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-20 md:gap-y-0">
+          {projects.map((project, i) => (
+            <ProjectCard 
+              key={project.id}
+              index={i}
+              title={project.title}
+              description={project.description}
+              imageUrl={project.image?.imageUrl || ""}
+              imageHint={project.image?.imageHint || "design project"}
+              tags={project.tags}
+            />
           ))}
         </div>
       </section>
