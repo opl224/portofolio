@@ -5,7 +5,8 @@
     "role": "Designer & Developer",
     "bio": "Seorang kreator yang mengutamakan sentuhan manusiawi daripada presisi klinis. Ahli dalam membuat produk digital yang berjiwa, autentik, dan berkesan dengan gaya visual coretan tangan.",
     "location": "Indonesia",
-    "philosophy": "Desain harus terasa hidup dan memiliki karakter unik."
+    "philosophy": "Desain harus terasa hidup dan memiliki karakter unik.",
+    "contact": "Anda bisa menghubungi saya melalui formulir kontak di bawah atau via email di bagian footer."
   },
   "skills": {
     "design": ["UI/UX", "Branding", "Digital Illustration", "Typography", "Visual Storytelling"],
@@ -34,9 +35,21 @@
     }
   ],
   "faq": [
-    "Apa bahasa pemrograman favoritmu?",
-    "Proyek apa yang paling menantang?",
-    "Bagaimana cara menghubungimu?",
-    "Apakah kamu menerima proyek freelance?"
+    {
+      "question": "Apa bahasa pemrograman favoritmu?",
+      "answer": "Saya sangat menyukai TypeScript dan Next.js karena memungkinkan saya membangun aplikasi yang solid dengan cepat!"
+    },
+    {
+      "question": "Proyek apa yang paling menantang?",
+      "answer": "Membangun sistem desain InkFolio ini cukup menantang karena harus menyeimbangkan estetika coretan tangan dengan fungsionalitas web modern."
+    },
+    {
+      "question": "Bagaimana cara menghubungimu?",
+      "answer": "Silakan gulir ke bawah ke bagian 'Let's Scribble Something' atau cek link sosial media saya di footer."
+    },
+    {
+      "question": "Apakah kamu menerima proyek freelance?",
+      "answer": "Ya, saya selalu terbuka untuk proyek kreatif yang menarik. Mari kita bicarakan ide Anda!"
+    }
   ]
 }

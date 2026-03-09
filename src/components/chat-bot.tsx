@@ -1,9 +1,9 @@
+
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { MessageCircle, X, Send, Loader2, Sparkles, Search } from 'lucide-react';
 import { WobblyBox } from './ui/wobbly-box';
-import { chatWithPortfolio } from '@/ai/flows/portfolio-chat-flow';
 import { cn } from '@/lib/utils';
 import portfolioData from '@/lib/chatbot-data.json';
 
@@ -27,15 +27,55 @@ export const ChatBot = () => {
     }
   }, [messages, isLoading]);
 
+  // Local response logic (No AI)
+  const getLocalResponse = (userInput: string): string => {
+    const query = userInput.toLowerCase();
+    
+    // 1. Check for exact or partial FAQ matches
+    const faqMatch = portfolioData.faq.find(f => 
+      query.includes(f.question.toLowerCase()) || f.question.toLowerCase().includes(query)
+    );
+    if (faqMatch) return faqMatch.answer;
+
+    // 2. Profile keywords
+    if (query.includes('siapa') || query.includes('profil') || query.includes('nama')) {
+      return `Saya adalah ${portfolioData.profile.name}. ${portfolioData.profile.bio}`;
+    }
+
+    // 3. Skills keywords
+    if (query.includes('skill') || query.includes('keahlian') || query.includes('bisa apa') || query.includes('teknis')) {
+      return `Saya ahli di bidang desain (${portfolioData.skills.design.join(', ')}) dan mahir dalam teknologi seperti ${portfolioData.skills.technical.join(', ')}.`;
+    }
+
+    // 4. Projects keywords
+    if (query.includes('proyek') || query.includes('karya') || query.includes('buat')) {
+      const titles = portfolioData.projects.map(p => p.title).join(', ');
+      return `Saya sudah mengerjakan beberapa proyek menarik seperti: ${titles}. Ada yang ingin Anda ketahui lebih detail?`;
+    }
+
+    // 5. Contact keywords
+    if (query.includes('kontak') || query.includes('hubung') || query.includes('email') || query.includes('pesan')) {
+      return portfolioData.profile.contact;
+    }
+
+    // 6. Greetings
+    if (query.includes('halo') || query.includes('hi') || query.includes('hai') || query.includes('pagi') || query.includes('siang')) {
+      return "Halo! Senang bertemu Anda. Ingin tahu tentang proyek saya atau keahlian teknis saya?";
+    }
+
+    return "Maaf, tinta saya agak bingung. Coba tanya tentang 'proyek', 'keahlian', atau 'siapa profilmu'!";
+  };
+
   // Suggestion logic based on typing
   const suggestions = useMemo(() => {
     if (!input.trim()) return [];
     
     const allKnowledge = [
-      ...portfolioData.faq,
+      ...portfolioData.faq.map(f => f.question),
       ...portfolioData.projects.map(p => `Ceritakan tentang ${p.title}`),
-      ...portfolioData.skills.design.map(s => `Apakah kamu ahli dalam ${s}?`),
-      ...portfolioData.skills.technical.map(s => `Bagaimana pengalamanmu dengan ${s}?`)
+      "Apa saja keahlianmu?",
+      "Siapa itu InkFolio?",
+      "Bagaimana cara menghubungi?"
     ];
 
     return allKnowledge
@@ -51,17 +91,12 @@ export const ChatBot = () => {
     setMessages(prev => [...prev, { role: 'user', text: messageToSend }]);
     setIsLoading(true);
 
-    try {
-      const result = await chatWithPortfolio({ 
-        message: messageToSend,
-        history: messages 
-      });
-      setMessages(prev => [...prev, { role: 'model', text: result.response }]);
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: 'Waduh, sepertinya koneksi tinta saya terputus. Coba lagi ya!' }]);
-    } finally {
+    // Simulate "thinking" time for natural feel
+    setTimeout(() => {
+      const response = getLocalResponse(messageToSend);
+      setMessages(prev => [...prev, { role: 'model', text: response }]);
       setIsLoading(false);
-    }
+    }, 600);
   };
 
   const handleSuggestionClick = (s: string) => {
@@ -121,7 +156,7 @@ export const ChatBot = () => {
             ))}
             {isLoading && (
               <div className="flex items-center gap-2 font-body text-muted-foreground italic p-2">
-                <Loader2 size={16} className="animate-spin" /> Sedang merangkai kata...
+                <Loader2 size={16} className="animate-spin" /> Sedang menulis...
               </div>
             )}
           </div>
@@ -150,13 +185,13 @@ export const ChatBot = () => {
             {/* Default FAQ if no typing */}
             {input.length === 0 && messages.length < 3 && !isLoading && (
               <div className="flex flex-wrap gap-2">
-                {portfolioData.faq.slice(0, 3).map((q, i) => (
+                {portfolioData.faq.slice(0, 3).map((f, i) => (
                   <button 
                     key={i}
-                    onClick={() => handleSuggestionClick(q)}
+                    onClick={() => handleSuggestionClick(f.question)}
                     className="text-xs font-body border-2 border-foreground/30 px-3 py-1 rounded-full hover:bg-primary hover:text-white hover:border-foreground transition-all"
                   >
-                    {q}
+                    {f.question}
                   </button>
                 ))}
               </div>
