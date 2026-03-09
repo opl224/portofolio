@@ -16,6 +16,7 @@ import {
   SheetTrigger, 
   SheetHeader, 
   SheetTitle,
+  SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
 
@@ -84,14 +85,15 @@ export default function Home() {
                 </SheetTrigger>
                 <SheetContent side="top" className="h-full w-full border-none p-0 flex flex-col paper-texture bg-background overflow-y-auto">
                   <div className="p-8 flex flex-col h-full">
-                    <div className="flex justify-between items-center mb-12">
-                      <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
+                    <SheetHeader className="p-0 mb-12 flex flex-row items-center justify-between text-left space-y-0">
+                      <SheetTitle className="text-3xl font-headline text-foreground">InkFolio.</SheetTitle>
+                      <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
                       <SheetClose asChild>
                         <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground">
                           <X size={28} strokeWidth={2.5} />
                         </button>
                       </SheetClose>
-                    </div>
+                    </SheetHeader>
 
                     <div className="flex flex-col gap-8 font-body text-4xl mb-12">
                       <SheetClose asChild>
