@@ -69,7 +69,10 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            <ThemeLanguageToggle />
+            {/* Desktop Only Toggle */}
+            <div className="hidden md:block">
+              <ThemeLanguageToggle />
+            </div>
             
             {/* Mobile Menu Trigger */}
             <div className="md:hidden">
@@ -79,25 +82,55 @@ export default function Home() {
                     <Menu size={24} strokeWidth={2.5} />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="bg-background border-l-[3px] border-foreground p-8 flex flex-col paper-texture">
-                  <SheetHeader>
-                    <SheetTitle className="font-headline text-3xl text-left border-b-2 border-dashed border-foreground pb-4 mb-10 text-foreground">
-                      Menu.
-                    </SheetTitle>
-                  </SheetHeader>
-                  <div className="flex flex-col gap-8 font-body text-3xl">
-                    <SheetClose asChild>
-                      <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.projects}</a>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.about}</a>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.contact}</a>
-                    </SheetClose>
-                  </div>
-                  <div className="mt-auto border-t-2 border-dashed border-foreground pt-6">
-                    <p className="font-headline text-accent text-xl -rotate-2">{t.footer.stayCreative}</p>
+                <SheetContent side="top" className="h-full w-full border-none p-0 flex flex-col paper-texture bg-background overflow-y-auto">
+                  <div className="p-8 flex flex-col h-full">
+                    <div className="flex justify-between items-center mb-12">
+                      <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
+                      <SheetClose asChild>
+                        <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground">
+                          <X size={28} strokeWidth={2.5} />
+                        </button>
+                      </SheetClose>
+                    </div>
+
+                    <div className="flex flex-col gap-8 font-body text-4xl mb-12">
+                      <SheetClose asChild>
+                        <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.projects}</a>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.about}</a>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.contact}</a>
+                      </SheetClose>
+                    </div>
+
+                    <div className="border-t-2 border-dashed border-foreground pt-8 mb-10">
+                      <p className="font-headline text-xl mb-6 text-foreground/60">Settings & Socials</p>
+                      <div className="flex flex-col gap-8">
+                        {/* Theme and Lang Toggles moved here for mobile */}
+                        <div className="scale-125 origin-left">
+                          <ThemeLanguageToggle />
+                        </div>
+
+                        {/* Social Media Links */}
+                        <div className="flex gap-6 mt-4">
+                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
+                            <Github size={24} strokeWidth={3} />
+                          </a>
+                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground">
+                            <Linkedin size={24} strokeWidth={3} />
+                          </a>
+                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
+                            <Mail size={24} strokeWidth={3} />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-auto">
+                      <p className="font-headline text-accent text-2xl -rotate-2">{t.footer.stayCreative}</p>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
@@ -288,13 +321,13 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-center gap-4">
             <div className="flex justify-center gap-6">
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
                 <Github strokeWidth={3} />
               </a>
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
                 <Linkedin strokeWidth={3} />
               </a>
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
                 <Mail strokeWidth={3} />
               </a>
             </div>
