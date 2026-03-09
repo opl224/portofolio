@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, ArrowRight, ArrowUp, User, Code, Palette, Menu, X } from 'lucide-react';
+import { Mail, Github, Linkedin, ArrowUp, User, Code, Palette, Menu, X } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -19,6 +19,25 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
+
+// Custom Long Arrow Icon Component
+const LongArrowRight = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M2 12h17" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+);
 
 export default function Home() {
   const { locale } = useAppContext();
@@ -63,7 +82,7 @@ export default function Home() {
         <h1 className="text-3xl md:text-4xl font-headline tracking-tight">InkFolio.</h1>
         <div className="flex items-center gap-4 md:gap-8">
           {/* Desktop Links */}
-          <div className="hidden md:flex gap-8 font-body text-xl">
+          <div className="hidden md:flex gap-8 font-body text-xl text-foreground">
             <a href="#projects" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.projects}</a>
             <a href="#about" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.about}</a>
             <a href="#contact" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.contact}</a>
@@ -130,7 +149,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="mt-auto text-center">
+                    <div className="mt-auto text-center pb-8">
                       <p className="font-headline text-accent text-2xl -rotate-2">{t.footer.stayCreative}</p>
                     </div>
                   </div>
@@ -147,7 +166,7 @@ export default function Home() {
           <WobblyBox variant="accent" className="inline-block px-4 py-1 mb-2 -rotate-2" shadow="sm">
             <span className="text-accent font-headline">{t.hero.status}</span>
           </WobblyBox>
-          <h2 className="text-5xl md:text-7xl font-headline leading-tight">
+          <h2 className="text-5xl md:text-7xl font-headline leading-tight text-foreground">
             {t.hero.title}
           </h2>
           <p className="text-xl md:text-2xl font-body text-foreground/80 leading-relaxed max-w-lg">
@@ -196,10 +215,10 @@ export default function Home() {
           { label: t.stats.sketchbooks, value: "05" },
         ].map((stat, i) => (
           <div key={i} className="text-center group">
-            <div className={`mx-auto w-24 h-24 md:w-32 md:h-32 flex items-center justify-center border-[3px] border-foreground mb-4 transition-transform group-hover:rotate-6 ${i % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'}`} style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>
+            <div className={`mx-auto w-24 h-24 md:w-32 md:h-32 flex items-center justify-center border-[3px] border-foreground mb-4 transition-transform group-hover:rotate-6 text-foreground ${i % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'}`} style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>
               <span className="text-3xl md:text-4xl font-headline">{stat.value}</span>
             </div>
-            <p className="font-body text-lg md:text-xl">{stat.label}</p>
+            <p className="font-body text-lg md:text-xl text-foreground">{stat.label}</p>
           </div>
         ))}
       </section>
@@ -207,7 +226,7 @@ export default function Home() {
       {/* Projects Gallery */}
       <section id="projects" className="mb-32">
         <div className="flex justify-between items-end mb-12">
-          <h2 className="text-4xl md:text-5xl font-headline">{t.projects.title}</h2>
+          <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.projects.title}</h2>
           <div className="hidden md:block">
             <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="stroke-foreground/20 stroke-2">
               <path d="M5,5 Q30,35 55,5" strokeLinecap="round" strokeDasharray="4,4" />
@@ -233,8 +252,8 @@ export default function Home() {
       <section id="about" className="mb-32">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div className="order-2 md:order-1 space-y-8">
-            <h2 className="text-4xl md:text-5xl font-headline">{t.about.title}</h2>
-            <p className="text-xl md:text-2xl font-body leading-relaxed" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
+            <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.about.title}</h2>
+            <p className="text-xl md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
             <div className="grid grid-cols-2 gap-4">
               <WobblyBox variant="post-it" className="rotate-2" shadow="sm">
                 <Palette className="mb-2 text-accent" size={24} strokeWidth={3} />
@@ -306,8 +325,8 @@ export default function Home() {
               />
             </div>
             <div className="text-center pt-4">
-              <HandDrawnButton variant="accent" size="lg" className="w-full md:w-auto">
-                {t.contact.send} <ArrowRight className="inline ml-2" />
+              <HandDrawnButton variant="accent" size="lg" className="w-full md:w-auto flex items-center justify-center gap-4">
+                {t.contact.send} <LongArrowRight className="inline" />
               </HandDrawnButton>
             </div>
           </form>
@@ -318,8 +337,8 @@ export default function Home() {
       <footer className="border-t-[3px] border-foreground border-dashed pt-12 pb-20">
         <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
           <div className="space-y-4">
-            <h2 className="text-3xl font-headline">InkFolio.</h2>
-            <p className="font-body text-xl">{t.footer.tagline}</p>
+            <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
+            <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
           </div>
           <div className="flex flex-col items-center gap-4">
             <div className="flex justify-center gap-6">
@@ -339,7 +358,7 @@ export default function Home() {
             </a>
           </div>
           <div className="text-center md:text-right space-y-2">
-            <p className="font-body text-lg">{t.footer.copyright}</p>
+            <p className="font-body text-lg text-foreground">{t.footer.copyright}</p>
             <div className="font-headline text-2xl text-accent -rotate-2">{t.footer.stayCreative}</div>
           </div>
         </div>
