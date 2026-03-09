@@ -95,28 +95,28 @@ export default function Home() {
                       </SheetClose>
                     </SheetHeader>
 
-                    <div className="flex flex-col gap-8 font-body text-4xl mb-12">
+                    <div className="flex flex-col gap-8 font-body text-4xl mb-12 items-center text-center">
                       <SheetClose asChild>
-                        <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.projects}</a>
+                        <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground">{t.nav.projects}</a>
                       </SheetClose>
                       <SheetClose asChild>
-                        <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.about}</a>
+                        <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground">{t.nav.about}</a>
                       </SheetClose>
                       <SheetClose asChild>
-                        <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.contact}</a>
+                        <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground">{t.nav.contact}</a>
                       </SheetClose>
                     </div>
 
-                    <div className="border-t-2 border-dashed border-foreground pt-8 mb-10">
-                      <p className="font-headline text-xl mb-6 text-foreground/60">Settings & Socials</p>
-                      <div className="flex flex-col gap-8">
-                        {/* Theme and Lang Toggles moved here for mobile */}
-                        <div className="scale-125 origin-left">
+                    <div className="border-t-2 border-dashed border-foreground pt-8 mb-10 flex flex-col items-center">
+                      <p className="font-headline text-xl mb-6 text-foreground/60 text-center">Settings & Socials</p>
+                      <div className="flex flex-col gap-8 items-center w-full">
+                        {/* Theme and Lang Toggles */}
+                        <div className="scale-125">
                           <ThemeLanguageToggle />
                         </div>
 
                         {/* Social Media Links */}
-                        <div className="flex gap-6 mt-4">
+                        <div className="flex gap-6 mt-4 justify-center">
                           <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
                             <Github size={24} strokeWidth={3} />
                           </a>
@@ -130,7 +130,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="mt-auto">
+                    <div className="mt-auto text-center">
                       <p className="font-headline text-accent text-2xl -rotate-2">{t.footer.stayCreative}</p>
                     </div>
                   </div>
