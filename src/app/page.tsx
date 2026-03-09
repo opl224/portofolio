@@ -20,7 +20,7 @@ import {
   SheetClose 
 } from '@/components/ui/sheet';
 
-// Custom Long Arrow Right Icon
+// Custom Long Arrow Right Icon - fixed viewBox to prevent clipping
 const LongArrowRight = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -98,7 +98,7 @@ export default function Home() {
     <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative">
       {/* Navigation */}
       <nav className="flex justify-between items-center mb-20 px-4">
-        <h1 className="text-3xl md:text-4xl font-headline tracking-tight">InkFolio.</h1>
+        <h1 className="text-3xl md:text-4xl font-headline tracking-tight text-foreground">InkFolio.</h1>
         <div className="flex items-center gap-4 md:gap-8">
           {/* Desktop Links */}
           <div className="hidden md:flex gap-8 font-body text-xl text-foreground">
@@ -122,12 +122,12 @@ export default function Home() {
                   </button>
                 </SheetTrigger>
                 <SheetContent side="top" className="h-full w-full border-none p-0 flex flex-col paper-texture bg-background overflow-y-auto">
-                  <div className="p-8 flex flex-col h-full">
-                    <SheetHeader className="p-0 mb-12 flex flex-row items-center justify-between text-left space-y-0">
+                  <div className="p-8 flex flex-col h-full items-center">
+                    <SheetHeader className="w-full p-0 mb-12 flex flex-row items-center justify-between text-left space-y-0">
                       <SheetTitle className="text-3xl font-headline text-foreground">InkFolio.</SheetTitle>
                       <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
                       <SheetClose asChild>
-                        <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground">
+                        <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground active:scale-90 duration-200">
                           <X size={28} strokeWidth={2.5} />
                         </button>
                       </SheetClose>
@@ -145,7 +145,7 @@ export default function Home() {
                       </SheetClose>
                     </div>
 
-                    <div className="border-t-2 border-dashed border-foreground pt-8 mb-10 flex flex-col items-center">
+                    <div className="w-full border-t-2 border-dashed border-foreground pt-8 mb-10 flex flex-col items-center">
                       <div className="flex flex-col gap-8 items-center w-full">
                         {/* Theme and Lang Toggles */}
                         <div className="scale-125">
@@ -154,22 +154,22 @@ export default function Home() {
 
                         {/* Social Media Links */}
                         <div className="flex gap-6 mt-4 justify-center">
-                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
+                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
                             <Github size={24} strokeWidth={3} />
                           </a>
-                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground">
+                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground active:scale-90">
                             <Linkedin size={24} strokeWidth={3} />
                           </a>
-                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
+                          <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
                             <Mail size={24} strokeWidth={3} />
                           </a>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-auto text-center pb-8 flex flex-col items-center">
+                    <div className="mt-auto text-center pb-12 flex flex-col items-center">
                       <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-10px] z-10">opal</span>
-                      <p className="font-headline text-accent text-4xl -rotate-2">{t.footer.stayCreative}</p>
+                      <p className="font-headline text-accent text-5xl -rotate-2">{t.footer.stayCreative}</p>
                     </div>
                   </div>
                 </SheetContent>
@@ -344,8 +344,8 @@ export default function Home() {
               />
             </div>
             <div className="text-center pt-4">
-              <HandDrawnButton variant="accent" size="lg" className="w-full md:w-auto flex items-center justify-center gap-4">
-                <span className="flex items-center gap-4">
+              <HandDrawnButton variant="accent" size="lg" className="w-full md:w-auto">
+                <span className="flex items-center justify-center gap-4">
                   {t.contact.send} <LongArrowRight />
                 </span>
               </HandDrawnButton>
@@ -361,28 +361,28 @@ export default function Home() {
             <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
             <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
           </div>
-          <div className="flex flex-col items-center gap-10">
+          <div className="flex flex-col items-center gap-12">
             <div className="flex justify-center gap-6">
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
                 <Github strokeWidth={3} />
               </a>
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
                 <Linkedin strokeWidth={3} />
               </a>
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
                 <Mail strokeWidth={3} />
               </a>
             </div>
-            <a href="#top" className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group">
+            <a href="#top" className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group mt-4">
               <MoveUpArrow className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
               {t.footer.backToTop}
             </a>
           </div>
           <div className="text-center md:text-right space-y-4">
             <p className="font-body text-lg text-foreground hidden md:block">{t.footer.copyright}</p>
-            <div className="flex flex-col items-center md:items-end group">
+            <div className="flex flex-col items-center md:items-end group mt-4">
               <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-12px] md:mr-4 z-10">opal</span>
-              <div className="font-headline text-4xl md:text-5xl text-accent -rotate-2 group-hover:rotate-0 transition-transform duration-500">
+              <div className="font-headline text-5xl md:text-6xl text-accent -rotate-2 group-hover:rotate-0 transition-transform duration-500">
                 {t.footer.stayCreative}
               </div>
             </div>
