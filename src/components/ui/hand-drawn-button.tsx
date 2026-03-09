@@ -9,9 +9,9 @@ interface HandDrawnButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElem
 export const HandDrawnButton = React.forwardRef<HTMLButtonElement, HandDrawnButtonProps>(
   ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
     const variants = {
-      primary: "bg-white border-foreground text-foreground hover:bg-accent hover:text-white",
-      secondary: "bg-secondary border-foreground text-foreground hover:bg-primary hover:text-white",
-      accent: "bg-accent border-foreground text-white hover:bg-white hover:text-accent",
+      primary: "bg-background border-foreground text-foreground hover:bg-accent hover:text-white dark:hover:text-background",
+      secondary: "bg-secondary border-foreground text-secondary-foreground hover:bg-primary hover:text-white dark:hover:text-background",
+      accent: "bg-accent border-foreground text-white hover:bg-background hover:text-accent",
     };
 
     const sizes = {

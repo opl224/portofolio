@@ -26,7 +26,6 @@ export const ChatBot = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Reset welcome message on locale change
     setMessages([{ role: 'model', text: t.welcome }]);
   }, [locale, t.welcome]);
 
@@ -39,8 +38,6 @@ export const ChatBot = () => {
   const getLocalResponse = (userInput: string): string => {
     const query = userInput.toLowerCase();
     const data = portfolioData;
-    
-    // Simple logic based on locale
     const isID = locale === 'id';
 
     if (query.includes('siapa') || query.includes('who') || query.includes('profil') || query.includes('profile')) {
@@ -66,7 +63,6 @@ export const ChatBot = () => {
       return data.profile.contact;
     }
 
-    // Default FAQ search
     const faqMatch = data.faq.find(f => 
       query.includes(f.question.toLowerCase()) || f.question.toLowerCase().includes(query)
     );
@@ -111,7 +107,7 @@ export const ChatBot = () => {
         <WobblyBox 
           variant="default" 
           shadow="lg" 
-          className="mb-4 w-[350px] md:w-[400px] h-[550px] flex flex-col p-4 bg-white dark:bg-slate-900 overflow-hidden"
+          className="mb-4 w-[350px] md:w-[400px] h-[550px] flex flex-col p-4 bg-background overflow-hidden"
           rotate={-1}
         >
           <div className="flex justify-between items-center border-b-2 border-dashed border-foreground pb-2 mb-4">
@@ -171,7 +167,7 @@ export const ChatBot = () => {
                     <button 
                       key={i}
                       onClick={() => handleSend(s)}
-                      className="text-xs font-body border-2 border-foreground/30 px-3 py-1 rounded-full hover:bg-accent hover:text-white hover:border-foreground transition-all text-left text-foreground"
+                      className="text-xs font-body border-2 border-foreground/30 px-3 py-1 rounded-full hover:bg-accent hover:text-white hover:border-foreground transition-all text-left text-foreground bg-background/50"
                     >
                       {s}
                     </button>
@@ -188,7 +184,7 @@ export const ChatBot = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
               placeholder={t.placeholder}
-              className="flex-1 font-body text-lg border-2 border-foreground p-2 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all bg-white dark:bg-slate-800 text-foreground"
+              className="flex-1 font-body text-lg border-2 border-foreground p-2 focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all bg-background text-foreground"
               style={{ borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px' }}
             />
             <button 
@@ -207,7 +203,7 @@ export const ChatBot = () => {
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "p-5 rounded-full border-[3px] border-foreground shadow-hand-drawn hover:shadow-hand-drawn-lg transition-all transform hover:-translate-y-1 active:translate-y-1 active:shadow-none",
-          isOpen ? "bg-white text-accent dark:bg-slate-900" : "bg-accent text-white"
+          isOpen ? "bg-background text-accent" : "bg-accent text-white"
         )}
       >
         {isOpen ? <X size={32} strokeWidth={3} /> : <MessageCircle size={32} strokeWidth={3} />}

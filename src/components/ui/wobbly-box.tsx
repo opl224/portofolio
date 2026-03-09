@@ -11,10 +11,10 @@ interface WobblyBoxProps extends React.HTMLAttributes<HTMLDivElement> {
 export const WobblyBox = React.forwardRef<HTMLDivElement, WobblyBoxProps>(
   ({ className, variant = 'default', decoration = 'none', rotate = 0, shadow = 'md', children, ...props }, ref) => {
     const variants = {
-      default: 'bg-white border-foreground',
-      'post-it': 'bg-[#fff9c4] border-foreground',
-      blue: 'bg-[#e3f2fd] border-[#2d5da1]',
-      accent: 'bg-accent/10 border-accent',
+      default: 'bg-background border-foreground text-foreground',
+      'post-it': 'bg-[#fff9c4] dark:bg-yellow-600/20 border-foreground text-foreground',
+      blue: 'bg-[#e3f2fd] dark:bg-blue-900/20 border-primary text-foreground',
+      accent: 'bg-accent/10 border-accent text-foreground',
     };
 
     const shadows = {

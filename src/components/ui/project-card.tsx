@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Image from 'next/image';
 import { ExternalLink, Tag } from 'lucide-react';
@@ -36,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         decoration={index === 0 ? "tape" : "none"}
         shadow="lg"
         className={cn(
-          "overflow-hidden p-0 mb-6 group-hover:scale-[1.02] transition-transform duration-300 bg-white",
+          "overflow-hidden p-0 mb-6 group-hover:scale-[1.02] transition-transform duration-300 bg-background",
           isEven ? "rotate-[-1.5deg]" : "rotate-[1.5deg]"
         )}
       >
@@ -58,12 +57,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
       <div className="px-4 space-y-3">
         <div className="flex justify-between items-start">
-          <h3 className="text-3xl font-headline group-hover:text-primary transition-colors">
+          <h3 className="text-3xl font-headline group-hover:text-primary transition-colors text-foreground">
             {title}
           </h3>
           <a 
             href={link} 
-            className="p-2 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all transform hover:rotate-12"
+            className="p-2 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all transform hover:rotate-12 text-foreground hover:text-white"
           >
             <ExternalLink size={20} strokeWidth={3} />
           </a>
@@ -77,7 +76,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {tags.map((tag) => (
             <span 
               key={tag} 
-              className="flex items-center gap-1 font-body text-sm bg-secondary/50 px-3 py-1 border-2 border-foreground rounded-full"
+              className="flex items-center gap-1 font-body text-sm bg-secondary/50 px-3 py-1 border-2 border-foreground rounded-full text-foreground"
               style={{ borderRadius: '15px 225px 15px 255px / 255px 15px 225px 15px' }}
             >
               <Tag size={12} className="text-primary" />
