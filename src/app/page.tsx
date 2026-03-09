@@ -146,7 +146,6 @@ export default function Home() {
                     </div>
 
                     <div className="border-t-2 border-dashed border-foreground pt-8 mb-10 flex flex-col items-center">
-                      <p className="font-headline text-xl mb-6 text-foreground/60 text-center">Settings & Socials</p>
                       <div className="flex flex-col gap-8 items-center w-full">
                         {/* Theme and Lang Toggles */}
                         <div className="scale-125">
@@ -390,7 +389,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
       <ChatBot />
     </div>
   );

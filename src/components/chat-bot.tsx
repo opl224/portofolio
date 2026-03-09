@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { MessageCircle, X, Send, Loader2, Sparkles, Search } from 'lucide-react';
+import { X, Send, Loader2, Sparkles, Search } from 'lucide-react';
 import { WobblyBox } from './ui/wobbly-box';
 import { cn } from '@/lib/utils';
 import portfolioData from '@/lib/chatbot-data.json';
@@ -12,6 +12,29 @@ type Message = {
   role: 'user' | 'model';
   text: string;
 };
+
+// Custom Bot Icon SVG
+const BotIcon = ({ className, size = 24, strokeWidth = 2 }: { className?: string, size?: number, strokeWidth?: number }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth={strokeWidth} 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={cn("lucide lucide-bot-message-square", className)}
+  >
+    <path d="M12 6V2H8"/>
+    <path d="M15 11v2"/>
+    <path d="M2 12h2"/>
+    <path d="M20 12h2"/>
+    <path d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/>
+    <path d="M9 11v2"/>
+  </svg>
+);
 
 export const ChatBot = () => {
   const { locale } = useAppContext();
@@ -206,7 +229,11 @@ export const ChatBot = () => {
           isOpen ? "bg-background text-accent" : "bg-accent text-white"
         )}
       >
-        {isOpen ? <X size={32} strokeWidth={3} /> : <MessageCircle size={32} strokeWidth={3} />}
+        {isOpen ? (
+          <X size={32} strokeWidth={3} />
+        ) : (
+          <BotIcon size={32} strokeWidth={3} />
+        )}
       </button>
     </div>
   );
