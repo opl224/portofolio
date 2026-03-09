@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, ArrowRight, ArrowUp, User, Code, Palette, Briefcase } from 'lucide-react';
+import { Mail, Github, Linkedin, ArrowRight, ArrowUp, User, Code, Palette, Menu, X } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -10,6 +10,14 @@ import { ChatBot } from '@/components/chat-bot';
 import { ThemeLanguageToggle } from '@/components/ui/theme-language-toggle';
 import { useAppContext } from '@/context/app-context';
 import { translations } from '@/lib/translations';
+import { 
+  Sheet, 
+  SheetContent, 
+  SheetTrigger, 
+  SheetHeader, 
+  SheetTitle,
+  SheetClose 
+} from '@/components/ui/sheet';
 
 export default function Home() {
   const { locale } = useAppContext();
@@ -52,13 +60,49 @@ export default function Home() {
       {/* Navigation */}
       <nav className="flex justify-between items-center mb-20 px-4">
         <h1 className="text-3xl md:text-4xl font-headline tracking-tight">InkFolio.</h1>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8">
+          {/* Desktop Links */}
           <div className="hidden md:flex gap-8 font-body text-xl">
-            <a href="#projects" className="hover:line-through decoration-accent decoration-2">{t.nav.projects}</a>
-            <a href="#about" className="hover:line-through decoration-accent decoration-2">{t.nav.about}</a>
-            <a href="#contact" className="hover:line-through decoration-accent decoration-2">{t.nav.contact}</a>
+            <a href="#projects" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.projects}</a>
+            <a href="#about" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.about}</a>
+            <a href="#contact" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.contact}</a>
           </div>
-          <ThemeLanguageToggle />
+
+          <div className="flex items-center gap-3">
+            <ThemeLanguageToggle />
+            
+            {/* Mobile Menu Trigger */}
+            <div className="md:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border active:scale-90 duration-200 bg-background text-foreground">
+                    <Menu size={24} strokeWidth={2.5} />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right" className="bg-background border-l-[3px] border-foreground p-8 flex flex-col paper-texture">
+                  <SheetHeader>
+                    <SheetTitle className="font-headline text-3xl text-left border-b-2 border-dashed border-foreground pb-4 mb-10 text-foreground">
+                      Menu.
+                    </SheetTitle>
+                  </SheetHeader>
+                  <div className="flex flex-col gap-8 font-body text-3xl">
+                    <SheetClose asChild>
+                      <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.projects}</a>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.about}</a>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground w-fit">{t.nav.contact}</a>
+                    </SheetClose>
+                  </div>
+                  <div className="mt-auto border-t-2 border-dashed border-foreground pt-6">
+                    <p className="font-headline text-accent text-xl -rotate-2">{t.footer.stayCreative}</p>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
         </div>
       </nav>
 
