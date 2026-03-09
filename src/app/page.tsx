@@ -1,6 +1,5 @@
-
 import Image from 'next/image';
-import { Mail, Github, Linkedin, ExternalLink, ArrowRight, User, Code, Palette, Briefcase } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, ArrowRight, ArrowUp, User, Code, Palette, Briefcase } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -40,7 +39,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
+    <div id="top" className="max-w-5xl mx-auto px-6 py-10">
       {/* Navigation */}
       <nav className="flex justify-between items-center mb-20 px-4">
         <h1 className="text-3xl md:text-4xl font-headline tracking-tight">InkFolio.</h1>
@@ -64,9 +63,11 @@ export default function Home() {
             A designer and developer who values human touch over clinical precision. Creating wobbly, authentic, and memorable products.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 pt-4 relative">
-            <HandDrawnButton variant="primary" size="lg">
-              See my work
-            </HandDrawnButton>
+            <a href="#projects">
+              <HandDrawnButton variant="primary" size="lg">
+                See my work
+              </HandDrawnButton>
+            </a>
             <div className="hidden md:block absolute -right-24 top-0 animate-bounce-slow">
               <svg width="100" height="60" viewBox="0 0 100 60" fill="none" className="stroke-accent stroke-[2.5] fill-none">
                 <path d="M10,10 Q50,5 90,50 M90,50 L80,50 M90,50 L90,40" strokeLinecap="round" strokeDasharray="5,5" />
@@ -237,15 +238,21 @@ export default function Home() {
             <h2 className="text-3xl font-headline">InkFolio.</h2>
             <p className="font-body text-xl">Drawn with love and coffee.</p>
           </div>
-          <div className="flex justify-center gap-6">
-            <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1">
-              <Github strokeWidth={3} />
-            </a>
-            <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1">
-              <Linkedin strokeWidth={3} />
-            </a>
-            <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1">
-              <Mail strokeWidth={3} />
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex justify-center gap-6">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1">
+                <Github strokeWidth={3} />
+              </a>
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1">
+                <Linkedin strokeWidth={3} />
+              </a>
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1">
+                <Mail strokeWidth={3} />
+              </a>
+            </div>
+            <a href="#top" className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group">
+              <ArrowUp size={20} strokeWidth={3} className="group-hover:-translate-y-1 transition-transform" />
+              Kembali ke Atas
             </a>
           </div>
           <div className="text-center md:text-right space-y-2">
