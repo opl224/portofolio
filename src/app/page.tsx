@@ -395,11 +395,12 @@ export default function Home() {
                   <div className="flex animate-marquee whitespace-nowrap items-center h-full">
                     {[...techLogos, ...techLogos].map((item, i) => (
                       <div key={i} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
-                        <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300">
+                        <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
                           <Image 
                             src={item.src} 
                             alt={item.name} 
-                            fill 
+                            width={48} 
+                            height={48} 
                             className="object-contain"
                           />
                         </div>
