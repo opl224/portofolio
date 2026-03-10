@@ -63,7 +63,6 @@ export default function Home() {
   const t = translations[locale];
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
-  const profileImg = { imageUrl: "/me.png" }; // forcing me.png
   
   const projects = [
     {
@@ -156,13 +155,13 @@ export default function Home() {
 
                     <div className="flex flex-col gap-8 font-body text-4xl mb-12 items-center text-center">
                       <SheetClose asChild>
-                        <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground">{t.nav.projects}</a>
+                        <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all">{t.nav.projects}</a>
                       </SheetClose>
                       <SheetClose asChild>
-                        <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground">{t.nav.about}</a>
+                        <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all">{t.nav.about}</a>
                       </SheetClose>
                       <SheetClose asChild>
-                        <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground">{t.nav.contact}</a>
+                        <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all">{t.nav.contact}</a>
                       </SheetClose>
                     </div>
 
