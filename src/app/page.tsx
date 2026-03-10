@@ -63,7 +63,7 @@ export default function Home() {
   const t = translations[locale];
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
-  const profileImg = PlaceHolderImages.find(img => img.id === 'profile');
+  const profileImg = { imageUrl: "/me.png" }; // forcing me.png
   
   const projects = [
     {
@@ -103,7 +103,7 @@ export default function Home() {
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
             <Image 
-              src={profileImg?.imageUrl || "/me.png"} 
+              src="/me.png" 
               alt="Logo" 
               width={48} 
               height={48} 
@@ -137,7 +137,7 @@ export default function Home() {
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
                           <Image 
-                            src={profileImg?.imageUrl || "/me.png"} 
+                            src="/me.png" 
                             alt="Logo" 
                             width={48} 
                             height={48} 
@@ -145,7 +145,8 @@ export default function Home() {
                           />
                         </div>
                       </div>
-                      <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
+                      <SheetTitle className="sr-only">Navigasi Portofolio</SheetTitle>
+                      <SheetDescription className="sr-only">Pilih bagian portofolio untuk berpindah halaman</SheetDescription>
                       <SheetClose asChild>
                         <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground active:scale-90 duration-200">
                           <X size={28} strokeWidth={2.5} />
@@ -308,7 +309,7 @@ export default function Home() {
             <div className="relative">
               <div className="w-64 h-64 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                 <Image 
-                  src={profileImg?.imageUrl || "/me.png"} 
+                  src="/me.png" 
                   alt="Profile" 
                   width={400} 
                   height={400} 
@@ -379,7 +380,7 @@ export default function Home() {
             <div className="flex items-center gap-3 justify-center md:justify-start">
               <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
                 <Image 
-                  src={profileImg?.imageUrl || "/me.png"} 
+                  src="/me.png" 
                   alt="Logo" 
                   width={40} 
                   height={40} 

@@ -16,7 +16,6 @@ export const ThemeLanguageToggle = () => {
         onClick={() => setLocale(locale === 'en' ? 'id' : 'en')}
         className="flex items-center gap-2 font-headline text-lg border-2 border-foreground px-3 py-1 hover:bg-primary hover:text-white transition-all wobbly-border"
       >
-        <Languages size={18} />
         {locale.toUpperCase()}
       </button>
 
