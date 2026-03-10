@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { ExternalLink, Tag } from 'lucide-react';
+import { ExternalLink, Tag, Code2 } from 'lucide-react';
 import { WobblyBox } from './wobbly-box';
 import { HandDrawnButton } from './hand-drawn-button';
 import { cn } from '@/lib/utils';
@@ -27,15 +27,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const isEven = index % 2 === 0;
   
   return (
-    <div className={cn(
-      "group flex flex-col transition-all duration-300",
-      !isEven && "md:mt-16"
-    )}>
+    <div 
+      className={cn(
+        "group flex flex-col transition-all duration-300 outline-none",
+        !isEven && "md:mt-16"
+      )}
+      tabIndex={0}
+    >
       <WobblyBox 
         decoration={index === 0 ? "tape" : "none"}
         shadow="lg"
         className={cn(
-          "overflow-hidden p-0 mb-6 group-hover:scale-[1.02] transition-transform duration-300 bg-background",
+          "overflow-hidden p-0 mb-6 group-hover:scale-[1.02] transition-transform duration-300 bg-background cursor-pointer",
           isEven ? "rotate-[-1.5deg]" : "rotate-[1.5deg]"
         )}
       >
@@ -44,13 +47,37 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             src={imageUrl} 
             alt={title} 
             fill 
-            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            className="object-cover grayscale group-hover:grayscale-0 group-focus:grayscale-0 transition-all duration-500"
             data-ai-hint={imageHint}
           />
-          <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-            <HandDrawnButton variant="accent" size="sm" className="scale-90 group-hover:scale-100 transition-transform">
-              Buka Proyek
-            </HandDrawnButton>
+          
+          {/* Overlay for Technologies & CTA */}
+          <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-300 flex flex-col items-center justify-center backdrop-blur-[6px] p-6 text-center">
+            <div className="mb-4 space-y-2">
+              <p className="font-headline text-white text-lg flex items-center justify-center gap-2 mb-2">
+                <Code2 size={18} /> Tech Stack:
+              </p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {tags.map((tag, i) => (
+                  <span 
+                    key={tag} 
+                    className={cn(
+                      "bg-white text-primary font-body text-sm px-3 py-1 border-2 border-foreground shadow-hand-drawn-sm",
+                      i % 2 === 0 ? "rotate-2" : "-rotate-2"
+                    )}
+                    style={{ borderRadius: '15px 225px 15px 255px / 255px 15px 225px 15px' }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <a href={link} className="mt-2">
+              <HandDrawnButton variant="accent" size="sm" className="scale-90 group-hover:scale-100 group-focus:scale-100 transition-transform">
+                Buka Proyek
+              </HandDrawnButton>
+            </a>
           </div>
         </div>
       </WobblyBox>
@@ -62,7 +89,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </h3>
           <a 
             href={link} 
-            className="p-2 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all transform hover:rotate-12 text-foreground hover:text-white"
+            className="p-2 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all transform hover:rotate-12 text-foreground"
           >
             <ExternalLink size={20} strokeWidth={3} />
           </a>
