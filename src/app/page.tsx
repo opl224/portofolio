@@ -380,7 +380,7 @@ export default function Home() {
         {/* About Section */}
         <section id="about" className="mb-32 scroll-mt-20 overflow-hidden">
           <h2 className="text-4xl md:text-5xl font-headline text-foreground mb-12 text-center md:text-left">{t.about.title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start mb-16">
             <div className="order-2 md:order-1 space-y-6 min-w-0">
               <p className="text-lg md:text-xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
               
@@ -391,28 +391,6 @@ export default function Home() {
                       <FileDown size={24} /> {t.about.downloadCV}
                     </HandDrawnButton>
                   </a>
-                </div>
-
-                {/* Tech Marquee */}
-                <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-6">
-                  <div className="flex animate-marquee whitespace-nowrap items-center h-full">
-                    {[...techLogos, ...techLogos].map((item, i) => (
-                      <div key={i} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
-                        <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
-                          <Image 
-                            src={item.src} 
-                            alt={item.name}
-                            width={48} 
-                            height={48} 
-                            className="object-contain"
-                          />
-                        </div>
-                        <span className="font-headline text-xs mt-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 text-primary">
-                          {item.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
@@ -432,6 +410,28 @@ export default function Home() {
                   <User className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Tech Marquee - Full Width within Container */}
+          <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-6">
+            <div className="flex animate-marquee whitespace-nowrap items-center h-full">
+              {[...techLogos, ...techLogos].map((item, i) => (
+                <div key={i} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
+                  <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
+                    <Image 
+                      src={item.src} 
+                      alt={item.name}
+                      width={48} 
+                      height={48} 
+                      className="object-contain"
+                    />
+                  </div>
+                  <span className="font-headline text-xs mt-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 text-primary">
+                    {item.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
