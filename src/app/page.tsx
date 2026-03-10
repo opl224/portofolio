@@ -166,7 +166,7 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
-      <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative">
+      <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative overflow-x-hidden">
         {/* Navigation */}
         <nav className="flex justify-between items-center mb-20 px-4">
           <div className="flex items-center gap-3">
@@ -387,10 +387,10 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="mb-32 scroll-mt-20">
+        <section id="about" className="mb-32 scroll-mt-20 overflow-hidden">
           <h2 className="text-4xl md:text-5xl font-headline text-foreground mb-12 text-center md:text-left">{t.about.title}</h2>
-          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
-            <div className="order-2 md:order-1 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+            <div className="order-2 md:order-1 space-y-6 min-w-0">
               <p className="text-lg md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
               
               <div className="pt-4 flex flex-col gap-10">
@@ -406,7 +406,7 @@ export default function Home() {
                 <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-4">
                   <div className="flex animate-marquee whitespace-nowrap items-center h-full">
                     {[...techIcons, ...techIcons].map((item, i) => (
-                      <div key={i} className="flex flex-col items-center justify-center mx-6 md:mx-8 group">
+                      <div key={i} className="flex flex-col items-center justify-center mx-6 md:mx-8 group min-w-max">
                         <div className="p-3 border-2 border-foreground wobbly-border bg-white group-hover:bg-primary group-hover:text-white transition-all shadow-hand-drawn-sm group-hover:rotate-6">
                           {item.icon}
                         </div>
@@ -419,7 +419,7 @@ export default function Home() {
             </div>
             <div className="order-1 md:order-2 flex justify-center mb-8 md:mb-0">
               <div className="relative">
-                <div className="w-56 h-56 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
+                <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
                     src="/me.png" 
                     alt="Profile" 
