@@ -32,6 +32,7 @@ export const translations = {
       designSkills: 'UI/UX, Branding, Illustration',
       code: 'Code',
       codeSkills: 'Next.js, Tailwind, TypeScript',
+      downloadCV: 'Download CV',
     },
     contact: {
       title: "Let's Scribble Something!",
@@ -90,6 +91,7 @@ export const translations = {
       designSkills: 'UI/UX, Branding, Ilustrasi',
       code: 'Kode',
       codeSkills: 'Next.js, Tailwind, TypeScript',
+      downloadCV: 'Unduh CV',
     },
     contact: {
       title: 'Mari Mencoret Sesuatu!',

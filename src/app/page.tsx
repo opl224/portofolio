@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, Code, Palette, Menu, X } from 'lucide-react';
+import { Mail, Github, Linkedin, User, Code, Palette, Menu, X, FileDown } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -359,6 +359,7 @@ export default function Home() {
             <div className="order-2 md:order-1 space-y-8">
               <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.about.title}</h2>
               <p className="text-xl md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
+              
               <div className="grid grid-cols-2 gap-4">
                 <WobblyBox variant="post-it" className="rotate-2" shadow="sm">
                   <Palette className="mb-2 text-accent" size={24} strokeWidth={3} />
@@ -370,6 +371,14 @@ export default function Home() {
                   <h4 className="font-headline text-lg text-foreground">{t.about.code}</h4>
                   <p className="font-body text-sm text-foreground/70">{t.about.codeSkills}</p>
                 </WobblyBox>
+              </div>
+
+              <div className="pt-4">
+                <a href="/cv.pdf" download="CV_Portfolio.pdf">
+                  <HandDrawnButton variant="secondary" size="md" className="flex items-center gap-3">
+                    <FileDown size={24} /> {t.about.downloadCV}
+                  </HandDrawnButton>
+                </a>
               </div>
             </div>
             <div className="order-1 md:order-2 flex justify-center">
