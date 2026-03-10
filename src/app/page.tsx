@@ -102,16 +102,15 @@ export default function Home() {
       {/* Navigation */}
       <nav className="flex justify-between items-center mb-20 px-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm hidden sm:block">
+          <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
             <Image 
-              src={profileImg?.imageUrl || "/profile.png"} 
+              src={profileImg?.imageUrl || "/me.png"} 
               alt="Logo" 
-              width={40} 
-              height={40} 
+              width={48} 
+              height={48} 
               className="object-cover grayscale hover:grayscale-0 transition-all"
             />
           </div>
-          <h1 className="text-3xl md:text-4xl font-headline tracking-tight text-foreground">InkFolio.</h1>
         </div>
         
         <div className="flex items-center gap-4 md:gap-8">
@@ -137,16 +136,15 @@ export default function Home() {
                   <div className="p-8 flex flex-col h-full items-center">
                     <SheetHeader className="w-full p-0 mb-12 flex flex-row items-center justify-between text-left space-y-0">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
+                        <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
                           <Image 
-                            src={profileImg?.imageUrl || "/profile.png"} 
+                            src={profileImg?.imageUrl || "/me.png"} 
                             alt="Logo" 
-                            width={40} 
-                            height={40} 
+                            width={48} 
+                            height={48} 
                             className="object-cover"
                           />
                         </div>
-                        <SheetTitle className="text-3xl font-headline text-foreground">InkFolio.</SheetTitle>
                       </div>
                       <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
                       <SheetClose asChild>
@@ -311,7 +309,7 @@ export default function Home() {
             <div className="relative">
               <div className="w-64 h-64 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                 <Image 
-                  src={profileImg?.imageUrl || "/profile.png"} 
+                  src={profileImg?.imageUrl || "/me.png"} 
                   alt="Profile" 
                   width={400} 
                   height={400} 
@@ -380,16 +378,15 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
           <div className="space-y-4">
             <div className="flex items-center gap-3 justify-center md:justify-start">
-              <div className="w-8 h-8 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
+              <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
                 <Image 
-                  src={profileImg?.imageUrl || "/profile.png"} 
+                  src={profileImg?.imageUrl || "/me.png"} 
                   alt="Logo" 
-                  width={32} 
-                  height={32} 
+                  width={40} 
+                  height={40} 
                   className="object-cover grayscale"
                 />
               </div>
-              <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
             </div>
             <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
           </div>
@@ -411,7 +408,6 @@ export default function Home() {
             </a>
           </div>
           <div className="text-center md:text-right space-y-4">
-            <p className="font-body text-lg text-foreground hidden md:block">{t.footer.copyright}</p>
             <div className="flex flex-col items-center md:items-end group mt-4">
               <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-12px] md:mr-4 z-10">opal</span>
               <div className="font-headline text-5xl md:text-6xl text-accent -rotate-2 group-hover:rotate-0 transition-transform duration-500">

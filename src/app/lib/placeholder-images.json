@@ -34,7 +34,7 @@
     {
       "id": "profile",
       "description": "Main profile photo and logo",
-      "imageUrl": "/profile.png",
+      "imageUrl": "/me.png",
       "imageHint": "profile avatar"
     }
   ]
