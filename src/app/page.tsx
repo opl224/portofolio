@@ -402,8 +402,8 @@ export default function Home() {
                 </div>
 
                 {/* Tech Marquee */}
-                <div className="relative overflow-hidden w-full h-24 border-y-2 border-dashed border-foreground py-4 mt-4">
-                  <div className="flex animate-marquee whitespace-nowrap items-center">
+                <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-4 mt-4">
+                  <div className="flex animate-marquee whitespace-nowrap items-center h-full">
                     {[...techIcons, ...techIcons].map((item, i) => (
                       <div key={i} className="flex flex-col items-center justify-center mx-8 group">
                         <div className="p-3 border-2 border-foreground wobbly-border bg-white group-hover:bg-primary group-hover:text-white transition-all shadow-hand-drawn-sm group-hover:rotate-6">
