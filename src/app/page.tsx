@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -20,7 +21,7 @@ import {
   SheetClose 
 } from '@/components/ui/sheet';
 
-// Custom Long Arrow Right Icon - fixed viewBox to prevent clipping
+// Custom Long Arrow Right Icon
 const LongArrowRight = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -63,6 +64,8 @@ export default function Home() {
   const t = translations[locale];
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
+  const profileImg = PlaceHolderImages.find(img => img.id === 'profile');
+  
   const projects = [
     {
       id: 'project1',
@@ -98,9 +101,20 @@ export default function Home() {
     <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative">
       {/* Navigation */}
       <nav className="flex justify-between items-center mb-20 px-4">
-        <h1 className="text-3xl md:text-4xl font-headline tracking-tight text-foreground">InkFolio.</h1>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm hidden sm:block">
+            <Image 
+              src={profileImg?.imageUrl || "/profile.png"} 
+              alt="Logo" 
+              width={40} 
+              height={40} 
+              className="object-cover grayscale hover:grayscale-0 transition-all"
+            />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-headline tracking-tight text-foreground">InkFolio.</h1>
+        </div>
+        
         <div className="flex items-center gap-4 md:gap-8">
-          {/* Desktop Links */}
           <div className="hidden md:flex gap-8 font-body text-xl text-foreground">
             <a href="#projects" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.projects}</a>
             <a href="#about" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.about}</a>
@@ -108,12 +122,10 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Desktop Only Toggle */}
             <div className="hidden md:block">
               <ThemeLanguageToggle />
             </div>
             
-            {/* Mobile Menu Trigger */}
             <div className="md:hidden">
               <Sheet>
                 <SheetTrigger asChild>
@@ -124,7 +136,18 @@ export default function Home() {
                 <SheetContent side="top" className="h-full w-full border-none p-0 flex flex-col paper-texture bg-background overflow-y-auto">
                   <div className="p-8 flex flex-col h-full items-center">
                     <SheetHeader className="w-full p-0 mb-12 flex flex-row items-center justify-between text-left space-y-0">
-                      <SheetTitle className="text-3xl font-headline text-foreground">InkFolio.</SheetTitle>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
+                          <Image 
+                            src={profileImg?.imageUrl || "/profile.png"} 
+                            alt="Logo" 
+                            width={40} 
+                            height={40} 
+                            className="object-cover"
+                          />
+                        </div>
+                        <SheetTitle className="text-3xl font-headline text-foreground">InkFolio.</SheetTitle>
+                      </div>
                       <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
                       <SheetClose asChild>
                         <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground active:scale-90 duration-200">
@@ -147,12 +170,10 @@ export default function Home() {
 
                     <div className="w-full border-t-2 border-dashed border-foreground pt-8 mb-10 flex flex-col items-center">
                       <div className="flex flex-col gap-8 items-center w-full">
-                        {/* Theme and Lang Toggles */}
                         <div className="scale-125">
                           <ThemeLanguageToggle />
                         </div>
 
-                        {/* Social Media Links */}
                         <div className="flex gap-6 mt-4 justify-center">
                           <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
                             <Github size={24} strokeWidth={3} />
@@ -228,9 +249,9 @@ export default function Home() {
       {/* Stats Section */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-32">
         {[
-          { label: t.stats.projects, value: "24+" },
-          { label: t.stats.coffee, value: "850" },
-          { label: t.stats.clients, value: "12" },
+          { label: t.stats.projects, value: "10+" },
+          { label: t.stats.coffee, value: "49" },
+          { label: t.stats.clients, value: "3" },
           { label: t.stats.sketchbooks, value: "05" },
         ].map((stat, i) => (
           <div key={i} className="text-center group">
@@ -290,7 +311,7 @@ export default function Home() {
             <div className="relative">
               <div className="w-64 h-64 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                 <Image 
-                  src="https://picsum.photos/seed/ink-profile/400/400" 
+                  src={profileImg?.imageUrl || "/profile.png"} 
                   alt="Profile" 
                   width={400} 
                   height={400} 
@@ -358,7 +379,18 @@ export default function Home() {
       <footer className="border-t-[3px] border-foreground border-dashed pt-12 pb-20">
         <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
           <div className="space-y-4">
-            <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
+            <div className="flex items-center gap-3 justify-center md:justify-start">
+              <div className="w-8 h-8 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
+                <Image 
+                  src={profileImg?.imageUrl || "/profile.png"} 
+                  alt="Logo" 
+                  width={32} 
+                  height={32} 
+                  className="object-cover grayscale"
+                />
+              </div>
+              <h2 className="text-3xl font-headline text-foreground">InkFolio.</h2>
+            </div>
             <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
           </div>
           <div className="flex flex-col items-center gap-12">

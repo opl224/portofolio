@@ -1,3 +1,4 @@
+
 {
   "placeholderImages": [
     {
@@ -8,21 +9,33 @@
     },
     {
       "id": "project1",
-      "description": "App design sketch",
+      "description": "Eco-Friendly App Design",
       "imageUrl": "https://picsum.photos/seed/ink-p1/600/400",
-      "imageHint": "ui design"
+      "imageHint": "app interface"
     },
     {
       "id": "project2",
-      "description": "Branding identity sketch",
+      "description": "Hand-Drawn Brand Identity",
       "imageUrl": "https://picsum.photos/seed/ink-p2/600/400",
-      "imageHint": "branding logo"
+      "imageHint": "logo branding"
     },
     {
       "id": "project3",
-      "description": "Illustration showcase",
+      "description": "Storybook Illustrations",
       "imageUrl": "https://picsum.photos/seed/ink-p3/600/400",
       "imageHint": "illustration art"
+    },
+    {
+      "id": "project4",
+      "description": "Creative Portfolio Website",
+      "imageUrl": "https://picsum.photos/seed/ink-p4/600/400",
+      "imageHint": "web design"
+    },
+    {
+      "id": "profile",
+      "description": "Main profile photo and logo",
+      "imageUrl": "/profile.png",
+      "imageHint": "profile avatar"
     }
   ]
 }
