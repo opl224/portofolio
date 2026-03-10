@@ -121,7 +121,7 @@ export default function Home() {
     e.preventDefault();
     const startPosition = window.pageYOffset;
     const distance = -startPosition;
-    const duration = 1200; //ms
+    const duration = 1800; // Slower scroll duration
     let start: number | null = null;
 
     function step(timestamp: number) {
@@ -136,13 +136,17 @@ export default function Home() {
   };
 
   const handleScrollToSection = (sectionId: string) => {
+    // 1. Initiate sheet closure
     setIsSheetOpen(false);
+    
+    // 2. Delay the scroll to ensure the Sheet doesn't fight for focus
+    // and correctly closes before we move the viewport.
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 300);
+    }, 400); 
   };
 
   useEffect(() => {
@@ -154,7 +158,7 @@ export default function Home() {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 500);
+      }, 600);
     }
   }, []);
 
@@ -235,6 +239,7 @@ export default function Home() {
 
                       <div className="flex flex-col gap-8 font-body text-4xl mb-12 items-center text-center">
                         <button 
+                          type="button"
                           onClick={() => handleScrollToSection('projects')}
                           className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
                         >
@@ -242,6 +247,7 @@ export default function Home() {
                         </button>
                         
                         <button 
+                          type="button"
                           onClick={() => handleScrollToSection('about')}
                           className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
                         >
@@ -249,6 +255,7 @@ export default function Home() {
                         </button>
                         
                         <button 
+                          type="button"
                           onClick={() => handleScrollToSection('contact')}
                           className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
                         >
@@ -342,7 +349,7 @@ export default function Home() {
             { label: t.stats.projects, value: "10+" },
             { label: t.stats.coffee, value: "49" },
             { label: t.stats.clients, value: "3" },
-            { label: locale === 'en' ? "idle" : "nganggur", value: "1+" },
+            { label: t.stats.idle, value: "1+" },
           ].map((stat, i) => (
             <div key={i} className="text-center group">
               <div className={`mx-auto w-24 h-24 md:w-32 md:h-32 flex items-center justify-center border-[3px] border-foreground mb-4 transition-transform group-hover:rotate-6 text-foreground ${i % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'}`} style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>
