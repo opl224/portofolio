@@ -21,8 +21,9 @@ import {
   SheetClose 
 } from '@/components/ui/sheet';
 import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
 
-// Custom SVG Icons
+// Custom Animated Menu Icon
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -34,13 +35,14 @@ const MenuIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={className}
+    className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
   >
     <path d="M4 6h16"/>
     <path d="M4 18h16"/>
   </svg>
 );
 
+// Custom Animated Close Icon
 const CloseIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -52,7 +54,7 @@ const CloseIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={className}
+    className={cn("lucide lucide-x-icon lucide-x transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
   >
     <path d="M6 6 18 18"/>
     <path d="M6 18 18 6"/>
@@ -151,7 +153,7 @@ export default function Home() {
     e.preventDefault();
     const startPosition = window.pageYOffset;
     const distance = -startPosition;
-    const duration = 2200; // Slower scroll duration
+    const duration = 2200; 
     let start: number | null = null;
 
     function step(timestamp: number) {
@@ -167,6 +169,7 @@ export default function Home() {
 
   const handleScrollToSection = (sectionId: string) => {
     setIsSheetOpen(false);
+    // Delay slightly more to ensure focus restoration doesn't hijack scroll
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -236,8 +239,8 @@ export default function Home() {
               <div className="md:hidden">
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                   <SheetTrigger asChild>
-                    <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border active:scale-90 duration-200 bg-background text-foreground">
-                      <MenuIcon className="w-6 h-6" />
+                    <button className="p-2 transition-all duration-200 text-foreground">
+                      <MenuIcon />
                     </button>
                   </SheetTrigger>
                   <SheetContent side="top" className="h-full w-full border-none p-0 flex flex-col paper-texture bg-background overflow-y-auto">
@@ -257,8 +260,8 @@ export default function Home() {
                         <SheetTitle className="sr-only">Navigasi Portofolio</SheetTitle>
                         <SheetDescription className="sr-only">Pilih bagian portofolio untuk berpindah halaman</SheetDescription>
                         <SheetClose asChild>
-                          <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground active:scale-90 duration-200">
-                            <CloseIcon className="w-7 h-7" />
+                          <button className="p-2 transition-all text-foreground duration-200">
+                            <CloseIcon />
                           </button>
                         </SheetClose>
                       </SheetHeader>

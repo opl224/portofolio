@@ -13,7 +13,7 @@ type Message = {
   text: string;
 };
 
-// Custom SVG Icons
+// Custom Animated Close Icon
 const CloseIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -25,7 +25,7 @@ const CloseIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={className}
+    className={cn("lucide lucide-x-icon lucide-x transition-all duration-300 hover:rotate-90", className)}
   >
     <path d="M6 6 18 18"/>
     <path d="M6 18 18 6"/>
