@@ -100,14 +100,17 @@ export default function Home() {
 
   const techLogos = [
     { src: "/logo/react.svg", name: "React" },
-    { src: "/logo/html.svg", name: "HTML5" },
+    { src: "/logo/html5.svg", name: "HTML5" },
     { src: "/logo/tailwind.svg", name: "Tailwind" },
-    { src: "/logo/react-native.svg", name: "React Native" },
+    { src: "/logo/expo.svg", name: "Expo" },
     { src: "/logo/flutter.svg", name: "Flutter" },
     { src: "/logo/capacitor.svg", name: "Capacitor" },
     { src: "/logo/typescript.svg", name: "TypeScript" },
     { src: "/logo/firebase.svg", name: "Firebase" },
-    { src: "/logo/nextjs.svg", name: "Next.js" },
+    { src: "/logo/figma.svg", name: "Figma" },
+    { src: "/logo/javascript.svg", name: "JavaScript" },
+    { src: "/logo/nodejs.svg", name: "Node.js" },
+    { src: "/logo/office.svg", name: "Microsoft Office" },
   ];
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -130,8 +133,6 @@ export default function Home() {
 
   const handleScrollToSection = (sectionId: string) => {
     setIsSheetOpen(false);
-    // Use a small timeout to allow the sheet close animation to start
-    // but not block the scroll for too long.
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -141,7 +142,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Initial scroll if hash is present
     const hash = window.location.hash;
     if (hash) {
       const id = hash.replace('#', '');
@@ -401,7 +401,7 @@ export default function Home() {
                         <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
                           <Image 
                             src={item.src} 
-                            alt={item.name} 
+                            alt={item.name}
                             width={48} 
                             height={48} 
                             className="object-contain"
