@@ -20,6 +20,7 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
+import { useState, useEffect } from 'react';
 
 // Custom Long Arrow Right Icon
 const LongArrowRight = ({ className }: { className?: string }) => (
@@ -62,6 +63,7 @@ const MoveUpArrow = ({ className }: { className?: string }) => (
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
   
@@ -83,13 +85,13 @@ export default function Home() {
     {
       id: 'project3',
       title: locale === 'en' ? "Storybook World" : "Dunia Buku Cerita",
-      description: locale === 'en' ? "Digital illustration series for children's books inspired by folklore." : "Seri ilustrasi digital untuk buku anak-anak yang terinspirasi dari dongeng.",
+      description: locale === 'en' ? "Digital illustration series for children's books inspired by folklore." : "Seri ilustrasi digital untuk buku anak-anak yang terinspirasi dari dongeng Nusantara.",
       tags: ["Illustration", "Digital Art"],
       image: PlaceHolderImages.find(img => img.id === 'project3')
     },
     {
       id: 'project4',
-      title: "Portfolio Website",
+      title: locale === 'en' ? "Portfolio Website" : "Website Portofolio",
       description: locale === 'en' ? "Web portfolio development using Next.js with dynamic hand-drawn animations." : "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan.",
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
@@ -103,6 +105,40 @@ export default function Home() {
       behavior: 'smooth'
     });
   };
+
+  const handleScrollToSection = (sectionId: string) => {
+    setIsSheetOpen(false);
+    
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: 'smooth'
+        });
+      }
+    }, 150);
+  };
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementPosition - offset,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
+    }
+  }, []);
 
   return (
     <>
@@ -124,9 +160,24 @@ export default function Home() {
           
           <div className="flex items-center gap-4 md:gap-8">
             <div className="hidden md:flex gap-8 font-body text-xl text-foreground">
-              <a href="#projects" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.projects}</a>
-              <a href="#about" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.about}</a>
-              <a href="#contact" className="hover:line-through decoration-accent decoration-2 transition-all">{t.nav.contact}</a>
+              <button 
+                onClick={() => handleScrollToSection('projects')}
+                className="hover:line-through decoration-accent decoration-2 transition-all bg-transparent border-none cursor-pointer"
+              >
+                {t.nav.projects}
+              </button>
+              <button 
+                onClick={() => handleScrollToSection('about')}
+                className="hover:line-through decoration-accent decoration-2 transition-all bg-transparent border-none cursor-pointer"
+              >
+                {t.nav.about}
+              </button>
+              <button 
+                onClick={() => handleScrollToSection('contact')}
+                className="hover:line-through decoration-accent decoration-2 transition-all bg-transparent border-none cursor-pointer"
+              >
+                {t.nav.contact}
+              </button>
             </div>
 
             <div className="flex items-center gap-3">
@@ -135,7 +186,7 @@ export default function Home() {
               </div>
               
               <div className="md:hidden">
-                <Sheet>
+                <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                   <SheetTrigger asChild>
                     <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border active:scale-90 duration-200 bg-background text-foreground">
                       <Menu size={24} strokeWidth={2.5} />
@@ -165,15 +216,26 @@ export default function Home() {
                       </SheetHeader>
 
                       <div className="flex flex-col gap-8 font-body text-4xl mb-12 items-center text-center">
-                        <SheetClose asChild>
-                          <a href="#projects" className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all">{t.nav.projects}</a>
-                        </SheetClose>
-                        <SheetClose asChild>
-                          <a href="#about" className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all">{t.nav.about}</a>
-                        </SheetClose>
-                        <SheetClose asChild>
-                          <a href="#contact" className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all">{t.nav.contact}</a>
-                        </SheetClose>
+                        <button 
+                          onClick={() => handleScrollToSection('projects')}
+                          className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
+                        >
+                          {t.nav.projects}
+                        </button>
+                        
+                        <button 
+                          onClick={() => handleScrollToSection('about')}
+                          className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
+                        >
+                          {t.nav.about}
+                        </button>
+                        
+                        <button 
+                          onClick={() => handleScrollToSection('contact')}
+                          className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
+                        >
+                          {t.nav.contact}
+                        </button>
                       </div>
 
                       <div className="w-full border-t-2 border-dashed border-foreground pt-8 mb-10 flex flex-col items-center">
@@ -214,18 +276,20 @@ export default function Home() {
             <WobblyBox variant="accent" className="inline-block px-4 py-1 mb-2 -rotate-2" shadow="sm">
               <span className="text-accent font-headline">{t.hero.status}</span>
             </WobblyBox>
-            <h2 className="text-5xl md:text-7xl font-headline leading-tight text-foreground">
+            <h1 className="text-5xl md:text-7xl font-headline leading-tight text-foreground">
               {t.hero.title}
-            </h2>
+            </h1>
             <p className="text-xl md:text-2xl font-body text-foreground/80 leading-relaxed max-w-lg">
               {t.hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 pt-4 relative">
-              <a href="#projects">
-                <HandDrawnButton variant="primary" size="lg">
-                  {t.hero.cta}
-                </HandDrawnButton>
-              </a>
+              <HandDrawnButton 
+                variant="primary" 
+                size="lg" 
+                onClick={() => handleScrollToSection('projects')}
+              >
+                {t.hero.cta}
+              </HandDrawnButton>
               <div className="hidden md:block absolute -right-24 top-0 animate-bounce-slow">
                 <svg width="100" height="60" viewBox="0 0 100 60" fill="none" className="stroke-accent stroke-[2.5] fill-none">
                   <path d="M10,10 Q50,5 90,50 M90,50 L80,50 M90,50 L90,40" strokeLinecap="round" strokeDasharray="5,5" />
@@ -260,7 +324,7 @@ export default function Home() {
             { label: t.stats.projects, value: "10+" },
             { label: t.stats.coffee, value: "49" },
             { label: t.stats.clients, value: "3" },
-            { label: t.stats.sketchbooks, value: "1+" },
+            { label: locale === 'en' ? 'idle' : 'nganggur', value: "1+" },
           ].map((stat, i) => (
             <div key={i} className="text-center group">
               <div className={`mx-auto w-24 h-24 md:w-32 md:h-32 flex items-center justify-center border-[3px] border-foreground mb-4 transition-transform group-hover:rotate-6 text-foreground ${i % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'}`} style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>
@@ -412,14 +476,13 @@ export default function Home() {
                   <Mail strokeWidth={3} />
                 </a>
               </div>
-              <a 
-                href="#top" 
+              <button 
                 onClick={handleBackToTop}
-                className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group mt-4"
+                className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group mt-4 bg-transparent border-none cursor-pointer"
               >
                 <MoveUpArrow className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
                 {t.footer.backToTop}
-              </a>
+              </button>
             </div>
             <div className="text-center md:text-right space-y-4">
               <div className="flex flex-col items-center md:items-end group mt-4">

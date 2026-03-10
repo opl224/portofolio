@@ -26,6 +26,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const isEven = index % 2 === 0;
   
+  const handleOpenProject = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.location.href = link;
+  };
+
   return (
     <div 
       className={cn(
@@ -73,11 +78,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
             </div>
             
-            <a href={link} className="mt-2">
-              <HandDrawnButton variant="accent" size="sm" className="scale-90 group-hover:scale-100 group-focus:scale-100 transition-transform">
+            <div className="mt-2">
+              <HandDrawnButton 
+                variant="accent" 
+                size="sm" 
+                className="scale-90 group-hover:scale-100 group-focus:scale-100 transition-transform"
+                onClick={handleOpenProject}
+              >
                 Buka Proyek
               </HandDrawnButton>
-            </a>
+            </div>
           </div>
         </div>
       </WobblyBox>
