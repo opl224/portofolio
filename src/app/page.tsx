@@ -99,15 +99,15 @@ export default function Home() {
   ];
 
   const techLogos = [
-    { src: "/logo/react.png", name: "React" },
-    { src: "/logo/html.png", name: "HTML5" },
-    { src: "/logo/tailwind.png", name: "Tailwind" },
-    { src: "/logo/react-native.png", name: "React Native" },
-    { src: "/logo/flutter.png", name: "Flutter" },
-    { src: "/logo/capacitor.png", name: "Capacitor" },
-    { src: "/logo/typescript.png", name: "TypeScript" },
-    { src: "/logo/firebase.png", name: "Firebase" },
-    { src: "/logo/nextjs.png", name: "Next.js" },
+    { src: "/logo/react.svg", name: "React" },
+    { src: "/logo/html.svg", name: "HTML5" },
+    { src: "/logo/tailwind.svg", name: "Tailwind" },
+    { src: "/logo/react-native.svg", name: "React Native" },
+    { src: "/logo/flutter.svg", name: "Flutter" },
+    { src: "/logo/capacitor.svg", name: "Capacitor" },
+    { src: "/logo/typescript.svg", name: "TypeScript" },
+    { src: "/logo/firebase.svg", name: "Firebase" },
+    { src: "/logo/nextjs.svg", name: "Next.js" },
   ];
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -130,6 +130,8 @@ export default function Home() {
 
   const handleScrollToSection = (sectionId: string) => {
     setIsSheetOpen(false);
+    // Use a small timeout to allow the sheet close animation to start
+    // but not block the scroll for too long.
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -139,6 +141,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Initial scroll if hash is present
     const hash = window.location.hash;
     if (hash) {
       const id = hash.replace('#', '');
