@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -146,7 +147,7 @@ export default function Home() {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 400); 
+    }, 500); 
   };
 
   useEffect(() => {
@@ -158,7 +159,7 @@ export default function Home() {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 600);
+      }, 800);
     }
   }, []);
 
@@ -387,13 +388,13 @@ export default function Home() {
 
         {/* About Section */}
         <section id="about" className="mb-32 scroll-mt-20">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className="order-2 md:order-1 space-y-8">
-              <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.about.title}</h2>
-              <p className="text-xl md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
+          <h2 className="text-4xl md:text-5xl font-headline text-foreground mb-12 text-center md:text-left">{t.about.title}</h2>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+            <div className="order-2 md:order-1 space-y-6">
+              <p className="text-lg md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
               
-              <div className="pt-4 flex flex-col gap-12">
-                <div>
+              <div className="pt-4 flex flex-col gap-10">
+                <div className="flex justify-center md:justify-start">
                   <a href="/cv.pdf" download="CV_Portfolio.pdf">
                     <HandDrawnButton variant="secondary" size="md" className="flex items-center gap-3">
                       <FileDown size={24} /> {t.about.downloadCV}
@@ -402,10 +403,10 @@ export default function Home() {
                 </div>
 
                 {/* Tech Marquee */}
-                <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-4 mt-4">
+                <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-4">
                   <div className="flex animate-marquee whitespace-nowrap items-center h-full">
                     {[...techIcons, ...techIcons].map((item, i) => (
-                      <div key={i} className="flex flex-col items-center justify-center mx-8 group">
+                      <div key={i} className="flex flex-col items-center justify-center mx-6 md:mx-8 group">
                         <div className="p-3 border-2 border-foreground wobbly-border bg-white group-hover:bg-primary group-hover:text-white transition-all shadow-hand-drawn-sm group-hover:rotate-6">
                           {item.icon}
                         </div>
@@ -416,9 +417,9 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="order-1 md:order-2 flex justify-center">
+            <div className="order-1 md:order-2 flex justify-center mb-8 md:mb-0">
               <div className="relative">
-                <div className="w-64 h-64 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
+                <div className="w-56 h-56 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
                     src="/me.png" 
                     alt="Profile" 
@@ -428,8 +429,8 @@ export default function Home() {
                     style={{ borderRadius: 'inherit' }}
                   />
                 </div>
-                <div className="absolute -top-4 -right-4 bg-accent text-white p-3 border-2 border-foreground rounded-full rotate-12">
-                  <User size={32} strokeWidth={3} />
+                <div className="absolute -top-4 -right-4 bg-accent text-white p-2 md:p-3 border-2 border-foreground rounded-full rotate-12">
+                  <User className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
                 </div>
               </div>
             </div>
