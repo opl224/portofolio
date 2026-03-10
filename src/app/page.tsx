@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -250,7 +249,7 @@ export default function Home() {
           { label: t.stats.projects, value: "10+" },
           { label: t.stats.coffee, value: "49" },
           { label: t.stats.clients, value: "3" },
-          { label: t.stats.sketchbooks, value: "05" },
+          { label: t.stats.sketchbooks, value: "1+" },
         ].map((stat, i) => (
           <div key={i} className="text-center group">
             <div className={`mx-auto w-24 h-24 md:w-32 md:h-32 flex items-center justify-center border-[3px] border-foreground mb-4 transition-transform group-hover:rotate-6 text-foreground ${i % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'}`} style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>

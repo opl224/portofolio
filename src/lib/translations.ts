@@ -19,7 +19,7 @@ export const translations = {
       projects: 'Projects Done',
       coffee: 'Coffee Cups',
       clients: 'Satisfied Clients',
-      sketchbooks: 'Sketchbooks Filled',
+      sketchbooks: 'Nganggur',
     },
     projects: {
       title: 'Selected Projects',
@@ -47,7 +47,7 @@ export const translations = {
     footer: {
       tagline: 'Drawn with love and coffee.',
       backToTop: 'Back to Top',
-      copyright: '© 2024 InkFolio Studio',
+      copyright: '© 2024 Studio',
       stayCreative: 'Stay Creative!',
     },
     chat: {
@@ -77,7 +77,7 @@ export const translations = {
       projects: 'Proyek Selesai',
       coffee: 'Cangkir Kopi',
       clients: 'Klien Puas',
-      sketchbooks: 'Buku Sketsa',
+      sketchbooks: 'Nganggur',
     },
     projects: {
       title: 'Proyek Terpilih',
@@ -105,7 +105,7 @@ export const translations = {
     footer: {
       tagline: 'Digambar dengan cinta dan kopi.',
       backToTop: 'Kembali ke Atas',
-      copyright: '© 2024 InkFolio Studio',
+      copyright: '© 2024 Studio',
       stayCreative: 'Tetap Kreatif!',
     },
     chat: {
