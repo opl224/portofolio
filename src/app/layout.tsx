@@ -3,8 +3,12 @@ import './globals.css';
 import { AppProvider } from '@/context/app-context';
 
 export const metadata: Metadata = {
-  title: 'InkFolio | Creative Portfolio',
+  title: 'myPortfolio',
   description: 'A hand-drawn inspired portfolio for creative individuals.',
+  icons: {
+    icon: '/me.png',
+    apple: '/me.png',
+  },
 };
 
 export default function RootLayout({
