@@ -89,12 +89,20 @@ export default function Home() {
     },
     {
       id: 'project4',
-      title: "Inkfolio Website",
+      title: "Portfolio Website",
       description: locale === 'en' ? "Web portfolio development using Next.js with dynamic hand-drawn animations." : "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan.",
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
     }
   ];
+
+  const handleBackToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <>
@@ -404,7 +412,11 @@ export default function Home() {
                   <Mail strokeWidth={3} />
                 </a>
               </div>
-              <a href="#top" className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group mt-4">
+              <a 
+                href="#top" 
+                onClick={handleBackToTop}
+                className="flex items-center gap-2 font-headline text-primary hover:text-accent transition-colors group mt-4"
+              >
                 <MoveUpArrow className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
                 {t.footer.backToTop}
               </a>
