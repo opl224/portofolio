@@ -1,8 +1,7 @@
-
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, Code, Palette, Menu, X, FileDown, Atom, Code2, Wind, Smartphone, Zap, Flame, Terminal, Layers } from 'lucide-react';
+import { Mail, Github, Linkedin, User, Menu, X, FileDown, ExternalLink, Tag, Code2, Search, Loader2, Sparkles, Send } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -61,13 +60,6 @@ const MoveUpArrow = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Flutter Icon SVG
-const FlutterIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-  </svg>
-);
-
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
@@ -106,16 +98,16 @@ export default function Home() {
     }
   ];
 
-  const techIcons = [
-    { icon: <Atom size={32} />, name: "React" },
-    { icon: <Code2 size={32} />, name: "HTML5" },
-    { icon: <Wind size={32} />, name: "Tailwind" },
-    { icon: <Smartphone size={32} />, name: "React Native" },
-    { icon: <FlutterIcon className="w-8 h-8" />, name: "Flutter" },
-    { icon: <Zap size={32} />, name: "Capacitor" },
-    { icon: <Terminal size={32} />, name: "TypeScript" },
-    { icon: <Flame size={32} />, name: "Firebase" },
-    { icon: <Layers size={32} />, name: "Next.js" },
+  const techLogos = [
+    { src: "/logo/react.png", name: "React" },
+    { src: "/logo/html.png", name: "HTML5" },
+    { src: "/logo/tailwind.png", name: "Tailwind" },
+    { src: "/logo/react-native.png", name: "React Native" },
+    { src: "/logo/flutter.png", name: "Flutter" },
+    { src: "/logo/capacitor.png", name: "Capacitor" },
+    { src: "/logo/typescript.png", name: "TypeScript" },
+    { src: "/logo/firebase.png", name: "Firebase" },
+    { src: "/logo/nextjs.png", name: "Next.js" },
   ];
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -137,11 +129,7 @@ export default function Home() {
   };
 
   const handleScrollToSection = (sectionId: string) => {
-    // 1. Initiate sheet closure
     setIsSheetOpen(false);
-    
-    // 2. Delay the scroll to ensure the Sheet doesn't fight for focus
-    // and correctly closes before we move the viewport.
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -391,7 +379,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-headline text-foreground mb-12 text-center md:text-left">{t.about.title}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
             <div className="order-2 md:order-1 space-y-6 min-w-0">
-              <p className="text-lg md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
+              <p className="text-lg md:text-xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
               
               <div className="pt-4 flex flex-col gap-10">
                 <div className="flex justify-center md:justify-start">
@@ -403,14 +391,21 @@ export default function Home() {
                 </div>
 
                 {/* Tech Marquee */}
-                <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-4">
+                <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-6">
                   <div className="flex animate-marquee whitespace-nowrap items-center h-full">
-                    {[...techIcons, ...techIcons].map((item, i) => (
-                      <div key={i} className="flex flex-col items-center justify-center mx-6 md:mx-8 group min-w-max">
-                        <div className="p-3 border-2 border-foreground wobbly-border bg-white group-hover:bg-primary group-hover:text-white transition-all shadow-hand-drawn-sm group-hover:rotate-6">
-                          {item.icon}
+                    {[...techLogos, ...techLogos].map((item, i) => (
+                      <div key={i} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
+                        <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300">
+                          <Image 
+                            src={item.src} 
+                            alt={item.name} 
+                            fill 
+                            className="object-contain"
+                          />
                         </div>
-                        <span className="font-headline text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity">{item.name}</span>
+                        <span className="font-headline text-xs mt-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 text-primary">
+                          {item.name}
+                        </span>
                       </div>
                     ))}
                   </div>
