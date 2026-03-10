@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, Code, Palette, Menu, X, FileDown } from 'lucide-react';
+import { Mail, Github, Linkedin, User, Code, Palette, Menu, X, FileDown, Atom, Code2, Wind, Smartphone, Zap, Flame, Terminal, Layers } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -60,6 +60,13 @@ const MoveUpArrow = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// Flutter Icon SVG
+const FlutterIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+  </svg>
+);
+
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
@@ -98,20 +105,38 @@ export default function Home() {
     }
   ];
 
+  const techIcons = [
+    { icon: <Atom size={32} />, name: "React" },
+    { icon: <Code2 size={32} />, name: "HTML5" },
+    { icon: <Wind size={32} />, name: "Tailwind" },
+    { icon: <Smartphone size={32} />, name: "React Native" },
+    { icon: <FlutterIcon className="w-8 h-8" />, name: "Flutter" },
+    { icon: <Zap size={32} />, name: "Capacitor" },
+    { icon: <Terminal size={32} />, name: "TypeScript" },
+    { icon: <Flame size={32} />, name: "Firebase" },
+    { icon: <Layers size={32} />, name: "Next.js" },
+  ];
+
   const handleBackToTop = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    const startPosition = window.pageYOffset;
+    const distance = -startPosition;
+    const duration = 1200; //ms
+    let start: number | null = null;
+
+    function step(timestamp: number) {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const t = progress / duration;
+      const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // easeInOutQuad
+      window.scrollTo(0, startPosition + distance * ease);
+      if (progress < duration) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
   };
 
   const handleScrollToSection = (sectionId: string) => {
-    // Menutup menu mobile terlebih dahulu
     setIsSheetOpen(false);
-    
-    // Memberikan waktu sedikit agar animasi penutupan menu selesai 
-    // dan body scroll lock dilepaskan sebelum memulai scroll
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -317,7 +342,7 @@ export default function Home() {
             { label: t.stats.projects, value: "10+" },
             { label: t.stats.coffee, value: "49" },
             { label: t.stats.clients, value: "3" },
-            { label: t.stats.idle, value: "1+" },
+            { label: locale === 'en' ? "idle" : "nganggur", value: "1+" },
           ].map((stat, i) => (
             <div key={i} className="text-center group">
               <div className={`mx-auto w-24 h-24 md:w-32 md:h-32 flex items-center justify-center border-[3px] border-foreground mb-4 transition-transform group-hover:rotate-6 text-foreground ${i % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'}`} style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}>
@@ -360,25 +385,28 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.about.title}</h2>
               <p className="text-xl md:text-2xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
               
-              <div className="grid grid-cols-2 gap-4">
-                <WobblyBox variant="post-it" className="rotate-2" shadow="sm">
-                  <Palette className="mb-2 text-accent" size={24} strokeWidth={3} />
-                  <h4 className="font-headline text-lg text-foreground">{t.about.design}</h4>
-                  <p className="font-body text-sm text-foreground/70">{t.about.designSkills}</p>
-                </WobblyBox>
-                <WobblyBox variant="post-it" className="-rotate-2" shadow="sm">
-                  <Code className="mb-2 text-primary" size={24} strokeWidth={3} />
-                  <h4 className="font-headline text-lg text-foreground">{t.about.code}</h4>
-                  <p className="font-body text-sm text-foreground/70">{t.about.codeSkills}</p>
-                </WobblyBox>
-              </div>
+              <div className="pt-4 flex flex-col gap-12">
+                <div>
+                  <a href="/cv.pdf" download="CV_Portfolio.pdf">
+                    <HandDrawnButton variant="secondary" size="md" className="flex items-center gap-3">
+                      <FileDown size={24} /> {t.about.downloadCV}
+                    </HandDrawnButton>
+                  </a>
+                </div>
 
-              <div className="pt-4">
-                <a href="/cv.pdf" download="CV_Portfolio.pdf">
-                  <HandDrawnButton variant="secondary" size="md" className="flex items-center gap-3">
-                    <FileDown size={24} /> {t.about.downloadCV}
-                  </HandDrawnButton>
-                </a>
+                {/* Tech Marquee */}
+                <div className="relative overflow-hidden w-full h-24 border-y-2 border-dashed border-foreground py-4 mt-4">
+                  <div className="flex animate-marquee whitespace-nowrap items-center">
+                    {[...techIcons, ...techIcons].map((item, i) => (
+                      <div key={i} className="flex flex-col items-center justify-center mx-8 group">
+                        <div className="p-3 border-2 border-foreground wobbly-border bg-white group-hover:bg-primary group-hover:text-white transition-all shadow-hand-drawn-sm group-hover:rotate-6">
+                          {item.icon}
+                        </div>
+                        <span className="font-headline text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity">{item.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="order-1 md:order-2 flex justify-center">
