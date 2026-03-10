@@ -49,7 +49,7 @@ const MoveUpArrow = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24" 
     fill="none" 
     stroke="currentColor" 
-    strokeWidth="3" 
+    strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
     className={className}
@@ -189,8 +189,8 @@ export default function Home() {
                       </div>
 
                       <div className="mt-auto text-center pb-12 flex flex-col items-center">
-                        <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-10px] z-10">opal</span>
-                        <p className="font-headline text-accent text-5xl -rotate-2">{t.footer.stayCreative}</p>
+                        <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-12px] z-10">opal</span>
+                        <p className="font-headline text-accent text-6xl -rotate-2">{t.footer.stayCreative}</p>
                       </div>
                     </div>
                   </SheetContent>
