@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, Menu, X, FileDown, ExternalLink, Tag, Code2, Search, Loader2, Sparkles, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, User, FileDown, Code2, Loader2, Sparkles, Search } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -22,7 +22,43 @@ import {
 } from '@/components/ui/sheet';
 import { useState, useEffect } from 'react';
 
-// Custom Long Arrow Right Icon
+// Custom SVG Icons
+const MenuIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M4 6h16"/>
+    <path d="M4 18h16"/>
+  </svg>
+);
+
+const CloseIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M6 6 18 18"/>
+    <path d="M6 18 18 6"/>
+  </svg>
+);
+
 const LongArrowRight = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -41,7 +77,6 @@ const LongArrowRight = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Custom Move Up Arrow Icon
 const MoveUpArrow = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -105,7 +140,6 @@ export default function Home() {
     { src: "/logo/expo.svg", name: "Expo" },
     { src: "/logo/flutter.svg", name: "Flutter" },
     { src: "/logo/capacitor.svg", name: "Capacitor" },
-    { src: "/logo/typescript.svg", name: "TypeScript" },
     { src: "/logo/firebase.svg", name: "Firebase" },
     { src: "/logo/figma.svg", name: "Figma" },
     { src: "/logo/javascript.svg", name: "JavaScript" },
@@ -117,14 +151,14 @@ export default function Home() {
     e.preventDefault();
     const startPosition = window.pageYOffset;
     const distance = -startPosition;
-    const duration = 1800; // Slower scroll duration
+    const duration = 2200; // Slower scroll duration
     let start: number | null = null;
 
     function step(timestamp: number) {
       if (!start) start = timestamp;
       const progress = timestamp - start;
       const t = progress / duration;
-      const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // easeInOutQuad
+      const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; 
       window.scrollTo(0, startPosition + distance * ease);
       if (progress < duration) window.requestAnimationFrame(step);
     }
@@ -138,7 +172,7 @@ export default function Home() {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 500); 
+    }, 450); 
   };
 
   useEffect(() => {
@@ -203,7 +237,7 @@ export default function Home() {
                 <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
                   <SheetTrigger asChild>
                     <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border active:scale-90 duration-200 bg-background text-foreground">
-                      <Menu size={24} strokeWidth={2.5} />
+                      <MenuIcon className="w-6 h-6" />
                     </button>
                   </SheetTrigger>
                   <SheetContent side="top" className="h-full w-full border-none p-0 flex flex-col paper-texture bg-background overflow-y-auto">
@@ -224,7 +258,7 @@ export default function Home() {
                         <SheetDescription className="sr-only">Pilih bagian portofolio untuk berpindah halaman</SheetDescription>
                         <SheetClose asChild>
                           <button className="p-2 border-2 border-foreground hover:bg-accent hover:text-white transition-all wobbly-border text-foreground active:scale-90 duration-200">
-                            <X size={28} strokeWidth={2.5} />
+                            <CloseIcon className="w-7 h-7" />
                           </button>
                         </SheetClose>
                       </SheetHeader>

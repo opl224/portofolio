@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { X, Send, Loader2, Sparkles, Search } from 'lucide-react';
+import { Send, Loader2, Sparkles, Search } from 'lucide-react';
 import { WobblyBox } from './ui/wobbly-box';
 import { cn } from '@/lib/utils';
 import portfolioData from '@/lib/chatbot-data.json';
@@ -12,6 +12,25 @@ type Message = {
   role: 'user' | 'model';
   text: string;
 };
+
+// Custom SVG Icons
+const CloseIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M6 6 18 18"/>
+    <path d="M6 18 18 6"/>
+  </svg>
+);
 
 // Custom Bot Icon SVG
 const BotIcon = ({ className, size = 24, strokeWidth = 2 }: { className?: string, size?: number, strokeWidth?: number }) => (
@@ -141,7 +160,7 @@ export const ChatBot = () => {
               onClick={() => setIsOpen(false)}
               className="p-1 hover:bg-secondary rounded-full transition-colors text-foreground"
             >
-              <X size={24} />
+              <CloseIcon className="w-6 h-6" />
             </button>
           </div>
 
@@ -230,7 +249,7 @@ export const ChatBot = () => {
         )}
       >
         {isOpen ? (
-          <X size={32} strokeWidth={3} />
+          <CloseIcon className="w-8 h-8" />
         ) : (
           <BotIcon size={32} strokeWidth={3} />
         )}
