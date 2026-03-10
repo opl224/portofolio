@@ -78,7 +78,7 @@ export const translations = {
       projects: 'Proyek Selesai',
       coffee: 'Cangkir Kopi',
       clients: 'Klien Puas',
-      idle: 'nganggur',
+      idle: 'Nganggur',
     },
     projects: {
       title: 'Proyek Terpilih',
