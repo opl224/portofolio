@@ -264,7 +264,7 @@ export default function Home() {
         </section>
 
         {/* Projects Gallery */}
-        <section id="projects" className="mb-32">
+        <section id="projects" className="mb-32 scroll-mt-20">
           <div className="flex justify-between items-end mb-12">
             <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.projects.title}</h2>
             <div className="hidden md:block">
@@ -289,7 +289,7 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="mb-32">
+        <section id="about" className="mb-32 scroll-mt-20">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div className="order-2 md:order-1 space-y-8">
               <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.about.title}</h2>
@@ -328,7 +328,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="mb-32">
+        <section id="contact" className="mb-32 scroll-mt-20">
           <WobblyBox decoration="tack" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
             <div className="text-center mb-10">
               <h2 className="text-4xl md:text-5xl font-headline mb-4 text-foreground">{t.contact.title}</h2>

@@ -19,7 +19,7 @@ export const translations = {
       projects: 'Projects Done',
       coffee: 'Coffee Cups',
       clients: 'Satisfied Clients',
-      sketchbooks: 'Nganggur',
+      sketchbooks: 'idle',
     },
     projects: {
       title: 'Selected Projects',
@@ -77,7 +77,7 @@ export const translations = {
       projects: 'Proyek Selesai',
       coffee: 'Cangkir Kopi',
       clients: 'Klien Puas',
-      sketchbooks: 'Nganggur',
+      sketchbooks: 'nganggur',
     },
     projects: {
       title: 'Proyek Terpilih',
