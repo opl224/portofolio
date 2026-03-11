@@ -40,7 +40,7 @@ export const WobblyBox = React.forwardRef<HTMLDivElement, WobblyBoxProps>(
         {...props}
       >
         {decoration === 'tape' && (
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-foreground/20 rotate-[-2deg] z-10" />
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-1deg] z-10 border-x border-foreground/5 shadow-sm" />
         )}
         {decoration === 'tack' && (
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent shadow-sm z-10" />

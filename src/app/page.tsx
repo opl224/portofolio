@@ -26,38 +26,38 @@ import { cn } from '@/lib/utils';
 // Custom Animated Menu Icon
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
-  xmlns="http://www.w3.org/2000/svg" 
-  width="56" 
-  height="28" 
-  viewBox="0 0 56 28" 
-  fill="none" 
-  stroke="currentColor" 
-  strokeWidth="3" 
-  strokeLinecap="round" 
-  strokeLinejoin="round" 
-  className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
->
-  <path d="M4 8h48"/>
-  <path d="M4 20h48"/>
-</svg>
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
+  >
+    <path d="M4 8h16"/>
+    <path d="M4 16h16"/>
+  </svg>
 );
 
 // Custom Animated Close Icon
 const CloseIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="60" 
-    height="60" 
-    viewBox="0 0 60 60" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
     fill="none" 
     stroke="currentColor" 
-    strokeWidth="4" 
+    strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
     className={cn("lucide lucide-x-icon lucide-x transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
   >
-    <path d="M18 18 42 42"/>
-    <path d="M18 42 42 18"/>
+    <path d="M6 6 18 18"/>
+    <path d="M6 18 18 6"/>
   </svg>
 );
 
@@ -146,7 +146,7 @@ export default function Home() {
     { src: "/logo/figma.svg", name: "Figma" },
     { src: "/logo/javascript.svg", name: "JavaScript" },
     { src: "/logo/nodejs.svg", name: "Node.js" },
-    { src: "/logo/office.svg", name: "Microsoft Office" },
+    { src: "/logo/office.svg", name: "Office" },
   ];
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -485,7 +485,7 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="mb-32 scroll-mt-20">
-          <WobblyBox decoration="tack" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
+          <WobblyBox decoration="tape" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
             <div className="text-center mb-10">
               <h2 className="text-4xl md:text-5xl font-headline mb-4 text-foreground">{t.contact.title}</h2>
               <p className="text-xl font-body text-foreground/80">{t.contact.subtitle}</p>
