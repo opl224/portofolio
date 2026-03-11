@@ -20,7 +20,7 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 // Decorative Elements for the sides
@@ -486,11 +486,7 @@ export default function Home() {
               style={{ cursor: 'url(/nifsa.png), auto' }}
             >
               <div className="relative">
-                {/* Profile Photo with Tape Accessories */}
-                <div className="absolute -top-1 -left-10 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
-                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
-                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
-
+                {/* Profile Photo */}
                 <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
                     src="/me.png" 
