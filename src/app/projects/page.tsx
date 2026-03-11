@@ -2,11 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Github, Linkedin, Mail } from 'lucide-react';
 import { ProjectCard } from '@/components/ui/project-card';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
-import { ChatBot } from '@/components/chat-bot';
 import { useAppContext } from '@/context/app-context';
 import { translations } from '@/lib/translations';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -15,10 +12,8 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 const ArrowLeftIcon = () => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="100%"  // Biarkan responsif mengikuti container
+    width="60" 
     height="24" 
-    // PERLEBAR viewBox: dari "0 0 24 24" menjadi "0 0 100 24"
-    // Angka 100 bisa diubah sesuai seberapa panjang yang diinginkan
     viewBox="0 0 60 24" 
     fill="none" 
     stroke="currentColor" 
@@ -27,20 +22,7 @@ const ArrowLeftIcon = () => (
     strokeLinejoin="round" 
     className="lucide lucide-arrow-left"
   >
-    {/* 
-       ARROWHEAD (TIDAK DIUBAH - Tetap normal)
-       Koordinat tetap sama, sehingga ukuran kepala panah tidak berubah
-    */}
     <path d="m12 19-7-7 7-7"/>
-    
-    {/* 
-       SHAFT (DIPERPANJANG SIGNIFIKAN)
-       Asli: M19 12H5 (hanya 14 unit)
-       Baru: M95 12H5 (90 unit - sangat panjang!)
-       
-       M95 12 = Mulai dari x=95, y=12 (ujung kanan)
-       H5 = Tarik garis horizontal ke x=5 (menyambung ke kepala panah)
-    */}
     <path d="M50 12H5"/>
 </svg>
 );
@@ -141,44 +123,17 @@ export default function ProjectsPage() {
         </Link>
       </div>
 
-      {/* Standard Footer */}
-      <footer className="border-t-[3px] border-foreground border-dashed pt-12 pb-20 mt-auto">
-        <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 justify-center md:justify-start">
-              <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
-                <Image 
-                  src="/me.png" 
-                  alt="Footer Logo" 
-                  width={40} 
-                  height={40} 
-                  className="object-cover grayscale"
-                />
-              </div>
-            </div>
-            <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
-          </div>
-          <div className="flex flex-col items-center gap-6">
-            <div className="flex justify-center gap-6">
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
-                <Github strokeWidth={3} />
-              </a>
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground active:scale-90">
-                <Linkedin strokeWidth={3} />
-              </a>
-              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
-                <Mail strokeWidth={3} />
-              </a>
-            </div>
-          </div>
-          <div className="text-center md:text-right">
-            <span className="font-headline text-5xl text-accent -rotate-2 block">
+      {/* Minimalist Footer: Only "Stay Creative" */}
+      <footer className="pt-12 pb-24 mt-auto border-t-[3px] border-foreground border-dashed">
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="group relative">
+            <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-16px] mx-auto block w-fit z-10">opal</span>
+            <span className="font-headline text-7xl md:text-9xl text-accent -rotate-2 group-hover:rotate-0 transition-transform duration-500 block">
               {t.footer.stayCreative}
             </span>
           </div>
         </div>
       </footer>
-      <ChatBot />
     </div>
   );
 }
