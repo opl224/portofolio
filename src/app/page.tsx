@@ -25,9 +25,8 @@ import { cn } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast';
 
-// Google Sheet Apps Script URL Placeholder
-// User needs to deploy a Google Apps Script as a Web App and paste the URL here
-const GOOGLE_SHEET_URL = ''; 
+// Google Sheet Apps Script URL
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbz57Nc5HOhejqdJ7jqsfHBKEEQMVXp_5fzb8na2cVyw62oup3aLclLUTSeZKxRjswT6gw/exec'; 
 
 // Decorative Elements for the sides
 const SideDecorations = () => (
@@ -192,14 +191,13 @@ export default function Home() {
     },
     {
       id: 'project4',
-      title: locale === 'id' ? "Website Portofolio" : "Portfolio Website",
+      title: locale === 'id' ? "Website Portofolio" : "Website Portofolio",
       description: locale === 'id' ? "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan." : "Web portfolio development using Next.js with dynamic hand-drawn animations.",
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
     }
   ], [locale]);
 
-  // Limit projects to 2 for home page
   const displayedProjects = allProjects.slice(0, 2);
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -220,32 +218,24 @@ export default function Home() {
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
     try {
-      if (!GOOGLE_SHEET_URL) {
-        // Fallback for demo if URL is not set
-        console.log('Form data:', data);
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        toast({
-          title: locale === 'id' ? "Berhasil!" : "Success!",
-          description: locale === 'id' ? "Pesan Anda telah terkirim (Mode Demo)." : "Your message has been sent (Demo Mode).",
-        });
-        reset();
-        return;
-      }
-
+      // Create a hidden form submission to Google Sheet via fetch
+      // This usually works best with simple POST or custom Web App script
       const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
+        mode: 'no-cors', // Using no-cors as Google Apps Script often blocks standard CORS
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
-        toast({
-          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
-          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
-        });
-        reset();
-      } else {
-        throw new Error('Failed to send');
-      }
+      // Since we use 'no-cors', response.ok will be false and status 0
+      // We assume it sent if no exception was thrown
+      toast({
+        title: locale === 'id' ? "Terkirim!" : "Message Sent!",
+        description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
+      });
+      reset();
     } catch (error) {
       toast({
         variant: "destructive",
@@ -419,9 +409,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -top-4 left-4 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-15deg] z-10 border-x border-foreground/5 shadow-sm" />
-            <div className="absolute -bottom-6 -right-4 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-10 border-x border-foreground/5 shadow-sm" />
-            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-25deg] z-10 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -top-4 left-4 w-32 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-1deg] z-10 border-x border-foreground/5 shadow-sm" />
             
             <WobblyBox className="p-2 rotate-2" shadow="lg">
               <Image 
@@ -491,7 +479,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* View All Projects - Aesthetic Bottom Button for Mobile */}
           <div className="flex md:hidden justify-center mt-12">
             <Link 
               href="/projects" 
@@ -623,7 +610,7 @@ export default function Home() {
                   disabled={isSubmitting}
                 >
                   <span className="flex items-center justify-center gap-4">
-                    {isSubmitting ? <Loader2 className="animate-spin" /> : "Let's Scribble Something!"} 
+                    {isSubmitting ? <Loader2 className="animate-spin" /> : t.contact.send} 
                     {!isSubmitting && <LongArrowRight />}
                   </span>
                 </HandDrawnButton>
