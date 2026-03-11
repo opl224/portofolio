@@ -23,7 +23,7 @@ import {
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
-// Custom Animated Menu Icon
+// Custom Animated Menu Icon (2 lines as requested)
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -37,8 +37,8 @@ const MenuIcon = ({ className }: { className?: string }) => (
     strokeLinejoin="round" 
     className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
   >
-    <path d="M4 8h16"/>
-    <path d="M4 16h16"/>
+    <path d="M4 6h16"/>
+    <path d="M4 18h16"/>
   </svg>
 );
 
@@ -169,6 +169,7 @@ export default function Home() {
 
   const handleScrollToSection = (sectionId: string) => {
     setIsSheetOpen(false);
+    // Increased timeout for better mobile transition
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -432,6 +433,13 @@ export default function Home() {
             </div>
             <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
               <div className="relative">
+                {/* One tape on top-left */}
+                <div className="absolute -top-8 -left-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm hidden md:block" />
+                
+                {/* Two crossing tapes on bottom-right */}
+                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm hidden md:block" />
+                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm hidden md:block" />
+
                 <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
                     src="/me.png" 
