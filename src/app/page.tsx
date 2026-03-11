@@ -158,6 +158,7 @@ export default function Home() {
   const { toast } = useToast();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
   
   const { register, handleSubmit, reset } = useForm();
 
@@ -177,7 +178,7 @@ export default function Home() {
     },
     {
       id: 'project2',
-      title: locale === 'id' ? "Branding Buatan Tangan" : "Branding Buatan Tangan",
+      title: locale === 'id' ? "Branding Buatan Tangan" : "Hand-Crafted Branding",
       description: locale === 'id' ? "Identitas visual untuk studio keramik lokal dengan nuansa earthy." : "Visual identity for a local ceramic studio with earthy tones.",
       tags: ["Branding", "Print", "Illustration"],
       image: PlaceHolderImages.find(img => img.id === 'project2')
@@ -191,7 +192,7 @@ export default function Home() {
     },
     {
       id: 'project4',
-      title: locale === 'id' ? "Website Portofolio" : "Website Portofolio",
+      title: locale === 'id' ? "Website Portofolio" : "Portfolio Website",
       description: locale === 'id' ? "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan." : "Web portfolio development using Next.js with dynamic hand-drawn animations.",
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
@@ -218,7 +219,6 @@ export default function Home() {
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
     try {
-      // Coba tanpa no-cors dulu untuk test
       const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
         headers: {
@@ -228,7 +228,6 @@ export default function Home() {
       });
       
       const result = await response.json();
-      console.log('Response:', result); // Untuk debugging
       
       if (result.success) {
         toast({
@@ -243,7 +242,7 @@ export default function Home() {
     } catch (error) {
       console.error('Error:', error);
       
-      // Fallback ke no-cors jika error CORS
+      // Fallback to no-cors
       try {
         await fetch(GOOGLE_SHEET_URL, {
           method: 'POST',
@@ -271,9 +270,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const shuffleArray = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
-    setShuffledRow1(shuffleArray(techLogos));
-    setShuffledRow2(shuffleArray(techLogos));
+    setMounted(true);
+    const shuffle = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
+    setShuffledRow1(shuffle(techLogos));
+    setShuffledRow2(shuffle(techLogos));
   }, []);
 
   return (
@@ -432,8 +432,6 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -top-4 left-4 w-32 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-1deg] z-10 border-x border-foreground/5 shadow-sm" />
-            
             <WobblyBox className="p-2 rotate-2" shadow="lg" decoration="tape">
               <Image 
                 src={heroImg?.imageUrl || "https://picsum.photos/seed/ink-hero/800/600"} 

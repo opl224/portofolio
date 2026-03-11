@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import portfolioData from '@/lib/chatbot-data.json';
 import { useAppContext } from '@/context/app-context';
 import { translations } from '@/lib/translations';
+import { usePathname } from 'next/navigation';
 
 type Message = {
   role: 'user' | 'model';
@@ -56,6 +57,7 @@ const BotIcon = ({ className, size = 24, strokeWidth = 2 }: { className?: string
 );
 
 export const ChatBot = () => {
+  const pathname = usePathname();
   const { locale } = useAppContext();
   const t = translations[locale].chat;
   
@@ -142,6 +144,8 @@ export const ChatBot = () => {
       setIsLoading(false);
     }, 600);
   };
+
+  if (pathname === '/projects') return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
