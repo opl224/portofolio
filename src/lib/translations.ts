@@ -25,7 +25,7 @@ export const translations = {
       title: 'Selected Projects',
       viewAll: 'View All Projects →',
       allTitle: 'All My Sketches & Works',
-      back: '← Back to Home',
+      back: 'Back to Home',
       button: 'Open Project',
     },
     about: {
@@ -87,7 +87,7 @@ export const translations = {
       title: 'Proyek Terpilih',
       viewAll: 'Lihat Semua Proyek →',
       allTitle: 'Semua Coretan & Karya',
-      back: '← Kembali ke Beranda',
+      back: 'Kembali ke Beranda',
       button: 'Buka Proyek',
     },
     about: {
