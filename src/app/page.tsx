@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Github, Linkedin, FileDown, Sparkles, Star, Zap } from 'lucide-react';
+import { Mail, Github, Linkedin, FileDown, Sparkles, Star, Zap, Loader2 } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -22,6 +22,12 @@ import {
 } from '@/components/ui/sheet';
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { useForm } from 'react-hook-form';
+import { useToast } from '@/hooks/use-toast';
+
+// Google Sheet Apps Script URL Placeholder
+// User needs to deploy a Google Apps Script as a Web App and paste the URL here
+const GOOGLE_SHEET_URL = ''; 
 
 // Decorative Elements for the sides
 const SideDecorations = () => (
@@ -147,13 +153,15 @@ const techLogos = [
   { src: "/logo/office.svg", name: "Office" },
 ];
 
-const shuffleArray = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
-
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
+  const { toast } = useToast();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
+  const { register, handleSubmit, reset } = useForm();
+
   // Hydration-safe logo shuffling
   const [row1, setRow1] = useState(techLogos);
   const [row2, setRow2] = useState(techLogos);
@@ -209,7 +217,48 @@ export default function Home() {
     }, 450); 
   };
 
+  const onContactSubmit = async (data: any) => {
+    setIsSubmitting(true);
+    try {
+      if (!GOOGLE_SHEET_URL) {
+        // Fallback for demo if URL is not set
+        console.log('Form data:', data);
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        toast({
+          title: locale === 'id' ? "Berhasil!" : "Success!",
+          description: locale === 'id' ? "Pesan Anda telah terkirim (Mode Demo)." : "Your message has been sent (Demo Mode).",
+        });
+        reset();
+        return;
+      }
+
+      const response = await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
+          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
+        });
+        reset();
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: locale === 'id' ? "Oops!" : "Error!",
+        description: locale === 'id' ? "Terjadi kesalahan. Silakan coba lagi nanti." : "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
+    const shuffleArray = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
     setRow1(shuffleArray(techLogos));
     setRow2(shuffleArray(techLogos));
   }, []);
@@ -529,16 +578,14 @@ export default function Home() {
         {/* Contact Section */}
         <section id="contact" className="mb-32 scroll-mt-20">
           <WobblyBox decoration="tape" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
-            <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-headline mb-4 text-foreground">{t.contact.title}</h2>
-              <p className="text-xl font-body text-foreground/80">{t.contact.subtitle}</p>
-            </div>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit(onContactSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="font-headline text-lg ml-2 text-foreground">{t.contact.name}</label>
                   <input 
+                    {...register('name', { required: true })}
                     type="text" 
+                    required
                     className="w-full bg-white dark:bg-slate-900 border-[3px] border-foreground p-3 font-body text-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all text-foreground"
                     placeholder={t.contact.placeholderName}
                     style={{ borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px' }}
@@ -547,7 +594,9 @@ export default function Home() {
                 <div className="space-y-2">
                   <label className="font-headline text-lg ml-2 text-foreground">{t.contact.email}</label>
                   <input 
+                    {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
                     type="email" 
+                    required
                     className="w-full bg-white dark:bg-slate-900 border-[3px] border-foreground p-3 font-body text-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all text-foreground"
                     placeholder={t.contact.placeholderEmail}
                     style={{ borderRadius: '15px 225px 15px 255px / 255px 15px 225px 15px' }}
@@ -557,16 +606,25 @@ export default function Home() {
               <div className="space-y-2">
                 <label className="font-headline text-lg ml-2 text-foreground">{t.contact.message}</label>
                 <textarea 
+                  {...register('message', { required: true })}
                   rows={4}
+                  required
                   className="w-full bg-white dark:bg-slate-900 border-[3px] border-foreground p-4 font-body text-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all text-foreground"
                   placeholder={t.contact.placeholderMessage}
                   style={{ borderRadius: '30px 30px 30px 255px / 30px 255px 30px 30px' }}
                 />
               </div>
               <div className="text-center pt-4">
-                <HandDrawnButton variant="accent" size="lg" className="w-full md:w-auto">
+                <HandDrawnButton 
+                  type="submit"
+                  variant="accent" 
+                  size="lg" 
+                  className="w-full md:w-auto min-w-[280px]"
+                  disabled={isSubmitting}
+                >
                   <span className="flex items-center justify-center gap-4">
-                    {t.contact.send} <LongArrowRight />
+                    {isSubmitting ? <Loader2 className="animate-spin" /> : "Let's Scribble Something!"} 
+                    {!isSubmitting && <LongArrowRight />}
                   </span>
                 </HandDrawnButton>
               </div>
