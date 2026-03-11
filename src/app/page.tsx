@@ -64,18 +64,18 @@ const SideDecorations = () => (
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
+    width="56" 
+    height="28" 
+    viewBox="0 0 56 28" 
     fill="none" 
     stroke="currentColor" 
-    strokeWidth="2" 
+    strokeWidth="4" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
+    className={cn("transition-all duration-300 hover:scale-110 active:rotate-6", className)}
   >
-    <path d="M4 6h16"/>
-    <path d="M4 18h16"/>
+    <path d="M4 8h48"/>
+    <path d="M4 20h48"/>
   </svg>
 );
 
@@ -163,29 +163,29 @@ export default function Home() {
   const projects = [
     {
       id: 'project1',
-      title: locale === 'en' ? "Eco-App Redesign" : "Redesain Aplikasi Eco",
-      description: locale === 'en' ? "Interface design for eco-friendly apps with an organic visual approach." : "Desain antarmuka aplikasi ramah lingkungan dengan pendekatan visual yang organik.",
+      title: locale === 'id' ? "Redesain Aplikasi Eco" : "Eco-App Redesign",
+      description: locale === 'id' ? "Desain antarmuka aplikasi ramah lingkungan dengan pendekatan visual yang organik." : "Interface design for eco-friendly apps with an organic visual approach.",
       tags: ["UI/UX", "Mobile", "Sustainability"],
       image: PlaceHolderImages.find(img => img.id === 'project1')
     },
     {
       id: 'project2',
-      title: locale === 'en' ? "Hand-Crafted Branding" : "Branding Buatan Tangan",
-      description: locale === 'en' ? "Visual identity for a local ceramic studio with earthy tones." : "Identitas visual untuk studio keramik lokal dengan nuansa earthy.",
+      title: locale === 'id' ? "Branding Buatan Tangan" : "Hand-Crafted Branding",
+      description: locale === 'id' ? "Identitas visual untuk studio keramik lokal dengan nuansa earthy." : "Visual identity for a local ceramic studio with earthy tones.",
       tags: ["Branding", "Print", "Illustration"],
       image: PlaceHolderImages.find(img => img.id === 'project2')
     },
     {
       id: 'project3',
-      title: locale === 'en' ? "Storybook World" : "Dunia Buku Cerita",
-      description: locale === 'en' ? "Digital illustration series for children's books inspired by folklore." : "Seri ilustrasi digital untuk buku anak-anak yang terinspirasi dari dongeng Nusantara.",
+      title: locale === 'id' ? "Dunia Buku Cerita" : "Storybook World",
+      description: locale === 'id' ? "Seri ilustrasi digital untuk buku anak-anak yang terinspirasi dari dongeng Nusantara." : "Digital illustration series for children's books inspired by folklore.",
       tags: ["Illustration", "Digital Art"],
       image: PlaceHolderImages.find(img => img.id === 'project3')
     },
     {
       id: 'project4',
-      title: locale === 'en' ? "Portfolio Website" : "Website Portofolio",
-      description: locale === 'en' ? "Web portfolio development using Next.js with dynamic hand-drawn animations." : "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan.",
+      title: locale === 'id' ? "Website Portofolio" : "Portfolio Website",
+      description: locale === 'id' ? "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan." : "Web portfolio development using Next.js with dynamic hand-drawn animations.",
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
     }
@@ -207,7 +207,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Shuffle only on client to avoid hydration mismatch
+    // Shuffle only on client after hydration to avoid mismatch
     setRow1(shuffleArray(techLogos));
     setRow2(shuffleArray(techLogos));
   }, []);
@@ -282,7 +282,7 @@ export default function Home() {
                         <SheetDescription className="sr-only">Choose a section to navigate</SheetDescription>
                         <SheetClose asChild>
                           <button className="p-2 transition-all text-foreground duration-200">
-                            <CloseIcon className="w-8 h-8" />
+                            <CloseIcon />
                           </button>
                         </SheetClose>
                       </SheetHeader>
@@ -368,7 +368,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            {/* Hero Illustration Tape decoration as per instructions */}
+            {/* Hero Illustration Decoration - Tapes as per requested */}
             <div className="absolute -top-4 left-4 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-15deg] z-10 border-x border-foreground/5 shadow-sm" />
             <div className="absolute -bottom-6 -right-4 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-10 border-x border-foreground/5 shadow-sm" />
             <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-25deg] z-10 border-x border-foreground/5 shadow-sm" />
@@ -457,7 +457,7 @@ export default function Home() {
             
             <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
               <div className="relative group" style={{ cursor: 'url(/nifsa.png), auto' }}>
-                {/* Profile Photo */}
+                {/* Profile Photo - Clean without tape as requested */}
                 <div 
                   className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3 transition-transform hover:rotate-0" 
                   style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
@@ -477,6 +477,7 @@ export default function Home() {
                 <WobblyBox variant="post-it" shadow="sm" className="px-6 py-2 rotate-[-2deg] group-hover:rotate-0 transition-all">
                   <span className="text-3xl md:text-4xl font-headline text-foreground">Noval Firdaus</span>
                 </WobblyBox>
+                {/* Scribble decoration under name */}
                 <svg className="absolute -bottom-4 left-0 w-full h-4 text-accent/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
@@ -486,6 +487,7 @@ export default function Home() {
 
           {/* TWO ROW TECH MARQUEE */}
           <div className="relative overflow-hidden w-full h-48 border-y-2 border-dashed border-foreground py-6 flex flex-col justify-center gap-4">
+            {/* ROW 1 (Left) */}
             <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap items-center">
               {[...row1, ...row1].map((item, i) => (
                 <div key={`r1-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
@@ -495,6 +497,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            {/* ROW 2 (Right) */}
             <div className="flex animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap items-center">
               {[...row2, ...row2].map((item, i) => (
                 <div key={`r2-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
@@ -504,6 +507,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            {/* Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background pointer-events-none" />
           </div>
         </section>
