@@ -154,12 +154,10 @@ export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [row1, setRow1] = useState(techLogos);
+  const [row2, setRow2] = useState(techLogos);
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
-  
-  const shuffledLogos = useMemo(() => shuffleArray(techLogos), []);
-  const row1 = shuffledLogos; 
-  const row2 = shuffledLogos; 
 
   const projects = [
     {
@@ -221,6 +219,10 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Initial shuffle on client only to avoid hydration mismatch
+    setRow1(shuffleArray(techLogos));
+    setRow2(shuffleArray(techLogos));
+
     const hash = window.location.hash;
     if (hash) {
       const id = hash.replace('#', '');
