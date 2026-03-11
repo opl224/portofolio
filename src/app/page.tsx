@@ -26,7 +26,7 @@ import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast';
 
 // Google Sheet Apps Script URL
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbz57Nc5HOhejqdJ7jqsfHBKEEQMVXp_5fzb8na2cVyw62oup3aLclLUTSeZKxRjswT6gw/exec'; 
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw7dO81gsvb-0ekySe2Id6oFiyCzfxXiHF5GwDbl9VbVxiMSn-YJZZZCyukrKN2T3PPZw/exec'; 
 
 // Decorative Elements for the sides
 const SideDecorations = () => (
@@ -95,7 +95,7 @@ const CloseIcon = ({ className }: { className?: string }) => (
     strokeWidth="4" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
+    className={cn("transition-all duration-300 hover:rotate-90", className)}
   >
     <path d="M18 18 42 42"/>
     <path d="M18 42 42 18"/>
@@ -162,8 +162,8 @@ export default function Home() {
   const { register, handleSubmit, reset } = useForm();
 
   // Hydration-safe logo shuffling
-  const [row1, setRow1] = useState(techLogos);
-  const [row2, setRow2] = useState(techLogos);
+  const [shuffledRow1, setShuffledRow1] = useState(techLogos);
+  const [shuffledRow2, setShuffledRow2] = useState(techLogos);
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
 
@@ -177,7 +177,7 @@ export default function Home() {
     },
     {
       id: 'project2',
-      title: locale === 'id' ? "Branding Buatan Tangan" : "Hand-Crafted Branding",
+      title: locale === 'id' ? "Branding Buatan Tangan" : "Branding Buatan Tangan",
       description: locale === 'id' ? "Identitas visual untuk studio keramik lokal dengan nuansa earthy." : "Visual identity for a local ceramic studio with earthy tones.",
       tags: ["Branding", "Print", "Illustration"],
       image: PlaceHolderImages.find(img => img.id === 'project2')
@@ -218,30 +218,53 @@ export default function Home() {
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
     try {
-      // Create a hidden form submission to Google Sheet via fetch
-      // This usually works best with simple POST or custom Web App script
+      // Coba tanpa no-cors dulu untuk test
       const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors', // Using no-cors as Google Apps Script often blocks standard CORS
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       });
-
-      // Since we use 'no-cors', response.ok will be false and status 0
-      // We assume it sent if no exception was thrown
-      toast({
-        title: locale === 'id' ? "Terkirim!" : "Message Sent!",
-        description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
-      });
-      reset();
+      
+      const result = await response.json();
+      console.log('Response:', result); // Untuk debugging
+      
+      if (result.success) {
+        toast({
+          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
+          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
+        });
+        reset();
+      } else {
+        throw new Error(result.error);
+      }
+      
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: locale === 'id' ? "Oops!" : "Error!",
-        description: locale === 'id' ? "Terjadi kesalahan. Silakan coba lagi nanti." : "Something went wrong. Please try again later.",
-      });
+      console.error('Error:', error);
+      
+      // Fallback ke no-cors jika error CORS
+      try {
+        await fetch(GOOGLE_SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        toast({
+          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
+          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
+        });
+        reset();
+        
+      } catch (fallbackError) {
+        toast({
+          variant: "destructive",
+          title: locale === 'id' ? "Oops!" : "Error!",
+          description: locale === 'id' ? "Terjadi kesalahan. Silakan coba lagi nanti." : "Something went wrong. Please try again later.",
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -249,8 +272,8 @@ export default function Home() {
 
   useEffect(() => {
     const shuffleArray = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
-    setRow1(shuffleArray(techLogos));
-    setRow2(shuffleArray(techLogos));
+    setShuffledRow1(shuffleArray(techLogos));
+    setShuffledRow2(shuffleArray(techLogos));
   }, []);
 
   return (
@@ -411,7 +434,7 @@ export default function Home() {
           <div className="relative">
             <div className="absolute -top-4 left-4 w-32 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-1deg] z-10 border-x border-foreground/5 shadow-sm" />
             
-            <WobblyBox className="p-2 rotate-2" shadow="lg">
+            <WobblyBox className="p-2 rotate-2" shadow="lg" decoration="tape">
               <Image 
                 src={heroImg?.imageUrl || "https://picsum.photos/seed/ink-hero/800/600"} 
                 alt="Hero Illustration" 
@@ -541,7 +564,7 @@ export default function Home() {
           {/* TWO ROW TECH MARQUEE */}
           <div className="relative overflow-hidden w-full h-48 border-y-2 border-dashed border-foreground py-6 flex flex-col justify-center gap-4">
             <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap items-center">
-              {[...row1, ...row1].map((item, i) => (
+              {[...shuffledRow1, ...shuffledRow1].map((item, i) => (
                 <div key={`r1-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
                     <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
@@ -550,7 +573,7 @@ export default function Home() {
               ))}
             </div>
             <div className="flex animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap items-center">
-              {[...row2, ...row2].map((item, i) => (
+              {[...shuffledRow2, ...shuffledRow2].map((item, i) => (
                 <div key={`r2-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
                     <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
@@ -610,7 +633,7 @@ export default function Home() {
                   disabled={isSubmitting}
                 >
                   <span className="flex items-center justify-center gap-4">
-                    {isSubmitting ? <Loader2 className="animate-spin" /> : t.contact.send} 
+                    {isSubmitting ? <Loader2 className="animate-spin" /> : (locale === 'id' ? 'Kirim Pesan' : 'Send Message')} 
                     {!isSubmitting && <LongArrowRight />}
                   </span>
                 </HandDrawnButton>
