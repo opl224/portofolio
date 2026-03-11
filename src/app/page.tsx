@@ -173,17 +173,17 @@ export default function Home() {
   ];
 
   const techLogos = [
-    { src: "/logo/react.svg", name: "React" },
-    { src: "/logo/html5.svg", name: "HTML5" },
-    { src: "/logo/tailwind.svg", name: "Tailwind" },
-    { src: "/logo/expo.svg", name: "Expo" },
-    { src: "/logo/flutter.svg", name: "Flutter" },
-    { src: "/logo/capacitor.svg", name: "Capacitor" },
-    { src: "/logo/firebase.svg", name: "Firebase" },
-    { src: "/logo/figma.svg", name: "Figma" },
-    { src: "/logo/javascript.svg", name: "JavaScript" },
-    { src: "/logo/nodejs.svg", name: "Node.js" },
-    { src: "/logo/office.svg", name: "Office" },
+    { src: "/logo/react.png", name: "React" },
+    { src: "/logo/html5.png", name: "HTML5" },
+    { src: "/logo/tailwind.png", name: "Tailwind" },
+    { src: "/logo/expo.png", name: "Expo" },
+    { src: "/logo/flutter.png", name: "Flutter" },
+    { src: "/logo/capacitor.png", name: "Capacitor" },
+    { src: "/logo/firebase.png", name: "Firebase" },
+    { src: "/logo/figma.png", name: "Figma" },
+    { src: "/logo/javascript.png", name: "JavaScript" },
+    { src: "/logo/nodejs.png", name: "Node.js" },
+    { src: "/logo/office.png", name: "Office" },
   ];
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -390,11 +390,9 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            {/* One tape on top-left */}
+            {/* Tape Decorations on Hero Illustration */}
             <div className="absolute -top-1 -left-10 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
-            
-            {/* Two crossing tapes on bottom-right */}
-            <div className="absolute -bottom-4 -right-21 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
             <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
 
             <WobblyBox className="p-2 rotate-2" shadow="lg">
@@ -475,12 +473,15 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
+            <div 
+              className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0"
+              style={{ cursor: 'url(/nifsa.png), auto' }}
+            >
               <div className="relative">
-                {/* Tape Decorations */}
-                <div className="absolute -top-2 -left-8 w-20 h-6 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-25deg] z-20 border-x border-foreground/5 shadow-sm" />
-                <div className="absolute -bottom-2 -right-16 w-20 h-6 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
-                <div className="absolute -bottom-2 -right-8 w-20 h-6 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-45deg] z-20 border-x border-foreground/5 shadow-sm" />
+                {/* Profile Photo with Tape Accessories */}
+                <div className="absolute -top-1 -left-10 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
+                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
+                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
 
                 <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
@@ -492,12 +493,9 @@ export default function Home() {
                     style={{ borderRadius: 'inherit' }}
                   />
                 </div>
-                <div className="absolute -top-4 -right-4 bg-accent text-white p-2 md:p-3 border-2 border-foreground rounded-full rotate-12">
-                  <User className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
-                </div>
               </div>
               
-              {/* Profile Name */}
+              {/* Profile Name with Scribble Accessory */}
               <div className="mt-8 relative group">
                 <WobblyBox variant="post-it" shadow="sm" className="px-6 py-2 rotate-[-2deg] group-hover:rotate-0 transition-all">
                   <span className="text-3xl md:text-4xl font-headline text-foreground">Noval Firdaus</span>
@@ -510,11 +508,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Tech Marquee - Full Width within Container */}
+          {/* Tech Marquee - Full Width Seamless Scroll */}
           <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-6">
             <div className="flex animate-marquee whitespace-nowrap items-center h-full">
-              {[...techLogos, ...techLogos].map((item, i) => (
-                <div key={i} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
+              {[...techLogos, ...techLogos, ...techLogos, ...techLogos].map((item, i) => (
+                <div key={`${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
                     <Image 
                       src={item.src} 
