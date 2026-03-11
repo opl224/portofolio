@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, FileDown, Code2, Loader2, Sparkles, Search } from 'lucide-react';
+import { Mail, Github, Linkedin, User, FileDown} from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -352,6 +352,13 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
+            {/* One tape on top-left */}
+            <div className="absolute -top-8 -left-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
+            
+            {/* Two crossing tapes on bottom-right */}
+            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
+
             <WobblyBox className="p-2 rotate-2" shadow="lg">
               <Image 
                 src={heroImg?.imageUrl || "https://picsum.photos/seed/ink-hero/800/600"} 
@@ -432,13 +439,6 @@ export default function Home() {
             </div>
             <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
               <div className="relative">
-                {/* One tape on top-left */}
-                <div className="absolute -top-8 -left-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
-                
-                {/* Two crossing tapes on bottom-right */}
-                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
-                <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
-
                 <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
                     src="/me.png" 
