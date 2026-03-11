@@ -15,19 +15,34 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 const ArrowLeftIcon = () => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
+    width="100%"  // Biarkan responsif mengikuti container
     height="24" 
-    viewBox="0 0 24 24" 
+    // PERLEBAR viewBox: dari "0 0 24 24" menjadi "0 0 100 24"
+    // Angka 100 bisa diubah sesuai seberapa panjang yang diinginkan
+    viewBox="0 0 60 24" 
     fill="none" 
     stroke="currentColor" 
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className="lucide lucide-arrow-left-icon lucide-arrow-left"
+    className="lucide lucide-arrow-left"
   >
+    {/* 
+       ARROWHEAD (TIDAK DIUBAH - Tetap normal)
+       Koordinat tetap sama, sehingga ukuran kepala panah tidak berubah
+    */}
     <path d="m12 19-7-7 7-7"/>
-    <path d="M19 12H5"/>
-  </svg>
+    
+    {/* 
+       SHAFT (DIPERPANJANG SIGNIFIKAN)
+       Asli: M19 12H5 (hanya 14 unit)
+       Baru: M95 12H5 (90 unit - sangat panjang!)
+       
+       M95 12 = Mulai dari x=95, y=12 (ujung kanan)
+       H5 = Tarik garis horizontal ke x=5 (menyambung ke kepala panah)
+    */}
+    <path d="M50 12H5"/>
+</svg>
 );
 
 export default function ProjectsPage() {

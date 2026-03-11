@@ -20,7 +20,7 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 // Decorative Elements for the sides
@@ -82,18 +82,18 @@ const MenuIcon = ({ className }: { className?: string }) => (
 const CloseIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
+    width="60" 
+    height="60" 
+    viewBox="0 0 60 60" 
     fill="none" 
     stroke="currentColor" 
-    strokeWidth="2" 
+    strokeWidth="4" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("lucide lucide-x-icon lucide-x transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
+    className={cn("transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
   >
-    <path d="M6 6 18 18"/>
-    <path d="M6 18 18 6"/>
+    <path d="M18 18 42 42"/>
+    <path d="M18 42 42 18"/>
   </svg>
 );
 
@@ -282,7 +282,7 @@ export default function Home() {
                         <SheetDescription className="sr-only">Choose a section to navigate</SheetDescription>
                         <SheetClose asChild>
                           <button className="p-2 transition-all text-foreground duration-200">
-                            <CloseIcon />
+                            <CloseIcon className="w-8 h-8" />
                           </button>
                         </SheetClose>
                       </SheetHeader>
