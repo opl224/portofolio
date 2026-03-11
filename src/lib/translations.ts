@@ -27,7 +27,7 @@ export const translations = {
     },
     about: {
       title: 'Who am I?',
-      bio: "I'm a human first, a designer second. I believe that digital tools shouldn't strip away the warmth and personality of hand-crafted work. <br/><br/>My journey started with a pencil and a piece of paper, and though I use modern software now, I still think with my hands. I love creating messy prototypes that lead to beautiful, functional outcomes.",
+      bio: "I am a human first, and then a beginner programmer. <br/><br/> Bachelor’s degree in Information Systems (UBSI) with a specialization in Human-Computer Interaction (HCI). I am dedicated to building web and mobile applications that are not only functional but also intuitive and solution-oriented for their users.",
       design: 'Design',
       designSkills: 'UI/UX, Branding, Illustration',
       code: 'Code',
@@ -52,8 +52,8 @@ export const translations = {
       stayCreative: 'Stay Creative!',
     },
     chat: {
-      title: 'Chat Assistant',
-      welcome: 'Hello! I am your ink assistant. Need help explaining the works here?',
+      title: 'myBot',
+      welcome: 'Hello! I am your assistant. Is there anything I can help explain about this portfolio?',
       typing: 'Writing...',
       placeholder: 'Ask about projects...',
       suggestionTitle: 'Maybe you mean:',
@@ -67,7 +67,7 @@ export const translations = {
       contact: 'Kontak',
     },
     hero: {
-      status: 'Tersedia untuk bekerja!',
+      status: 'Bersedia untuk bekerja!',
       title: 'Saya melukis pengalaman digital.',
       subtitle: 'Seorang desainer dan pengembang yang menghargai sentuhan manusiawi. Membuat produk yang berjiwa, autentik, dan berkesan.',
       cta: 'Lihat karya saya',
@@ -86,7 +86,7 @@ export const translations = {
     },
     about: {
       title: 'Siapa saya?',
-      bio: "Saya adalah manusia terlebih dahulu, desainer kemudian. Saya percaya alat digital tidak boleh menghilangkan kehangatan karya tangan. <br/><br/>Perjalanan saya dimulai dengan pensil dan kertas, dan meskipun saya menggunakan perangkat lunak modern, saya tetap berpikir dengan tangan saya.",
+      bio: "Saya adalah manusia terlebih dahulu, baru kemudian seorang programmer pemula. <br/><br/> Lulusan S1 Sistem Informasi (UBSI) dengan spesialisasi Interaksi Manusia Komputer (HCI). Saya berdedikasi membangun aplikasi web dan mobile yang tidak hanya fungsional, tetapi juga intuitif dan berorientasi pada solusi nyata bagi penggunanya.",
       design: 'Desain',
       designSkills: 'UI/UX, Branding, Ilustrasi',
       code: 'Kode',
@@ -111,8 +111,8 @@ export const translations = {
       stayCreative: 'Tetap Kreatif!',
     },
     chat: {
-      title: 'Asisten Chat',
-      welcome: 'Halo! Saya asisten tinta Anda. Ada yang bisa saya bantu jelaskan tentang karya di sini?',
+      title: 'myBot',
+      welcome: 'Halo! Saya asisten kamu. Ada yang bisa saya bantu jelaskan tantang portofolio ini',
       typing: 'Sedang menulis...',
       placeholder: 'Tanya tentang proyek...',
       suggestionTitle: 'Mungkin maksud Anda:',

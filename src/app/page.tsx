@@ -169,7 +169,6 @@ export default function Home() {
 
   const handleScrollToSection = (sectionId: string) => {
     setIsSheetOpen(false);
-    // Delay slightly more to ensure focus restoration doesn't hijack scroll
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -431,7 +430,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="order-1 md:order-2 flex justify-center mb-8 md:mb-0">
+            <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
               <div className="relative">
                 <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
@@ -446,6 +445,17 @@ export default function Home() {
                 <div className="absolute -top-4 -right-4 bg-accent text-white p-2 md:p-3 border-2 border-foreground rounded-full rotate-12">
                   <User className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
                 </div>
+              </div>
+              
+              {/* Profile Name & Accessories */}
+              <div className="mt-8 relative group">
+                <WobblyBox variant="post-it" shadow="sm" className="px-6 py-2 rotate-[-2deg] group-hover:rotate-0 transition-all">
+                  <span className="text-3xl md:text-4xl font-headline text-foreground">Noval Firdaus</span>
+                </WobblyBox>
+                {/* Scribble Underline Accessory */}
+                <svg className="absolute -bottom-4 left-0 w-full h-4 text-accent/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
               </div>
             </div>
           </div>
@@ -560,7 +570,7 @@ export default function Home() {
             </div>
             <div className="text-center md:text-right space-y-4">
               <div className="flex flex-col items-center md:items-end group mt-4">
-                <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-12px] md:mr-4 z-10">opal</span>
+                <span className="font-headline text-base text-primary -rotate-12 bg-accent/10 px-2 py-0.5 wobbly-border border border-primary/30 mb-[-12px] md:mr-4 z-10">noval</span>
                 <div className="font-headline text-5xl md:text-6xl text-accent -rotate-2 group-hover:rotate-0 transition-transform duration-500">
                   {t.footer.stayCreative}
                 </div>
