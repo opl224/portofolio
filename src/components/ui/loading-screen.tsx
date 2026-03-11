@@ -4,14 +4,23 @@ import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 export const LoadingScreen = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Check if loading has already been shown in this session
+    const hasLoaded = sessionStorage.getItem('hasLoaded');
+    if (hasLoaded) {
+      setIsVisible(false);
+      return;
+    }
+
+    setIsVisible(true);
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
+          sessionStorage.setItem('hasLoaded', 'true');
           setTimeout(() => setIsVisible(false), 500);
           return 100;
         }

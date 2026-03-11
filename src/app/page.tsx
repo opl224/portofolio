@@ -9,7 +9,6 @@ import { ProjectCard } from '@/components/ui/project-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ChatBot } from '@/components/chat-bot';
 import { ThemeLanguageToggle } from '@/components/ui/theme-language-toggle';
-import { LoadingScreen } from '@/components/ui/loading-screen';
 import { useAppContext } from '@/context/app-context';
 import { translations } from '@/lib/translations';
 import { 
@@ -21,7 +20,7 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 // Decorative Elements for the sides
@@ -61,7 +60,7 @@ const SideDecorations = () => (
   </div>
 );
 
-// Custom Animated Menu Icon
+// Custom Menu and Close Icons from instructions
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -73,14 +72,13 @@ const MenuIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("transition-all duration-300 hover:scale-110 active:rotate-12", className)}
+    className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
   >
     <path d="M4 6h16"/>
     <path d="M4 18h16"/>
   </svg>
 );
 
-// Custom Animated Close Icon
 const CloseIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -92,7 +90,7 @@ const CloseIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
+    className={cn("lucide lucide-x-icon lucide-x transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
   >
     <path d="M6 6 18 18"/>
     <path d="M6 18 18 6"/>
@@ -216,13 +214,12 @@ export default function Home() {
 
   return (
     <>
-      <LoadingScreen />
       <SideDecorations />
       <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative overflow-x-hidden">
         {/* Navigation */}
         <nav className="flex justify-between items-center mb-20 px-4">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm group-hover:shadow-hand-drawn transition-all">
+            <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm group-hover:shadow-hand-drawn transition-all" style={{ cursor: 'url(/nifsa.png), auto' }}>
               <Image 
                 src="/me.png" 
                 alt="Logo" 
@@ -371,8 +368,10 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            {/* Hero Illustration Tape */}
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-1deg] z-10 border-x border-foreground/5 shadow-sm" />
+            {/* Hero Illustration Tape decoration as per instructions */}
+            <div className="absolute -top-4 left-4 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-15deg] z-10 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -bottom-6 -right-4 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-10 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-25deg] z-10 border-x border-foreground/5 shadow-sm" />
             
             <WobblyBox className="p-2 rotate-2" shadow="lg">
               <Image 
@@ -385,7 +384,7 @@ export default function Home() {
                 style={{ borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px' }}
               />
             </WobblyBox>
-            <div className="absolute -bottom-6 -left-6 hidden md:block z-10">
+            <div className="absolute -bottom-10 -left-6 hidden md:block z-10">
               <WobblyBox variant="post-it" className="px-6 py-4 rotate-[-6deg]" shadow="md">
                 <p className="font-body text-lg font-bold text-foreground">{t.hero.postit}</p>
               </WobblyBox>
@@ -457,11 +456,11 @@ export default function Home() {
             </div>
             
             <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
-              <div className="relative group">
+              <div className="relative group" style={{ cursor: 'url(/nifsa.png), auto' }}>
                 {/* Profile Photo */}
                 <div 
                   className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3 transition-transform hover:rotate-0" 
-                  style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%', cursor: 'url(/nifsa.png), auto' }}
+                  style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
                 >
                   <Image 
                     src="/me.png" 

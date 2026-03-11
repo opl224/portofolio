@@ -3,12 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Github, Linkedin, Mail, MoveUpArrow } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { ProjectCard } from '@/components/ui/project-card';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
-import { LoadingScreen } from '@/components/ui/loading-screen';
 import { ChatBot } from '@/components/chat-bot';
-import { ThemeLanguageToggle } from '@/components/ui/theme-language-toggle';
 import { useAppContext } from '@/context/app-context';
 import { translations } from '@/lib/translations';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -46,7 +44,6 @@ export default function ProjectsPage() {
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
     },
-    // Adding extra projects to fill the page
     {
       id: 'project5',
       title: locale === 'en' ? "Digital Sketchbook" : "Sketsa Digital",
@@ -64,101 +61,88 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <>
-      <LoadingScreen />
-      <div className="max-w-5xl mx-auto px-6 py-10 relative min-h-screen flex flex-col">
-        {/* Navigation */}
-        <nav className="flex justify-between items-center mb-16 px-4">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm group-hover:shadow-hand-drawn transition-all">
-              <Image 
-                src="/me.png" 
-                alt="Logo" 
-                width={48} 
-                height={48} 
-                className="object-cover grayscale"
-              />
-            </div>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link href="/" className="font-headline text-xl text-foreground hover:text-accent transition-colors">
-              {t.projects.back}
-            </Link>
-            <ThemeLanguageToggle />
-          </div>
-        </nav>
+    <div className="max-w-5xl mx-auto px-6 py-10 relative min-h-screen flex flex-col">
+      {/* Simplified Navigation per instructions */}
+      <nav className="flex items-center mb-20 px-4">
+        <Link 
+          href="/" 
+          className="flex items-center gap-2 font-headline text-2xl text-primary hover:text-accent transition-all group"
+        >
+          <span className="transition-transform group-hover:-translate-x-1">←</span>
+          {t.projects.back}
+        </Link>
+      </nav>
 
-        {/* Header */}
-        <header className="mb-20 text-center md:text-left">
-          <h1 className="text-5xl md:text-7xl font-headline text-foreground mb-6">
-            {t.projects.allTitle}
-          </h1>
-          <div className="w-48 h-2 bg-accent/20 wobbly-border -rotate-1 mx-auto md:mx-0" />
-        </header>
+      {/* Header */}
+      <header className="mb-20 text-center md:text-left">
+        <h1 className="text-5xl md:text-7xl font-headline text-foreground mb-6">
+          {t.projects.allTitle}
+        </h1>
+        <div className="w-48 h-2 bg-accent/20 wobbly-border -rotate-1 mx-auto md:mx-0" />
+      </header>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-x-12 gap-y-20 flex-1">
-          {allProjects.map((project, i) => (
-            <ProjectCard 
-              key={project.id}
-              index={i}
-              title={project.title}
-              description={project.description}
-              imageUrl={project.image?.imageUrl || ""}
-              imageHint={project.image?.imageHint || "design project"}
-              tags={project.tags}
-            />
-          ))}
-        </div>
-
-        {/* CTA Footer */}
-        <div className="mt-32 mb-20 text-center">
-          <Link href="/#contact">
-            <HandDrawnButton variant="accent" size="lg">
-              {t.contact.title}
-            </HandDrawnButton>
-          </Link>
-        </div>
-
-        {/* Standard Footer */}
-        <footer className="border-t-[3px] border-foreground border-dashed pt-12 pb-20 mt-auto">
-          <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 justify-center md:justify-start">
-                <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
-                  <Image 
-                    src="/me.png" 
-                    alt="Footer Logo" 
-                    width={40} 
-                    height={40} 
-                    className="object-cover grayscale"
-                  />
-                </div>
-              </div>
-              <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
-            </div>
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex justify-center gap-6">
-                <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
-                  <Github />
-                </a>
-                <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground">
-                  <Linkedin />
-                </a>
-                <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
-                  <Mail />
-                </a>
-              </div>
-            </div>
-            <div className="text-center md:text-right">
-              <span className="font-headline text-5xl text-accent -rotate-2 block">
-                {t.footer.stayCreative}
-              </span>
-            </div>
-          </div>
-        </footer>
-        <ChatBot />
+      {/* Grid */}
+      <div className="grid md:grid-cols-2 gap-x-12 gap-y-20 flex-1">
+        {allProjects.map((project, i) => (
+          <ProjectCard 
+            key={project.id}
+            index={i}
+            title={project.title}
+            description={project.description}
+            imageUrl={project.image?.imageUrl || ""}
+            imageHint={project.image?.imageHint || "design project"}
+            tags={project.tags}
+          />
+        ))}
       </div>
-    </>
+
+      {/* CTA Footer */}
+      <div className="mt-32 mb-20 text-center">
+        <Link href="/#contact">
+          <HandDrawnButton variant="accent" size="lg">
+            {t.contact.title}
+          </HandDrawnButton>
+        </Link>
+      </div>
+
+      {/* Standard Footer */}
+      <footer className="border-t-[3px] border-foreground border-dashed pt-12 pb-20 mt-auto">
+        <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 justify-center md:justify-start">
+              <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
+                <Image 
+                  src="/me.png" 
+                  alt="Footer Logo" 
+                  width={40} 
+                  height={40} 
+                  className="object-cover grayscale"
+                />
+              </div>
+            </div>
+            <p className="font-body text-xl text-foreground">{t.footer.tagline}</p>
+          </div>
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex justify-center gap-6">
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
+                <Github />
+              </a>
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground">
+                <Linkedin />
+              </a>
+              <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground">
+                <Mail />
+              </a>
+            </div>
+          </div>
+          <div className="text-center md:text-right">
+            <span className="font-headline text-5xl text-accent -rotate-2 block">
+              {t.footer.stayCreative}
+            </span>
+          </div>
+        </div>
+      </footer>
+      <ChatBot />
+    </div>
   );
 }

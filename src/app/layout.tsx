@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { AppProvider } from '@/context/app-context';
+import { LoadingScreen } from '@/components/ui/loading-screen';
 
 export const metadata: Metadata = {
   title: 'myPortfolio',
@@ -25,6 +26,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased bg-background text-foreground min-h-screen">
         <AppProvider>
+          <LoadingScreen />
           <div className="paper-texture min-h-screen transition-colors duration-300">
             {children}
           </div>
