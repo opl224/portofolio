@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, FileDown} from 'lucide-react';
+import { Mail, Github, Linkedin, User, FileDown, Sparkles, Star, Zap } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -22,6 +22,43 @@ import {
 } from '@/components/ui/sheet';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+
+// Decorative Elements for the sides
+const SideDecorations = () => (
+  <div className="hidden xl:block pointer-events-none select-none">
+    {/* Left Side Decorations */}
+    <div className="fixed left-4 top-1/4 -translate-y-1/2 opacity-20">
+      <svg width="200" height="400" viewBox="0 0 200 400" fill="none" className="text-foreground">
+        <path d="M20,50 Q150,150 20,250 T50,380" stroke="currentColor" strokeWidth="2" strokeDasharray="8 4" fill="none" className="animate-pulse" />
+        <circle cx="120" cy="80" r="15" stroke="currentColor" strokeWidth="2" fill="none" />
+        <path d="M80,300 L110,330 M110,300 L80,330" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      </svg>
+    </div>
+    <div className="fixed left-10 bottom-20 opacity-10">
+      <Star className="w-16 h-16 rotate-12 text-accent" />
+      <div className="mt-4 ml-8">
+        <Sparkles className="w-10 h-10 -rotate-12 text-primary" />
+      </div>
+    </div>
+
+    {/* Right Side Decorations */}
+    <div className="fixed right-4 top-1/3 opacity-20">
+      <svg width="150" height="300" viewBox="0 0 150 300" fill="none" className="text-foreground">
+        <path d="M10,10 C100,50 10,150 130,280" stroke="currentColor" strokeWidth="2" fill="none" />
+        <rect x="40" y="40" width="40" height="40" stroke="currentColor" strokeWidth="2" fill="none" className="rotate-45" />
+        <path d="M100,20 Q120,40 100,60" stroke="currentColor" strokeWidth="2" fill="none" />
+      </svg>
+    </div>
+    <div className="fixed right-12 bottom-1/4 opacity-15">
+      <Zap className="w-12 h-12 text-accent animate-bounce-slow" />
+      <div className="mt-20 -mr-6">
+        <svg width="100" height="100" viewBox="0 0 100 100" className="text-primary">
+          <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="2" strokeDasharray="5 5" fill="none" />
+        </svg>
+      </div>
+    </div>
+  </div>
+);
 
 // Custom Animated Menu Icon (2 lines)
 const MenuIcon = ({ className }: { className?: string }) => (
@@ -193,6 +230,7 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
+      <SideDecorations />
       <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative overflow-x-hidden">
         {/* Navigation */}
         <nav className="flex justify-between items-center mb-20 px-4">
@@ -249,7 +287,7 @@ export default function Home() {
                           <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
                             <Image 
                               src="/me.png" 
-                              alt="Logo" 
+                              alt="Logo Mobile" 
                               width={48} 
                               height={48} 
                               className="object-cover"
@@ -353,10 +391,10 @@ export default function Home() {
           </div>
           <div className="relative">
             {/* One tape on top-left */}
-            <div className="absolute -top-8 -left-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -top-1 -left-10 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
             
             {/* Two crossing tapes on bottom-right */}
-            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
+            <div className="absolute -bottom-4 -right-21 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
             <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
 
             <WobblyBox className="p-2 rotate-2" shadow="lg">
@@ -439,10 +477,15 @@ export default function Home() {
             </div>
             <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
               <div className="relative">
+                {/* Tape Decorations */}
+                <div className="absolute -top-2 -left-8 w-20 h-6 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-25deg] z-20 border-x border-foreground/5 shadow-sm" />
+                <div className="absolute -bottom-2 -right-16 w-20 h-6 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
+                <div className="absolute -bottom-2 -right-8 w-20 h-6 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-45deg] z-20 border-x border-foreground/5 shadow-sm" />
+
                 <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
                   <Image 
                     src="/me.png" 
-                    alt="Profile" 
+                    alt="Profile Photo Noval" 
                     width={400} 
                     height={400} 
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
@@ -475,7 +518,7 @@ export default function Home() {
                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
                     <Image 
                       src={item.src} 
-                      alt={item.name}
+                      alt={`Logo ${item.name}`}
                       width={48} 
                       height={48} 
                       className="object-contain"
@@ -546,7 +589,7 @@ export default function Home() {
                 <div className="w-10 h-10 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
                   <Image 
                     src="/me.png" 
-                    alt="Logo" 
+                    alt="Footer Logo" 
                     width={40} 
                     height={40} 
                     className="object-cover grayscale"
