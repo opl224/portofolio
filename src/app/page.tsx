@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, Github, Linkedin, User, FileDown, Sparkles, Star, Zap } from 'lucide-react';
+import { Mail, Github, Linkedin, FileDown, Sparkles, Star, Zap } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
 import { ProjectCard } from '@/components/ui/project-card';
@@ -20,7 +20,7 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 // Decorative Elements for the sides
@@ -134,6 +134,22 @@ const MoveUpArrow = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const techLogos = [
+  { src: "/logo/react.svg", name: "React" },
+  { src: "/logo/html5.svg", name: "HTML5" },
+  { src: "/logo/tailwind.svg", name: "Tailwind" },
+  { src: "/logo/expo.svg", name: "Expo" },
+  { src: "/logo/flutter.svg", name: "Flutter" },
+  { src: "/logo/capacitor.svg", name: "Capacitor" },
+  { src: "/logo/firebase.svg", name: "Firebase" },
+  { src: "/logo/figma.svg", name: "Figma" },
+  { src: "/logo/javascript.svg", name: "JavaScript" },
+  { src: "/logo/nodejs.svg", name: "Node.js" },
+  { src: "/logo/office.svg", name: "Office" },
+];
+
+const shuffleArray = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
+
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
@@ -141,6 +157,10 @@ export default function Home() {
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
   
+  const shuffledLogos = useMemo(() => shuffleArray(techLogos), []);
+  const row1 = shuffledLogos; 
+  const row2 = shuffledLogos; 
+
   const projects = [
     {
       id: 'project1',
@@ -170,20 +190,6 @@ export default function Home() {
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
     }
-  ];
-
-  const techLogos = [
-    { src: "/logo/react.png", name: "React" },
-    { src: "/logo/html5.png", name: "HTML5" },
-    { src: "/logo/tailwind.png", name: "Tailwind" },
-    { src: "/logo/expo.png", name: "Expo" },
-    { src: "/logo/flutter.png", name: "Flutter" },
-    { src: "/logo/capacitor.png", name: "Capacitor" },
-    { src: "/logo/firebase.png", name: "Firebase" },
-    { src: "/logo/figma.png", name: "Figma" },
-    { src: "/logo/javascript.png", name: "JavaScript" },
-    { src: "/logo/nodejs.png", name: "Node.js" },
-    { src: "/logo/office.png", name: "Office" },
   ];
 
   const handleBackToTop = (e: React.MouseEvent) => {
@@ -508,26 +514,32 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Tech Marquee - Full Width Seamless Scroll */}
-          <div className="relative overflow-hidden w-full h-32 border-y-2 border-dashed border-foreground py-6">
-            <div className="flex animate-marquee whitespace-nowrap items-center h-full">
-              {[...techLogos, ...techLogos, ...techLogos, ...techLogos].map((item, i) => (
-                <div key={`${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 md:mx-12 group min-w-max">
-                  <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
-                    <Image 
-                      src={item.src} 
-                      alt={`Logo ${item.name}`}
-                      width={48} 
-                      height={48} 
-                      className="object-contain"
-                    />
+          {/* TWO ROW TECH MARQUEE */}
+          <div className="relative overflow-hidden w-full h-48 border-y-2 border-dashed border-foreground py-6 flex flex-col justify-center gap-4">
+            {/* BARIS 1 (Ke Kiri) */}
+            <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap items-center">
+              {[...row1, ...row1].map((item, i) => (
+                <div key={`r1-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
+                  <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
+                    <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
                   </div>
-                  <span className="font-headline text-xs mt-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 text-primary">
-                    {item.name}
-                  </span>
                 </div>
               ))}
             </div>
+
+            {/* BARIS 2 (Ke Kanan - Reverse) */}
+            <div className="flex animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap items-center">
+              {[...row2, ...row2].map((item, i) => (
+                <div key={`r2-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
+                  <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
+                    <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background pointer-events-none" />
           </div>
         </section>
 
