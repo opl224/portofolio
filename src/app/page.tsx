@@ -20,7 +20,7 @@ import {
   SheetDescription,
   SheetClose 
 } from '@/components/ui/sheet';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 // Decorative Elements for the sides
@@ -100,9 +100,9 @@ const CloseIcon = ({ className }: { className?: string }) => (
 const LongArrowRight = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    width="36" 
+    width="48" 
     height="24" 
-    viewBox="0 0 36 24" 
+    viewBox="0 0 48 24" 
     fill="none" 
     stroke="currentColor" 
     strokeWidth="2.5" 
@@ -110,8 +110,8 @@ const LongArrowRight = ({ className }: { className?: string }) => (
     strokeLinejoin="round" 
     className={className}
   >
-    <path d="M2 12h30" />
-    <path d="m24 5 8 7-8 7" />
+    <path d="M2 12h42" />
+    <path d="m36 5 8 7-8 7" />
   </svg>
 );
 
@@ -160,7 +160,7 @@ export default function Home() {
   
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero');
 
-  const allProjects = [
+  const allProjects = useMemo(() => [
     {
       id: 'project1',
       title: locale === 'id' ? "Redesain Aplikasi Eco" : "Eco-App Redesign",
@@ -189,7 +189,7 @@ export default function Home() {
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
     }
-  ];
+  ], [locale]);
 
   // Limit projects to 2 for home page
   const displayedProjects = allProjects.slice(0, 2);
@@ -413,14 +413,15 @@ export default function Home() {
         {/* Projects Gallery */}
         <section id="projects" className="mb-32 scroll-mt-20">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-2">
-            <div>
+            <div className="flex items-center justify-between w-full md:w-auto md:gap-8">
               <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.projects.title}</h2>
               <Link 
                 href="/projects" 
-                className="hidden md:inline-block group relative mt-2 font-headline text-xl text-primary hover:text-accent transition-colors"
+                className="hidden md:flex items-center gap-3 group relative font-headline text-xl text-primary hover:text-accent transition-all pl-4"
               >
                 {t.projects.viewAll}
-                <svg className="absolute -bottom-1 left-0 w-full h-2 text-accent/40 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <LongArrowRight className="group-hover:translate-x-2 transition-transform" />
+                <svg className="absolute -bottom-1 left-4 right-0 h-2 text-accent/40 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </Link>
@@ -441,16 +442,17 @@ export default function Home() {
             ))}
           </div>
 
-          {/* View All Projects - Bottom Link for Mobile */}
-          <div className="flex md:hidden justify-center mt-8">
+          {/* View All Projects - Aesthetic Bottom Button for Mobile */}
+          <div className="flex md:hidden justify-center mt-12">
             <Link 
               href="/projects" 
-              className="group relative inline-block font-headline text-2xl text-primary hover:text-accent transition-colors"
+              className="group relative flex items-center gap-4 px-8 py-4 border-[3px] border-foreground bg-white shadow-hand-drawn active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+              style={{ borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px' }}
             >
-              {t.projects.viewAll}
-              <svg className="absolute -bottom-1 left-0 w-full h-2 text-accent/40 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <span className="font-headline text-2xl text-primary group-hover:text-accent">
+                {t.projects.viewAll}
+              </span>
+              <LongArrowRight className="group-hover:translate-x-2 transition-transform text-primary group-hover:text-accent" />
             </Link>
           </div>
         </section>
