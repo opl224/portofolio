@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Mail, Github, Linkedin, FileDown, Sparkles, Star, Zap } from 'lucide-react';
 import { WobblyBox } from '@/components/ui/wobbly-box';
 import { HandDrawnButton } from '@/components/ui/hand-drawn-button';
@@ -60,7 +61,7 @@ const SideDecorations = () => (
   </div>
 );
 
-// Custom Animated Menu Icon (2 lines)
+// Custom Animated Menu Icon
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -72,7 +73,7 @@ const MenuIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("lucide lucide-menu-icon lucide-menu transition-all duration-300 hover:scale-110 active:rotate-12", className)}
+    className={cn("transition-all duration-300 hover:scale-110 active:rotate-12", className)}
   >
     <path d="M4 6h16"/>
     <path d="M4 18h16"/>
@@ -91,7 +92,7 @@ const CloseIcon = ({ className }: { className?: string }) => (
     strokeWidth="2" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    className={cn("lucide lucide-x-icon lucide-x transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
+    className={cn("transition-all duration-300 hover:scale-110 hover:rotate-90", className)}
   >
     <path d="M6 6 18 18"/>
     <path d="M6 18 18 6"/>
@@ -154,6 +155,8 @@ export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  
+  // Hydration-safe logo shuffling
   const [row1, setRow1] = useState(techLogos);
   const [row2, setRow2] = useState(techLogos);
   
@@ -192,20 +195,7 @@ export default function Home() {
 
   const handleBackToTop = (e: React.MouseEvent) => {
     e.preventDefault();
-    const startPosition = window.pageYOffset;
-    const distance = -startPosition;
-    const duration = 2200; 
-    let start: number | null = null;
-
-    function step(timestamp: number) {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      const t = progress / duration;
-      const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; 
-      window.scrollTo(0, startPosition + distance * ease);
-      if (progress < duration) window.requestAnimationFrame(step);
-    }
-    window.requestAnimationFrame(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleScrollToSection = (sectionId: string) => {
@@ -219,20 +209,9 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Initial shuffle on client only to avoid hydration mismatch
+    // Shuffle only on client to avoid hydration mismatch
     setRow1(shuffleArray(techLogos));
     setRow2(shuffleArray(techLogos));
-
-    const hash = window.location.hash;
-    if (hash) {
-      const id = hash.replace('#', '');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 800);
-    }
   }, []);
 
   return (
@@ -242,8 +221,8 @@ export default function Home() {
       <div id="top" className="max-w-5xl mx-auto px-6 py-10 relative overflow-x-hidden">
         {/* Navigation */}
         <nav className="flex justify-between items-center mb-20 px-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 border-2 border-foreground overflow-hidden wobbly-border bg-white shadow-hand-drawn-sm group-hover:shadow-hand-drawn transition-all">
               <Image 
                 src="/me.png" 
                 alt="Logo" 
@@ -252,7 +231,7 @@ export default function Home() {
                 className="object-cover grayscale hover:grayscale-0 transition-all"
               />
             </div>
-          </div>
+          </Link>
           
           <div className="flex items-center gap-4 md:gap-8">
             <div className="hidden md:flex gap-8 font-body text-xl text-foreground">
@@ -302,8 +281,8 @@ export default function Home() {
                             />
                           </div>
                         </div>
-                        <SheetTitle className="sr-only">Navigasi Portofolio</SheetTitle>
-                        <SheetDescription className="sr-only">Pilih bagian portofolio untuk berpindah halaman</SheetDescription>
+                        <SheetTitle className="sr-only">Portfolio Navigation</SheetTitle>
+                        <SheetDescription className="sr-only">Choose a section to navigate</SheetDescription>
                         <SheetClose asChild>
                           <button className="p-2 transition-all text-foreground duration-200">
                             <CloseIcon />
@@ -313,23 +292,18 @@ export default function Home() {
 
                       <div className="flex flex-col gap-8 font-body text-4xl mb-12 items-center text-center">
                         <button 
-                          type="button"
                           onClick={() => handleScrollToSection('projects')}
                           className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
                         >
                           {t.nav.projects}
                         </button>
-                        
                         <button 
-                          type="button"
                           onClick={() => handleScrollToSection('about')}
                           className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
                         >
                           {t.nav.about}
                         </button>
-                        
                         <button 
-                          type="button"
                           onClick={() => handleScrollToSection('contact')}
                           className="hover:line-through decoration-accent decoration-4 text-foreground block w-full transition-all text-center bg-transparent border-none cursor-pointer font-body text-4xl"
                         >
@@ -342,7 +316,6 @@ export default function Home() {
                           <div className="scale-125">
                             <ThemeLanguageToggle />
                           </div>
-
                           <div className="flex gap-6 mt-4 justify-center">
                             <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
                               <Github size={24} strokeWidth={3} />
@@ -398,11 +371,9 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            {/* Tape Decorations on Hero Illustration */}
-            <div className="absolute -top-1 -left-10 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-35deg] z-20 border-x border-foreground/5 shadow-sm" />
-            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[35deg] z-20 border-x border-foreground/5 shadow-sm" />
-            <div className="absolute -bottom-4 -right-8 w-24 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-55deg] z-20 border-x border-foreground/5 shadow-sm" />
-
+            {/* Hero Illustration Tape */}
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-100/40 backdrop-blur-[1px] rotate-[-1deg] z-10 border-x border-foreground/5 shadow-sm" />
+            
             <WobblyBox className="p-2 rotate-2" shadow="lg">
               <Image 
                 src={heroImg?.imageUrl || "https://picsum.photos/seed/ink-hero/800/600"} 
@@ -441,13 +412,17 @@ export default function Home() {
 
         {/* Projects Gallery */}
         <section id="projects" className="mb-32 scroll-mt-20">
-          <div className="flex justify-between items-end mb-12">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
             <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.projects.title}</h2>
-            <div className="hidden md:block">
-              <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="stroke-foreground/20 stroke-2">
-                <path d="M5,5 Q30,35 55,5" strokeLinecap="round" strokeDasharray="4,4" />
+            <Link 
+              href="/projects" 
+              className="group relative inline-block font-headline text-xl text-primary hover:text-accent transition-colors"
+            >
+              {t.projects.viewAll}
+              <svg className="absolute -bottom-1 left-0 w-full h-2 text-accent/40 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
-            </div>
+            </Link>
           </div>
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-20 md:gap-y-0">
             {projects.map((project, i) => (
@@ -470,10 +445,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start mb-16">
             <div className="order-2 md:order-1 space-y-6 min-w-0">
               <p className="text-lg md:text-xl font-body leading-relaxed text-foreground" dangerouslySetInnerHTML={{ __html: t.about.bio }} />
-              
               <div className="pt-4 flex flex-col gap-10">
                 <div className="flex justify-center md:justify-start">
-                  <a href="/cv.pdf" download="CV_Portfolio.pdf">
+                  <a href="/cv.pdf" download="CV_Noval_Firdaus.pdf">
                     <HandDrawnButton variant="secondary" size="md" className="flex items-center gap-3">
                       <FileDown size={24} /> {t.about.downloadCV}
                     </HandDrawnButton>
@@ -481,16 +455,17 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div 
-              className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0"
-              style={{ cursor: 'url(/nifsa.png), auto' }}
-            >
-              <div className="relative">
+            
+            <div className="order-1 md:order-2 flex flex-col items-center justify-center mb-8 md:mb-0">
+              <div className="relative group">
                 {/* Profile Photo */}
-                <div className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3" style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}>
+                <div 
+                  className="w-48 h-48 md:w-80 md:h-80 border-[4px] border-foreground p-2 overflow-hidden bg-white shadow-hand-drawn rotate-3 transition-transform hover:rotate-0" 
+                  style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%', cursor: 'url(/nifsa.png), auto' }}
+                >
                   <Image 
                     src="/me.png" 
-                    alt="Profile Photo Noval" 
+                    alt="Profile Photo" 
                     width={400} 
                     height={400} 
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
@@ -499,12 +474,10 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Profile Name with Scribble Accessory */}
-              <div className="mt-8 relative group">
+              <div className="mt-8 relative group" style={{ cursor: 'url(/nifsa.png), auto' }}>
                 <WobblyBox variant="post-it" shadow="sm" className="px-6 py-2 rotate-[-2deg] group-hover:rotate-0 transition-all">
                   <span className="text-3xl md:text-4xl font-headline text-foreground">Noval Firdaus</span>
                 </WobblyBox>
-                {/* Scribble Underline Accessory */}
                 <svg className="absolute -bottom-4 left-0 w-full h-4 text-accent/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
@@ -514,7 +487,6 @@ export default function Home() {
 
           {/* TWO ROW TECH MARQUEE */}
           <div className="relative overflow-hidden w-full h-48 border-y-2 border-dashed border-foreground py-6 flex flex-col justify-center gap-4">
-            {/* BARIS 1 (Ke Kiri) */}
             <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap items-center">
               {[...row1, ...row1].map((item, i) => (
                 <div key={`r1-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
@@ -524,8 +496,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-
-            {/* BARIS 2 (Ke Kanan - Reverse) */}
             <div className="flex animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap items-center">
               {[...row2, ...row2].map((item, i) => (
                 <div key={`r2-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
@@ -535,8 +505,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-
-            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background pointer-events-none" />
           </div>
         </section>
