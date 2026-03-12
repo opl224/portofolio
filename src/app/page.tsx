@@ -606,6 +606,9 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="mb-32 scroll-mt-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-headline text-foreground">{t.contact.title}</h2>
+          </div>
           <WobblyBox decoration="none" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
             <form onSubmit={handleSubmit(onContactSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
