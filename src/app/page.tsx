@@ -380,13 +380,13 @@ export default function Home() {
                             <ThemeLanguageToggle />
                           </div>
                           <div className="flex gap-6 mt-4 justify-center">
-                            <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
+                            <a href="https://github.com/opl224/" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
                               <Github size={24} strokeWidth={3} />
                             </a>
                             <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all bg-background text-foreground active:scale-90">
                               <Linkedin size={24} strokeWidth={3} />
                             </a>
-                            <a href="#" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
+                            <a href="mailto:siapaajaboleh202@gmail.com" className="p-4 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all bg-background text-foreground active:scale-90">
                               <Mail size={24} strokeWidth={3} />
                             </a>
                           </div>
@@ -680,13 +680,13 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center gap-12">
               <div className="flex justify-center gap-6">
-                <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
+                <a href="https://github.com/opl224/" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
                   <Github strokeWidth={3} />
                 </a>
                 <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-primary hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
                   <Linkedin strokeWidth={3} />
                 </a>
-                <a href="#" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
+                <a href="mailto:siapaajaboleh202@gmail.com" className="p-3 border-2 border-foreground rounded-full hover:bg-accent hover:text-white transition-all hover:-translate-y-1 bg-background text-foreground active:scale-90">
                   <Mail strokeWidth={3} />
                 </a>
               </div>
