@@ -1,17 +1,10 @@
-import type {Metadata} from 'next';
+'use client';
+
+import type { Metadata } from 'next';
 import './globals.css';
 import { AppProvider } from '@/context/app-context';
 import { LoadingScreen } from '@/components/ui/loading-screen';
-import { Toaster } from "@/components/ui/toaster";
-
-export const metadata: Metadata = {
-  title: 'myPortfolio',
-  description: 'A hand-drawn inspired portfolio for creative individuals.',
-  icons: {
-    icon: '/me.png',
-    apple: '/me.png',
-  },
-};
+import { Toaster } from 'sileo';
 
 export default function RootLayout({
   children,
@@ -27,11 +20,11 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased bg-background text-foreground min-h-screen">
         <AppProvider>
+          <Toaster position="top-right" />
           <LoadingScreen />
           <div className="paper-texture min-h-screen transition-colors duration-300">
             {children}
           </div>
-          <Toaster />
         </AppProvider>
       </body>
     </html>

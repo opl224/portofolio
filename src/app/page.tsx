@@ -23,9 +23,9 @@ import {
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sileo';
+import { sileo } from 'sileo';
 
-// URL Google Apps Script terbaru
+// URL Google Apps Script
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw7dO81gsvb-0ekySe2Id6oFiyCzfxXiHF5GwDbl9VbVxiMSn-YJZZZCyukrKN2T3PPZw/exec'; 
 
 // Decorative Elements for the sides
@@ -161,7 +161,6 @@ export default function Home() {
   
   const { register, handleSubmit, reset } = useForm();
 
-  // Hydration-safe logo shuffling
   const [shuffledRow1, setShuffledRow1] = useState<{ src: string, name: string }[]>([]);
   const [shuffledRow2, setShuffledRow2] = useState<{ src: string, name: string }[]>([]);
   
@@ -228,25 +227,22 @@ export default function Home() {
         body: JSON.stringify(data)
       });
 
-      // ⚠️ PENTING: Jangan lakukan response.json() saat mode: 'no-cors'
-      // Response akan bertipe 'opaque' dan tidak bisa dibaca, 
-      // tapi data SUDAH terkirim ke Google Sheets jika tidak ada error network.
-      
-      // Anggap sukses jika tidak ada error network
-      toast(locale === 'id' ? "Terkirim!" : "Message Sent!", {
-        variant: "success",
+      // ✅ Gunakan sileo.success()
+      sileo.success({
+        title: locale === 'id' ? "Terkirim!" : "Message Sent!",
         description: locale === 'id' 
           ? "Terima kasih! Saya akan segera menghubungi Anda." 
           : "Thank you! I'll get back to you soon.",
       });
+      
       reset();
       
     } catch (error) {
       console.error('Submission Error:', error);
       
-      // Hanya masuk sini jika benar-benar gagal (offline, URL salah, dll)
-      toast(locale === 'id' ? "Oops!" : "Error!", {
-        variant: "destructive",
+      // ✅ Gunakan sileo.error()
+      sileo.error({
+        title: locale === 'id' ? "Oops!" : "Error!",
         description: locale === 'id' 
           ? "Terjadi kesalahan. Silakan coba lagi nanti." 
           : "Something went wrong. Please try again later.",
