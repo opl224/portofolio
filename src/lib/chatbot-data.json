@@ -1,4 +1,3 @@
-
 {
   "profile": {
     "name": "myPortfolio Studio",
@@ -10,56 +9,56 @@
   },
   "knowledgeBase": [
     {
-      "keywords": ["siapa kamu", "intro", "tentang", "nama", "perkenalkan", "identitas", "siapa anda", "who are you", "about"],
+      "keywords": ["siapa kamu", "intro", "tentang", "nama", "perkenalkan", "identitas", "siapa anda"],
       "answer": {
         "id": "Halo! 👋 Saya seorang Fullstack Developer yang fokus membangun aplikasi web modern, cepat, dan user-friendly tapi kadang-kadang nyentuh mobile. Senang bertemu Anda!",
         "en": "Hello! 👋 I'm a Fullstack Developer focusing on building modern, fast, and user-friendly web apps, and occasionally mobile. Nice to meet you!"
       }
     },
     {
-      "keywords": ["lokasi", "domisili", "tinggal", "berbasis", "kota", "negara", "location", "live"],
+      "keywords": ["lokasi", "domisili", "tinggal", "berbasis", "kota", "negara"],
       "answer": {
         "id": "Saya berbasis di Depok dan terbuka untuk kerja remote atau kolaborasi dengan klien dari seluruh dunia.",
         "en": "I am based in Depok and open for remote work or collaboration with clients worldwide."
       }
     },
     {
-      "keywords": ["pengalaman", "kerja", "background", "latar belakang", "portofolio", "lama", "experience"],
+      "keywords": ["pengalaman", "kerja", "background", "latar belakang", "portofolio", "lama"],
       "answer": {
         "id": "Saya memiliki pengalaman 2+ tahun di bidang web & mobile development. Telah menyelesaikan berbagai proyek dari startup hingga enterprise.",
         "en": "I have 2+ years of experience in web & mobile development. I have completed various projects from startups to enterprises."
       }
     },
     {
-      "keywords": ["bahasa favorit", "stack", "programming", "kode", "pakai apa", "teknologi", "skill", "tech stack"],
+      "keywords": ["bahasa favorit", "stack", "programming", "kode", "pakai apa", "teknologi", "skill"],
       "answer": {
         "id": "Stack utama saya: TypeScript, React dan Tailwind CSS. Untuk mobile saya pakai React Native kadang Flutter. Saya suka ekosistem yang type-safe! 💻",
         "en": "My main stack: TypeScript, React, and Tailwind CSS. For mobile, I use React Native or sometimes Flutter. I love type-safe ecosystems! 💻"
       }
     },
     {
-      "keywords": ["database", "mysql", "postgresql", "mongodb", "data", "firebase", "supabase"],
+      "keywords": ["database", "mysql", "postgresql", "mongodb", "data"],
       "answer": {
         "id": "Saya biasa menggunakan PostgreSQL, Firebase, Supabase dan MySQL untuk data yang lebih fleksibel. Juga berpengalaman dengan Firebase & Supabase.",
         "en": "I usually use PostgreSQL, Firebase, Supabase, and MySQL for more flexible data. Also experienced with Firebase & Supabase."
       }
     },
     {
-      "keywords": ["tools", "software", "editor", "ide", "vs code", "workflow"],
+      "keywords": ["tools", "software", "editor", "ide", "vs code"],
       "answer": {
         "id": "Editor utama saya VS Code dengan berbagai extension produktif. Juga pakai Git, Docker dan Postman (sekarang bayar jadi malas) dalam workflow sehari-hari.",
         "en": "My main editor is VS Code with various productive extensions. I also use Git, Docker, and Postman in my daily workflow."
       }
     },
     {
-      "keywords": ["desain", "ui", "css", "tampilan", "framework css", "styling", "style", "design"],
+      "keywords": ["desain", "ui", "css", "tampilan", "framework css", "styling", "style"],
       "answer": {
         "id": "Saya pakai Tailwind CSS untuk styling karena fleksibel dan cepat 🎨",
         "en": "I use Tailwind CSS for styling because it's flexible and fast 🎨"
       }
     },
     {
-      "keywords": ["warna", "tema", "dark mode", "light mode", "palette", "colors", "theme"],
+      "keywords": ["warna", "tema", "dark mode", "light mode", "palette"],
       "answer": {
         "id": "Portfolio ini menggunakan tema minimalis dengan fokus pada readability. Tersedia dark mode untuk kenyamanan mata saat browsing malam hari! 🌙",
         "en": "This portfolio uses a minimalist theme with a focus on readability. Dark mode is available for eye comfort during night browsing! 🌙"
@@ -73,21 +72,21 @@
       }
     },
     {
-      "keywords": ["hobi", "suka apa", "aktivitas", "kesenangan", "waktu luang", "hobby", "hobbies"],
+      "keywords": ["hobi", "suka apa", "aktivitas", "kesenangan", "waktu luang", "hobby"],
       "answer": {
         "id": "Di luar coding, saya suka eksplor teknologi baru, baca dokumentasi, olahraga ringan, dan ibadah. Work-life balance itu penting! ⚖️",
         "en": "Outside of coding, I enjoy exploring new technologies, reading documentation, light exercise, and worship. Work-life balance is important! ⚖️"
       }
     },
     {
-      "keywords": ["musik", "lagu", "spotify", "dengar", "music", "song"],
+      "keywords": ["musik", "lagu", "spotify", "dengar"],
       "answer": {
         "id": "Saya biasa dengar lagu lawas saat coding. Membantu fokus tanpa terlalu mengganggu konsentrasi! 🎵",
         "en": "I usually listen to old songs while coding. Helps focus without being too distracting! 🎵"
       }
     },
     {
-      "keywords": ["proyek", "project", "karya", "portfolio", "hasil", "apps", "aplikasi", "projects"],
+      "keywords": ["proyek", "project", "karya", "portfolio", "hasil", "apps", "aplikasi"],
       "answer": {
         "id": "Silakan scroll ke bagian Portfolio di website ini! Saya paling bangga dengan proyek-proyek yang memiliki impact nyata bagi pengguna. ",
         "en": "Please scroll to the Portfolio section on this website! I am most proud of projects that have a real impact on users."
@@ -101,28 +100,28 @@
       }
     },
     {
-      "keywords": ["kontak", "email", "hubungi", "linkedin", "wa", "whatsapp", "telepon", "contact"],
+      "keywords": ["kontak", "email", "hubungi", "linkedin", "wa", "whatsapp", "telepon", "kontak saya"],
       "answer": {
         "id": "Email: siapaajaboleh202@gmail.com 📧 | LinkedIn: (Belum buat) | GitHub: opl224. Silakan reach out! ✨",
         "en": "Email: siapaajaboleh202@gmail.com 📧 | LinkedIn: (Not yet created) | GitHub: opl224. Feel free to reach out! ✨"
       }
     },
     {
-      "keywords": ["available", "hire", "kerja", "freelance", "proyek", "kolaborasi", "bisa", "collaboration"],
+      "keywords": ["available", "hire", "kerja", "freelance", "proyek", "kolaborasi", "bisa"],
       "answer": {
         "id": "Saya terbuka untuk proyek freelance dan full-time opportunities! Silakan kirim detail proyek via email, saya akan respond dalam 1-2 hari. 🤝",
         "en": "I am open to freelance projects and full-time opportunities! Please send project details via email, I will respond within 1-2 days. 🤝"
       }
     },
     {
-      "keywords": ["harga", "biaya", "rate", "bayar", "budget", "price", "cost"],
+      "keywords": ["harga", "biaya", "rate", "bayar", "budget"],
       "answer": {
         "id": "Harga tergantung kompleksitas proyek. Silakan diskusikan requirement Anda via email, saya akan berikan estimasi yang sesuai budget! 💰",
         "en": "Pricing depends on project complexity. Please discuss your requirements via email, I'll provide an estimate that fits your budget! 💰"
       }
     },
     {
-      "keywords": ["halo", "hi", "hello", "pagi", "siang", "malam", "assalamualaikum", "hey"],
+      "keywords": ["halo", "hi", "hello", "pagi", "siang", "malam", "assalamualaikum"],
       "answer": {
         "id": "Halo! 👋 Ada yang bisa saya bantu? Tanya seputar portfolio, tech stack, atau cara kontak saya ya!",
         "en": "Hello! 👋 How can I help you? Ask about my portfolio, tech stack, or how to contact me!"

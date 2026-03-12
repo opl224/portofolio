@@ -439,7 +439,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative">
-            <WobblyBox className="p-2 rotate-2" shadow="lg" decoration="tape">
+            <WobblyBox className="p-2 rotate-2" shadow="lg" decoration="none">
               <Image 
                 src={heroImg?.imageUrl || "https://picsum.photos/seed/ink-hero/800/600"} 
                 alt="Hero Illustration" 
@@ -608,7 +608,7 @@ export default function Home() {
         <section id="contact" className="mb-32 scroll-mt-20">
           <div className="text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-headline text-foreground">
-              {locale === 'id' ? "Mari Mencoret Sesuatu!" : "Let's Scribble Something!"}
+              {locale === 'id' ? "Mari Mencoret Sesuatu!" : "Let's Scribble!"}
             </h2>
           </div>
           <WobblyBox decoration="none" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
