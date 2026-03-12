@@ -216,18 +216,17 @@ export default function Home() {
 
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
+    
     try {
-      // LANGSUNG gunakan no-cors karena Google Apps Script tidak support CORS standar
       await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors', // ⚠️ Wajib: Mencegah blokir CORS browser
-        headers: {
+        mode: 'no-cors',
+        headers: { 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       });
 
-      // ✅ Gunakan sileo.success()
       sileo.success({
         title: locale === 'id' ? "Terkirim!" : "Message Sent!",
         description: locale === 'id' 
@@ -240,7 +239,6 @@ export default function Home() {
     } catch (error) {
       console.error('Submission Error:', error);
       
-      // ✅ Gunakan sileo.error()
       sileo.error({
         title: locale === 'id' ? "Oops!" : "Error!",
         description: locale === 'id' 
