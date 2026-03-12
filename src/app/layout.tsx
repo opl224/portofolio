@@ -20,7 +20,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased bg-background text-foreground min-h-screen">
         <AppProvider>
-          <Toaster position="top-right" />
+          <Toaster position="top-center" />
           <LoadingScreen />
           <div className="paper-texture min-h-screen transition-colors duration-300">
             {children}

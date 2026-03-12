@@ -217,16 +217,41 @@ export default function Home() {
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
     
+    console.log('📤 Mengirim data:', data);
+    console.log('🔗 URL:', GOOGLE_SHEET_URL);
+    
     try {
-      await fetch(GOOGLE_SHEET_URL, {
+      // Validasi URL
+      if (!GOOGLE_SHEET_URL || !GOOGLE_SHEET_URL.includes('script.google.com')) {
+        throw new Error('URL Google Apps Script tidak valid');
+      }
+
+      // Siapkan payload
+      const payload = {
+        name: data.name || '',
+        email: data.email || '',
+        message: data.message || '',
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('📦 Payload yang dikirim:', payload);
+
+      // Kirim ke Google Apps Script
+      const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(payload)
       });
 
+      console.log('✅ Response status:', response.status);
+      console.log('✅ Response type:', response.type);
+
+      // Dengan mode: 'no-cors', response akan opaque (tidak bisa dibaca)
+      // Tapi jika tidak ada error, berarti data berhasil dikirim
+      
       sileo.success({
         title: locale === 'id' ? "Terkirim!" : "Message Sent!",
         description: locale === 'id' 
@@ -234,16 +259,17 @@ export default function Home() {
           : "Thank you! I'll get back to you soon.",
       });
       
-      reset();
+      // Reset form
+      if (reset) reset();
       
     } catch (error) {
-      console.error('Submission Error:', error);
+      console.error('❌ Error detail:', error);
       
       sileo.error({
-        title: locale === 'id' ? "Oops!" : "Error!",
+        title: locale === 'id' ? "Gagal Mengirim!" : "Failed to Send!",
         description: locale === 'id' 
-          ? "Terjadi kesalahan. Silakan coba lagi nanti." 
-          : "Something went wrong. Please try again later.",
+          ? "Data tidak terkirim ke spreadsheet. Silakan coba lagi." 
+          : "Failed to send data to spreadsheet. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
