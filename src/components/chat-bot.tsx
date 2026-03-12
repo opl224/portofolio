@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Send, Loader2, Sparkles, Search } from 'lucide-react';
 import { WobblyBox } from './ui/wobbly-box';
 import { cn } from '@/lib/utils';
-import portfolioData from '@/lib/chatbot-data.json';
 import { useAppContext } from '@/context/app-context';
 import { translations } from '@/lib/translations';
 import { usePathname } from 'next/navigation';
@@ -14,7 +13,6 @@ type Message = {
   text: string;
 };
 
-// Custom Animated Close Icon with updated SVG from user
 const CloseIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -33,7 +31,6 @@ const CloseIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Custom Bot Icon SVG
 const BotIcon = ({ className, size = 24, strokeWidth = 2 }: { className?: string, size?: number, strokeWidth?: number }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -56,6 +53,85 @@ const BotIcon = ({ className, size = 24, strokeWidth = 2 }: { className?: string
   </svg>
 );
 
+const getKnowledgeBase = (locale: 'en' | 'id') => [
+  {
+    keywords: ['siapa kamu', 'intro', 'tentang', 'nama', 'perkenalkan', 'identitas', 'siapa anda', 'who are you', 'about', 'intro', 'identity'],
+    answer: locale === 'id' 
+      ? "Halo! 👋 Saya seorang Fullstack Developer yang fokus membangun aplikasi web modern, cepat, dan user-friendly tapi kadang-kadang nyentuh mobile. Senang bertemu Anda!"
+      : "Hello! 👋 I'm a Fullstack Developer focusing on building modern, fast, and user-friendly web apps, and occasionally mobile. Nice to meet you!"
+  },
+  {
+    keywords: ['lokasi', 'domisili', 'tinggal', 'berbasis', 'kota', 'negara', 'location', 'residence', 'live', 'based', 'city', 'country'],
+    answer: locale === 'id'
+      ? "Saya berbasis di Depok dan terbuka untuk kerja remote atau kolaborasi dengan klien dari seluruh dunia."
+      : "I am based in Depok and open for remote work or collaboration with clients worldwide."
+  },
+  {
+    keywords: ['pengalaman', 'kerja', 'background', 'latar belakang', 'portofolio', 'lama', 'experience', 'work', 'background', 'portfolio', 'how long'],
+    answer: locale === 'id'
+      ? "Saya memiliki pengalaman 2+ tahun di bidang web & mobile development. Telah menyelesaikan berbagai proyek dari startup hingga enterprise."
+      : "I have 2+ years of experience in web & mobile development. I have completed various projects from startups to enterprises."
+  },
+  {
+    keywords: ['bahasa favorit', 'stack', 'programming', 'kode', 'pakai apa', 'teknologi', 'skill', 'favorite language', 'stack', 'what do you use', 'technology', 'skills'],
+    answer: locale === 'id'
+      ? "Stack utama saya: TypeScript, React dan Tailwind CSS. Untuk mobile saya pakai React Native kadang Flutter. Saya suka ekosistem yang type-safe! 💻"
+      : "My main stack: TypeScript, React, and Tailwind CSS. For mobile, I use React Native or sometimes Flutter. I love type-safe ecosystems! 💻"
+  },
+  {
+    keywords: ['database', 'mysql', 'postgresql', 'mongodb', 'data', 'firebase', 'supabase'],
+    answer: locale === 'id'
+      ? "Saya biasa menggunakan PostgreSQL, Firebase, Supabase dan MySQL untuk data yang lebih fleksibel."
+      : "I usually use PostgreSQL, Firebase, Supabase, and MySQL for more flexible data."
+  },
+  {
+    keywords: ['tools', 'software', 'editor', 'ide', 'vs code', 'workflow'],
+    answer: locale === 'id'
+      ? "Editor utama saya VS Code dengan berbagai extension produktif. Juga pakai Git, Docker dan Postman dalam workflow sehari-hari."
+      : "My main editor is VS Code with various productive extensions. I also use Git, Docker, and Postman in my daily workflow."
+  },
+  {
+    keywords: ['desain', 'ui', 'css', 'tampilan', 'framework css', 'styling', 'style', 'design'],
+    answer: locale === 'id'
+      ? "Saya pakai Tailwind CSS untuk styling karena fleksibel dan cepat 🎨"
+      : "I use Tailwind CSS for styling because it's flexible and fast 🎨"
+  },
+  {
+    keywords: ['hobi', 'suka apa', 'aktivitas', 'kesenangan', 'waktu luang', 'hobby', 'hobbies', 'what do you like', 'leisure'],
+    answer: locale === 'id'
+      ? "Di luar coding, saya suka eksplor teknologi baru, baca dokumentasi, olahraga ringan, dan ibadah. Work-life balance itu penting! ⚖️"
+      : "Outside of coding, I enjoy exploring new technologies, reading documentation, light exercise, and worship. Work-life balance is important! ⚖️"
+  },
+  {
+    keywords: ['proyek', 'project', 'karya', 'portfolio', 'hasil', 'apps', 'aplikasi', 'projects', 'works'],
+    answer: locale === 'id'
+      ? "Silakan scroll ke bagian Portfolio di website ini! Saya paling bangga dengan proyek-proyek yang memiliki impact nyata bagi pengguna."
+      : "Please scroll to the Portfolio section on this website! I am most proud of projects that have a real impact on users."
+  },
+  {
+    keywords: ['kontak', 'email', 'hubungi', 'linkedin', 'wa', 'whatsapp', 'telepon', 'contact', 'reach out'],
+    answer: "Email: siapaajaboleh202@gmail.com 📧 | GitHub: opl224. Silakan reach out! ✨"
+  },
+  {
+    keywords: ['available', 'hire', 'kerja', 'freelance', 'proyek', 'kolaborasi', 'bisa', 'collaboration'],
+    answer: locale === 'id'
+      ? "Saya terbuka untuk proyek freelance dan full-time opportunities! Silakan kirim detail proyek via email, saya akan respond dalam 1-2 hari. 🤝"
+      : "I am open to freelance projects and full-time opportunities! Please send project details via email, I will respond within 1-2 days. 🤝"
+  },
+  {
+    keywords: ['halo', 'hi', 'hello', 'pagi', 'siang', 'malam', 'assalamualaikum', 'hey'],
+    answer: locale === 'id'
+      ? "Halo! 👋 Ada yang bisa saya bantu? Tanya seputar portfolio, tech stack, atau cara kontak saya ya!"
+      : "Hello! 👋 How can I help you? Ask about my portfolio, tech stack, or how to contact me!"
+  },
+  {
+    keywords: ['terima kasih', 'thanks', 'makasih', 'thank you'],
+    answer: locale === 'id'
+      ? "Sama-sama! 😊 Jangan ragu untuk tanya lagi atau langsung hubungi saya via email jika tertarik kolaborasi!"
+      : "You're welcome! 😊 Don't hesitate to ask again or contact me directly via email if you're interested in collaborating!"
+  }
+];
+
 export const ChatBot = () => {
   const pathname = usePathname();
   const { locale } = useAppContext();
@@ -69,6 +145,8 @@ export const ChatBot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const knowledgeBase = useMemo(() => getKnowledgeBase(locale), [locale]);
+
   useEffect(() => {
     setMessages([{ role: 'model', text: t.welcome }]);
   }, [locale, t.welcome]);
@@ -81,36 +159,12 @@ export const ChatBot = () => {
 
   const getLocalResponse = (userInput: string): string => {
     const query = userInput.toLowerCase();
-    const data = portfolioData;
-    const isID = locale === 'id';
-
-    if (query.includes('siapa') || query.includes('who') || query.includes('profil') || query.includes('profile')) {
-      return isID 
-        ? `Saya adalah ${data.profile.name}. ${data.profile.bio}`
-        : `I am ${data.profile.name}. ${data.profile.bio}`;
-    }
-
-    if (query.includes('skill') || query.includes('keahlian') || query.includes('can you') || query.includes('technical')) {
-      return isID
-        ? `Saya ahli di bidang desain (${data.skills.design.join(', ')}) dan mahir dalam teknologi seperti ${data.skills.technical.join(', ')}.`
-        : `I specialize in design (${data.skills.design.join(', ')}) and am proficient in technologies like ${data.skills.technical.join(', ')}.`;
-    }
-
-    if (query.includes('proyek') || query.includes('project') || query.includes('work') || query.includes('karya')) {
-      const titles = data.projects.map(p => p.title).join(', ');
-      return isID
-        ? `Saya sudah mengerjakan beberapa proyek menarik seperti: ${titles}.`
-        : `I have worked on several interesting projects like: ${titles}.`;
-    }
-
-    if (query.includes('kontak') || query.includes('contact') || query.includes('email')) {
-      return data.profile.contact;
-    }
-
-    const faqMatch = data.faq.find(f => 
-      query.includes(f.question.toLowerCase()) || f.question.toLowerCase().includes(query)
+    
+    const match = knowledgeBase.find(item => 
+      item.keywords.some(keyword => query.includes(keyword))
     );
-    if (faqMatch) return faqMatch.answer;
+
+    if (match) return match.answer;
 
     return t.confused;
   };
@@ -118,17 +172,13 @@ export const ChatBot = () => {
   const suggestions = useMemo(() => {
     if (!input.trim()) return [];
     
-    const allKnowledge = [
-      ...portfolioData.faq.map(f => f.question),
-      locale === 'id' ? "Apa saja keahlianmu?" : "What are your skills?",
-      locale === 'id' ? "Siapa itu InkFolio?" : "Who is InkFolio?",
-      locale === 'id' ? "Bagaimana cara menghubungi?" : "How to contact?"
-    ];
+    const allKeywords = knowledgeBase.flatMap(item => item.keywords);
+    const uniqueKeywords = Array.from(new Set(allKeywords));
 
-    return allKnowledge
+    return uniqueKeywords
       .filter(item => item.toLowerCase().includes(input.toLowerCase()))
       .slice(0, 3);
-  }, [input, locale]);
+  }, [input, knowledgeBase]);
 
   const handleSend = async (overrideMessage?: string) => {
     const messageToSend = overrideMessage || input.trim();

@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from 'next';
 import './globals.css';
 import { AppProvider } from '@/context/app-context';
 import { LoadingScreen } from '@/components/ui/loading-screen';
