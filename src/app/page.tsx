@@ -23,7 +23,7 @@ import {
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
-import { useToast } from "@/hooks/use-toast";
+import { toast } from 'sileo';
 
 // URL Google Apps Script terbaru
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw7dO81gsvb-0ekySe2Id6oFiyCzfxXiHF5GwDbl9VbVxiMSn-YJZZZCyukrKN2T3PPZw/exec'; 
@@ -155,7 +155,6 @@ const techLogos = [
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
-  const { toast } = useToast();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -192,7 +191,7 @@ export default function Home() {
     },
     {
       id: 'project4',
-      title: locale === 'id' ? "Website Portofolio" : "Portfolio Website",
+      title: locale === 'id' ? "Website Portofolio" : "Website Portofolio",
       description: locale === 'id' ? "Pengembangan portofolio web menggunakan Next.js dengan animasi coretan tangan." : "Web portfolio development using Next.js with dynamic hand-drawn animations.",
       tags: ["Web Dev", "React", "Tailwind"],
       image: PlaceHolderImages.find(img => img.id === 'project4')
@@ -219,57 +218,39 @@ export default function Home() {
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(GOOGLE_SHEET_URL, {
+      // LANGSUNG gunakan no-cors karena Google Apps Script tidak support CORS standar
+      await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
+        mode: 'no-cors', // ⚠️ Wajib: Mencegah blokir CORS browser
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       });
+
+      // ⚠️ PENTING: Jangan lakukan response.json() saat mode: 'no-cors'
+      // Response akan bertipe 'opaque' dan tidak bisa dibaca, 
+      // tapi data SUDAH terkirim ke Google Sheets jika tidak ada error network.
       
-      let result;
-      try {
-        result = await response.json();
-      } catch (e) {
-        // Jika gagal parse JSON, mungkin respon no-cors atau format lain
-        result = { success: true };
-      }
-      
-      if (result.success || response.ok) {
-        toast({
-          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
-          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
-        });
-        reset();
-      } else {
-        throw new Error(result.error || 'Failed to send');
-      }
+      // Anggap sukses jika tidak ada error network
+      toast(locale === 'id' ? "Terkirim!" : "Message Sent!", {
+        variant: "success",
+        description: locale === 'id' 
+          ? "Terima kasih! Saya akan segera menghubungi Anda." 
+          : "Thank you! I'll get back to you soon.",
+      });
+      reset();
       
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Submission Error:', error);
       
-      // Fallback ke no-cors jika error CORS
-      try {
-        await fetch(GOOGLE_SHEET_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        
-        toast({
-          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
-          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
-        });
-        reset();
-        
-      } catch (fallbackError) {
-        toast({
-          variant: "destructive",
-          title: locale === 'id' ? "Oops!" : "Error!",
-          description: locale === 'id' ? "Terjadi kesalahan. Silakan coba lagi nanti." : "Something went wrong. Please try again later.",
-        });
-      }
+      // Hanya masuk sini jika benar-benar gagal (offline, URL salah, dll)
+      toast(locale === 'id' ? "Oops!" : "Error!", {
+        variant: "destructive",
+        description: locale === 'id' 
+          ? "Terjadi kesalahan. Silakan coba lagi nanti." 
+          : "Something went wrong. Please try again later.",
+      });
     } finally {
       setIsSubmitting(false);
     }
