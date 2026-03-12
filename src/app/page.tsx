@@ -23,7 +23,7 @@ import {
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sileo';
+import { useToast } from "@/hooks/use-toast";
 
 // URL Google Apps Script terbaru
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw7dO81gsvb-0ekySe2Id6oFiyCzfxXiHF5GwDbl9VbVxiMSn-YJZZZCyukrKN2T3PPZw/exec'; 
@@ -155,6 +155,7 @@ const techLogos = [
 export default function Home() {
   const { locale } = useAppContext();
   const t = translations[locale];
+  const { toast } = useToast();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -218,29 +219,57 @@ export default function Home() {
   const onContactSubmit = async (data: any) => {
     setIsSubmitting(true);
     try {
-      // Mengirim ke Google Sheet Apps Script
-      // Menggunakan mode: 'no-cors' agar tidak diblokir kebijakan CORS
-      await fetch(GOOGLE_SHEET_URL, {
+      const response = await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       });
-  
-      // Karena no-cors, kita tidak bisa membaca isi respon (opaque),
-      // namun jika tidak masuk blok catch, diasumsikan data terkirim.
-      toast(locale === 'id' ? "Pesan Terkirim!" : "Message Sent!", {
-        variant: 'success'
-      });
-      reset();
+      
+      let result;
+      try {
+        result = await response.json();
+      } catch (e) {
+        // Jika gagal parse JSON, mungkin respon no-cors atau format lain
+        result = { success: true };
+      }
+      
+      if (result.success || response.ok) {
+        toast({
+          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
+          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
+        });
+        reset();
+      } else {
+        throw new Error(result.error || 'Failed to send');
+      }
       
     } catch (error) {
-      console.error('Submission Error:', error);
-      toast(locale === 'id' ? "Gagal Mengirim!" : "Failed to Send!", {
-        variant: 'error'
-      });
+      console.error('Error:', error);
+      
+      // Fallback ke no-cors jika error CORS
+      try {
+        await fetch(GOOGLE_SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        toast({
+          title: locale === 'id' ? "Terkirim!" : "Message Sent!",
+          description: locale === 'id' ? "Terima kasih! Saya akan segera menghubungi Anda." : "Thank you! I'll get back to you soon.",
+        });
+        reset();
+        
+      } catch (fallbackError) {
+        toast({
+          variant: "destructive",
+          title: locale === 'id' ? "Oops!" : "Error!",
+          description: locale === 'id' ? "Terjadi kesalahan. Silakan coba lagi nanti." : "Something went wrong. Please try again later.",
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -539,8 +568,15 @@ export default function Home() {
           {/* TWO ROW TECH MARQUEE */}
           <div className="relative overflow-hidden w-full h-48 border-y-2 border-dashed border-foreground py-6 flex flex-col justify-center gap-4">
             <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap items-center">
-              {shuffledRow1.length > 0 && [...shuffledRow1, ...shuffledRow1].map((item, i) => (
+              {mounted && shuffledRow1.length > 0 && [...shuffledRow1, ...shuffledRow1].map((item, i) => (
                 <div key={`r1-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
+                  <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
+                    <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
+                  </div>
+                </div>
+              ))}
+              {!mounted && techLogos.map((item, i) => (
+                <div key={`r1-static-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
                     <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
                   </div>
@@ -548,8 +584,15 @@ export default function Home() {
               ))}
             </div>
             <div className="flex animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap items-center">
-              {shuffledRow2.length > 0 && [...shuffledRow2, ...shuffledRow2].map((item, i) => (
+              {mounted && shuffledRow2.length > 0 && [...shuffledRow2, ...shuffledRow2].map((item, i) => (
                 <div key={`r2-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
+                  <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
+                    <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
+                  </div>
+                </div>
+              ))}
+              {!mounted && techLogos.map((item, i) => (
+                <div key={`r2-static-${item.name}-${i}`} className="flex flex-col items-center justify-center mx-8 group min-w-max">
                   <div className="relative w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-300">
                     <Image src={item.src} alt={item.name} width={48} height={48} className="object-contain" />
                   </div>

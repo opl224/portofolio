@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { AppProvider } from '@/context/app-context';
 import { LoadingScreen } from '@/components/ui/loading-screen';
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: 'myPortfolio',
@@ -30,6 +31,7 @@ export default function RootLayout({
           <div className="paper-texture min-h-screen transition-colors duration-300">
             {children}
           </div>
+          <Toaster />
         </AppProvider>
       </body>
     </html>
