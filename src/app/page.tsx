@@ -26,12 +26,10 @@ import { useForm } from 'react-hook-form';
 import { sileo } from 'sileo';
 
 // URL Google Apps Script
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyyylEWywBM9PxjB_yX-XsW2boOeSqkyCBV7V8exC7PM-7hPfpVREDQ4Kq3Z9sm7wWx/exec'; 
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw7dO81gsvb-0ekySe2Id6oFiyCzfxXiHF5GwDbl9VbVxiMSn-YJZZZCyukrKN2T3PPZw/exec'; 
 
-// Decorative Elements for the sides
 const SideDecorations = () => (
   <div className="hidden xl:block pointer-events-none select-none">
-    {/* Left Side Decorations */}
     <div className="fixed left-4 top-1/4 -translate-y-1/2 opacity-20">
       <svg width="200" height="400" viewBox="0 0 200 400" fill="none" className="text-foreground">
         <path d="M20,50 Q150,150 20,250 T50,380" stroke="currentColor" strokeWidth="2" strokeDasharray="8 4" fill="none" className="animate-pulse" />
@@ -45,8 +43,6 @@ const SideDecorations = () => (
         <Sparkles className="w-10 h-10 -rotate-12 text-primary" />
       </div>
     </div>
-
-    {/* Right Side Decorations */}
     <div className="fixed right-4 top-1/3 opacity-20">
       <svg width="150" height="300" viewBox="0 0 150 300" fill="none" className="text-foreground">
         <path d="M10,10 C100,50 10,150 130,280" stroke="currentColor" strokeWidth="2" fill="none" />
@@ -65,7 +61,6 @@ const SideDecorations = () => (
   </div>
 );
 
-// Custom Menu and Close Icons
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -608,7 +603,7 @@ export default function Home() {
         <section id="contact" className="mb-32 scroll-mt-20">
           <div className="text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-headline text-foreground">
-              {locale === 'id' ? "Mari Mencoret Sesuatu!" : "Let's Scribble!"}
+              {locale === 'id' ? "Mari Mencoret Sesuatu!" : "Let's Scribble"}
             </h2>
           </div>
           <WobblyBox decoration="none" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
