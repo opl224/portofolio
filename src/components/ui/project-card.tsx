@@ -40,7 +40,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       tabIndex={0}
     >
       <WobblyBox 
-        decoration={index === 0 ? "tape" : "none"}
+        decoration="none"
         shadow="lg"
         className={cn(
           "overflow-hidden p-0 mb-6 group-hover:scale-[1.02] transition-transform duration-300 bg-background cursor-pointer",

@@ -26,7 +26,7 @@ import { useForm } from 'react-hook-form';
 import { sileo } from 'sileo';
 
 // URL Google Apps Script
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyyylEWywBM9PxjB_yX-XsW2boOeSqkyCBV7V8exC7PM-7hPfpVREDQ4Kq3Z9sm7wWx/exec'; 
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw7dO81gsvb-0ekySe2Id6oFiyCzfxXiHF5GwDbl9VbVxiMSn-YJZZZCyukrKN2T3PPZw/exec'; 
 
 // Decorative Elements for the sides
 const SideDecorations = () => (
@@ -606,7 +606,7 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="mb-32 scroll-mt-20">
-          <WobblyBox decoration="tape" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
+          <WobblyBox decoration="none" className="max-w-3xl mx-auto py-12 px-8" shadow="lg">
             <form onSubmit={handleSubmit(onContactSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
